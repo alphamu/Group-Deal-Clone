@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+    <definition name="base.definition" template="/WEB-INF/views/layouts/layout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/includes/menu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+    </definition>
+ 
+    <definition name="home" extends="base.definition">
+        <put-attribute name="title" value="Welcome from Tile" />
+        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+    </definition>
+    
+    <definition name="new-deal-input" extends="base.definition">
+        <put-attribute name="title" value="New Deal" />
+        <put-attribute name="body" value="/WEB-INF/views/new-deal-input.jsp" />
+    </definition>
+    
+    <definition name="new-deal-success" extends="base.definition">
+        <put-attribute name="title" value="New Deal" />
+        <put-attribute name="body" value="/WEB-INF/views/new-deal-success.jsp" />
+    </definition>
+ 
+</tiles-definitions>
