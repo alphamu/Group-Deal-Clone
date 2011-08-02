@@ -34,6 +34,7 @@ public class HomeController{
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
+		//just to test
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		logger.info("Welcome home! the client locale is {} ", locale.toString());
 		

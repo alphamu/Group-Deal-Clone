@@ -11,7 +11,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Interceptor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,22 +27,22 @@ public class HibernateUtil {
 
 	static {
 		try {
-			AnnotationConfiguration anno = new AnnotationConfiguration();
+			Configuration anno = new Configuration();
 			entityClasses = new ArrayList<Class<?>>();
 
 			for (String propertyFile : PROPERTY_FILES) {
-				logger.debug("Reading entities list from '" + propertyFile
-						+ "'----");
+				logger.debug("Reading entities list from '{}' -----",propertyFile);
 				Properties entities = loadProperties(propertyFile);
 				if (entities == null)
 					continue;
-				List<String> keys = new ArrayList(entities.keySet());
+				
+				List<String> keys = new ArrayList<String>(entities.stringPropertyNames());
 				Collections.sort(keys);
 
 				for (String key : keys) {
 					String z = entities.getProperty(key, null);
 					if (logger.isDebugEnabled())
-						logger.debug(" '" + key + "'=" + z);
+						logger.debug("{}={}",key, z);
 					if (z != null) {
 						try {
 							Class<?> zz = Class.forName(z);
@@ -52,8 +51,7 @@ public class HibernateUtil {
 								entityClasses.add(zz);
 							}
 						} catch (Exception x) {
-							logger.error("Exception loading class '" + z + "'",
-									x);
+							logger.error("Exception loading class {}\n{}",z,x);
 						}
 					}
 				}
@@ -80,7 +78,7 @@ public class HibernateUtil {
 			is = HibernateUtil.class.getClassLoader().getResourceAsStream(
 					resourceName);
 		} catch (Exception x) {
-			logger.error("Cannot load '" + resourceName + "' properties", x);
+			logger.error("Cannot load '{}' properties:\n{}", resourceName, x);
 			return null;
 		}
 
@@ -90,8 +88,7 @@ public class HibernateUtil {
 				props.load(is);
 				return (props);
 			} catch (IOException e) {
-				logger.error(
-						"Error reading properties '" + resourceName + "' ", e);
+				logger.error("Error reading properties '{}'\n{} ", resourceName, e);
 			}
 		}
 
