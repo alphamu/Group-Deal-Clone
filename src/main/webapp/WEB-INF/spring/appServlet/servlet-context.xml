@@ -22,6 +22,7 @@
     </beans:bean>
 
     <beans:bean id="product1" class="com.groupdealclone.domain.Deal">
+        <beans:property name="id" value="101"/>
         <beans:property name="description" value="Lamp"/>
         <beans:property name="price" value="5.75"/>
         <beans:property name="minSaleRequired" value="2"/>
@@ -29,6 +30,7 @@
     </beans:bean>
         
     <beans:bean id="product2" class="com.groupdealclone.domain.Deal">
+    	<beans:property name="id" value="102"/>
         <beans:property name="description" value="Table"/>
         <beans:property name="price" value="75.25"/>
         <beans:property name="minSaleRequired" value="1"/>
@@ -36,6 +38,7 @@
     </beans:bean>
 
     <beans:bean id="product3" class="com.groupdealclone.domain.Deal">
+    	<beans:property name="id" value="103"/>
         <beans:property name="description" value="Chair"/>
         <beans:property name="price" value="22.79"/>
         <beans:property name="minSaleRequired" value="3"/>

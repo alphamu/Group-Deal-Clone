@@ -2,20 +2,22 @@ package com.groupdealclone.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
-
+@Entity
 public class Deal implements Serializable {
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Long id;
 	
 	@NotEmpty
 	@Size(min=1, max=250)
@@ -62,6 +64,16 @@ public class Deal implements Serializable {
     public void setPrice(double price) {
         this.price = price;
     }
+    
+    public void setId(Long id){
+    	this.id=id;
+    }
+    
+	@javax.persistence.Id
+	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
+	public Long getId() {
+		return this.id;
+	}
     
     
     public String toString() {
