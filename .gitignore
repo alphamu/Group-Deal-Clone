@@ -1,2 +1,6 @@
 logs
 target
+/.springBeans
+/.project
+/.classpath
+/.settings
