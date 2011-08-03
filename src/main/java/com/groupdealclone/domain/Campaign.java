@@ -1,17 +1,16 @@
 package com.groupdealclone.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Pattern;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @javax.persistence.Table(uniqueConstraints={@UniqueConstraint(columnNames={"name","company_id"}), @UniqueConstraint(columnNames={"id"})})
@@ -26,8 +25,10 @@ public class Campaign {
 	
 	private Date endDate;
 	
+	@Valid
 	private Deal deal;
 	
+	@Valid
 	private Company company;
 	
 	private boolean featured;

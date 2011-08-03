@@ -1,6 +1,6 @@
 package com.groupdealclone.validation;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -19,12 +19,15 @@ public class CampaignValidator implements Validator {
 	public void validate(Object target, Errors errors) {
         Campaign c = (Campaign) target;
         Date startDate = c.getStartDate();
-        Date endDate = c.getStartDate();
+        Date endDate = c.getEndDate();
         if (startDate == null) {
             errors.rejectValue("startDate", "validation.required");
         }
         if (endDate == null) {
             errors.rejectValue("endDate", "validation.required");
+        }
+        if(startDate != null && endDate != null && endDate.before(startDate)){
+        	errors.rejectValue("endDate", "validation.notbefore.startdate");
         }
 	}
 
