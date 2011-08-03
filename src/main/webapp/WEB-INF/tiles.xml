@@ -27,6 +27,11 @@
         <put-attribute name="body" value="/WEB-INF/views/new-deal-success.jsp" />
     </definition>
     
+    <definition name="new-campaign-input" extends="base.definition">
+        <put-attribute name="title" value="New Deal" />
+        <put-attribute name="body" value="/WEB-INF/views/new-campaign-input.jsp" />
+    </definition>
+    
     <definition name="new-campaign-success" extends="base.definition">
         <put-attribute name="title" value="New Deal" />
         <put-attribute name="body" value="/WEB-INF/views/new-campaign-success.jsp" />
