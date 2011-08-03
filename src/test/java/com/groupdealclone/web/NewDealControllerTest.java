@@ -3,8 +3,8 @@ package com.groupdealclone.web;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class NewDealControllerTest {
 	public void testProcessForm() {
         NewDealController controller = new  NewDealController();
         DealManager dealManager = new SimpleDealManager();
-        dealManager.setDeals(new ArrayList<Deal>());
+        dealManager.setDeals(new LinkedHashSet<Deal>());
         controller.setDealManager(dealManager);
         Map<String,Object> model;
         Deal newDeal;

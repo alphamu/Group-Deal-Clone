@@ -1,4 +1,4 @@
-package com.groupdealclone.domain;
+package com.groupdealclone.util;
 
 import java.io.IOException;
 import java.io.InputStream;

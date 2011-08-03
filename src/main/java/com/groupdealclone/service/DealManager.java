@@ -1,6 +1,6 @@
 package com.groupdealclone.service;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -9,8 +9,8 @@ import com.groupdealclone.domain.Deal;
 @Service
 public interface DealManager {
 
-	public List<Deal> getDeals();
+	public Set<Deal> getDeals();
 
-	public void setDeals(List<Deal> deals);
+	public void setDeals(Set<Deal> deals);
 
 }

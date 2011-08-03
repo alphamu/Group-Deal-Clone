@@ -1,0 +1,31 @@
+package com.groupdealclone.validation;
+
+import java.sql.Date;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import com.groupdealclone.domain.Campaign;
+
+
+public class CampaignValidator implements Validator {
+
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return Campaign.class.equals(clazz);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+        Campaign c = (Campaign) target;
+        Date startDate = c.getStartDate();
+        Date endDate = c.getStartDate();
+        if (startDate == null) {
+            errors.rejectValue("startDate", "validation.required");
+        }
+        if (endDate == null) {
+            errors.rejectValue("endDate", "validation.required");
+        }
+	}
+
+}

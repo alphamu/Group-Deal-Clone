@@ -1,0 +1,92 @@
+package com.groupdealclone.domain;
+
+import java.sql.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@javax.persistence.Table(uniqueConstraints={@UniqueConstraint(columnNames={"name","company_id"}), @UniqueConstraint(columnNames={"id"})})
+public class Campaign {
+	private Long id;
+	
+	@NotEmpty
+	@Size(min=1, max=100)
+	private String name;
+	
+	private Date startDate;
+	
+	private Date endDate;
+	
+	private Deal deal;
+	
+	private Company company;
+	
+	private boolean featured;
+	
+	@javax.persistence.Id
+	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+	
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	
+	public Date getEndDate() {
+		return endDate;
+	}
+	
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	public Deal getDeal() {
+		return deal;
+	}
+	
+	public void setDeal(Deal deal) {
+		this.deal = deal;
+	}
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	public Company getCompany() {
+		return company;
+	}
+	
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	
+	public boolean isFeatured() {
+		return featured;
+	}
+	
+	public void setFeatured(boolean featured) {
+		this.featured = featured;
+	}
+}

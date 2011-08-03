@@ -1,15 +1,17 @@
 package com.groupdealclone.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.groupdealclone.domain.Deal;
-import com.groupdealclone.service.SimpleDealManager;
 
 public class SimpleDealManagerTest {
 
@@ -30,7 +32,7 @@ public class SimpleDealManagerTest {
 	@Before
 	public void setUp(){
 		dealManager = new SimpleDealManager();
-		List<Deal> deals = new ArrayList<Deal>();
+		Set<Deal> deals = new LinkedHashSet<Deal>();
 		Deal deal = new Deal();
 		deal.setDescription(CHAIR_DESCRIPTION);
 		deal.setPrice(CHAIR_PRICE);
@@ -50,17 +52,18 @@ public class SimpleDealManagerTest {
 	
 	@Test
 	public void testGetProducts() {
-		List<Deal> deals = dealManager.getDeals();
+		Set<Deal> deals = dealManager.getDeals();
 		assertNotNull(deals);   
 		assertEquals(PRODUCT_COUNT, dealManager.getDeals().size());
-		
-        Deal deal = deals.get(0);
+		Iterator<Deal> it = deals.iterator();
+		assertTrue(it.hasNext());
+        Deal deal = (Deal) it.next();
         assertEquals(CHAIR_DESCRIPTION, deal.getDescription());
         assertEquals(CHAIR_PRICE, deal.getPrice(),0);
         assertEquals(CHAIR_MINSALE, deal.getMinSaleRequired());
         assertEquals(CHAIR_DISCOUNT, deal.getDiscountPercentage());
-        
-        deal = deals.get(1);
+        assertTrue(it.hasNext());
+        deal = (Deal) it.next();
         assertEquals(TABLE_DESCRIPTION, deal.getDescription());
         assertEquals(TABLE_PRICE, deal.getPrice(),0);    
         assertEquals(TABLE_MINSALE, deal.getMinSaleRequired());    
