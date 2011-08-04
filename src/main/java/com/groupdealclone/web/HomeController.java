@@ -36,6 +36,8 @@ public class HomeController{
 	public ModelAndView home(Locale locale, Model model) {
 		//just to test
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.close();
+		
 		logger.info("Welcome home! the client locale is {} ", locale.toString());
 		
 		Date date = new Date();

@@ -1,21 +1,28 @@
 package com.groupdealclone.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @javax.persistence.Table(uniqueConstraints={@UniqueConstraint(columnNames={"name","company_id"}), @UniqueConstraint(columnNames={"id"})})
-public class Campaign {
+public class Campaign implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
 	
 	@NotEmpty
@@ -31,6 +38,8 @@ public class Campaign {
 	
 	@Valid
 	private Company company;
+	
+	private Set<City> validCities;
 	
 	private boolean featured;
 	
@@ -91,4 +100,16 @@ public class Campaign {
 	public void setFeatured(boolean featured) {
 		this.featured = featured;
 	}
+
+	@OneToMany
+	public Set<City> getValidCities() {
+		return validCities;
+	}
+
+	public void setValidCities(Set<City> validCities) {
+		this.validCities = validCities;
+	}
+	
+	
+
 }
