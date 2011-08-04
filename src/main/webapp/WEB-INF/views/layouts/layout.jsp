@@ -1,4 +1,5 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ include file="/WEB-INF/views/include.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +14,11 @@ td.menu {
 }
 
 </style>
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
+<c:set var="titleKey">
+	<tiles:insertAttribute name="title" ignore="true" />
+</c:set>
+<title><fmt:message key="${titleKey}" /></title>
+
 </head>
 <body>
 <table id="layout" border="1" cellpadding="2" cellspacing="2" align="center">

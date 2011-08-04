@@ -26,6 +26,10 @@ public class EditCampaignController {
 	
 	@Autowired
 	private CampaignManager campaignManager;
+	@Autowired
+	SimpleDateFormat dateFormat;
+	@Autowired
+	CustomDateEditor dateEditor;
 
 	@RequestMapping(value = "campaign/{campaignId}/edit", method = RequestMethod.GET)
 	public String showForm(@PathVariable("campaignId") long petId, Map<String, Object> model) {
@@ -51,11 +55,8 @@ public class EditCampaignController {
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	    dateFormat.setLenient(false);
-
-	    // true passed to CustomDateEditor constructor means convert empty String to null
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	    binder.registerCustomEditor(Date.class, dateEditor);
 	}
 
 }

@@ -28,8 +28,16 @@
 	<beans:bean id="camp1" class="com.groupdealclone.domain.Campaign">
 		<beans:property name="id" value="101" />
 		<beans:property name="name" value="Lifebouy" />
-<!-- 		<beans:property name="startDate" value="01-01-2011" />
-		<beans:property name="endDate" value="01-02-2011" /> -->
+		<beans:property name="startDate" >
+			<beans:bean factory-bean="dateFormat" factory-method="parse">
+				<beans:constructor-arg value="01-10-2010" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="endDate">
+			<beans:bean factory-bean="dateFormat" factory-method="parse">
+				<beans:constructor-arg value="07-10-2010" />
+			</beans:bean>
+		</beans:property>
 		<beans:property name="deal" ref="product1" />
 		<beans:property name="company" ref="company1" />
 	</beans:bean>

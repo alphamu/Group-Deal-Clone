@@ -38,7 +38,7 @@
     </definition>
     
     <definition name="campaign/edit" extends="base.definition">
-        <put-attribute name="title" value="Edit Campaign" />
+        <put-attribute name="title" value="edit.campaign.title" />
         <put-attribute name="body" value="/WEB-INF/views/campaign/edit.jsp" />
     </definition>
  
