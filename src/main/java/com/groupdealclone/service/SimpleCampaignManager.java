@@ -19,6 +19,9 @@ public class SimpleCampaignManager implements CampaignManager {
 	public void setCampaign(Campaign campaign) {
 		this.campaigns.put(campaign.getId(), campaign);
 	}
+	public void setCampaign(Long id, Campaign campaign) {
+		this.campaigns.put(id, campaign);
+	}
 	
 	public void setCampaigns(Map<Long,Campaign> campaigns){
 		this.campaigns = campaigns;
