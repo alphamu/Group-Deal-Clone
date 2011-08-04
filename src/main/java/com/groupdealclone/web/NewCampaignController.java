@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,25 +23,25 @@ import com.groupdealclone.validation.CampaignValidator;
 public class NewCampaignController {
 	//private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
 	
-	
+	@Autowired
 	private CampaignManager campaignManager;
 
-	@RequestMapping(value = "new-campaign-input", method = RequestMethod.GET)
+	@RequestMapping(value = "campaign/new", method = RequestMethod.GET)
 	public String showForm(Map<String, Object> model) {
 		Campaign campaignForm = new Campaign();
 		model.put("campaign", campaignForm);
-		return "new-campaign-input";
+		return "campaign/new";
 	}
 
-	@RequestMapping(value = "new-campaign-input", method = RequestMethod.POST)
+	@RequestMapping(value = "campaign/new", method = RequestMethod.POST)
 	public String processForm(@Valid Campaign campaignForm, BindingResult result, Map<String,Object> model) {
 		new CampaignValidator().validate(campaignForm, result);
 		if (result.hasErrors()) {
-			return "new-campaign-input";
+			return "campaign/new";
 		}
 		model.put("campaign", campaignForm);
-		//this.campaignManager.getCampaign();
-		return "new-campaign-success";
+		this.campaignManager.setCampaign(campaignForm);
+		return "campaign/added";
 	}
 	
 	public void setCampaignManager(CampaignManager dealManager){

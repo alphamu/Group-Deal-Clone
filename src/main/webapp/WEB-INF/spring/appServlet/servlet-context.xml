@@ -11,6 +11,12 @@
 	
 	<!-- the application context definition for the appServlet DispatcherServlet -->
 
+    <beans:bean id="campaignManager" class="com.groupdealclone.service.SimpleCampaignManager">
+        <beans:property name="campaigns">
+        <beans:map></beans:map>
+        </beans:property>
+    </beans:bean>
+    
     <beans:bean id="dealManager" class="com.groupdealclone.service.SimpleDealManager">
         <beans:property name="deals">
             <beans:list>

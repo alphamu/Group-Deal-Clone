@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1><fmt:message key="newdeal.heading"/></h1>
-<form:form action="new-campaign-input.html" commandName="campaign">
+<form:form action="new" commandName="campaign">
  <table>
 <tr><td>Company Name:<FONT color="red"><form:errors path="company.name" /></FONT></td></tr>
 <tr><td><form:input path="company.name" /></td></tr>

@@ -4,16 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+table#layout {
+	width: 95%;
+}
+td.menu {
+	width: 15%;
+}
+
+</style>
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>
-<table border="1" cellpadding="2" cellspacing="2" align="center">
+<table id="layout" border="1" cellpadding="2" cellspacing="2" align="center">
     <tr>
-        <td colspan="2"><tiles:insertAttribute name="header" /></td>
+        <td colspan="2" class="header"><tiles:insertAttribute name="header" /></td>
     </tr>
     <tr>
-        <td><tiles:insertAttribute name="menu" /></td>
-        <td><tiles:insertAttribute name="body" /></td>
+        <td class="menu"><tiles:insertAttribute name="menu" /></td>
+        <td class="body"><tiles:insertAttribute name="body" /></td>
     </tr>
     <tr>
         <td colspan="2"><tiles:insertAttribute name="footer" /></td>

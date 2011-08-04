@@ -27,14 +27,14 @@
         <put-attribute name="body" value="/WEB-INF/views/new-deal-success.jsp" />
     </definition>
     
-    <definition name="new-campaign-input" extends="base.definition">
+    <definition name="campaign/new" extends="base.definition">
         <put-attribute name="title" value="New Deal" />
-        <put-attribute name="body" value="/WEB-INF/views/new-campaign-input.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/campaign/new.jsp" />
     </definition>
     
-    <definition name="new-campaign-success" extends="base.definition">
+    <definition name="campaign/added" extends="base.definition">
         <put-attribute name="title" value="New Deal" />
-        <put-attribute name="body" value="/WEB-INF/views/new-campaign-success.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/campaign/added.jsp" />
     </definition>
  
 </tiles-definitions>
