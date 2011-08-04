@@ -13,32 +13,32 @@
     </definition>
  
     <definition name="home" extends="base.definition">
-        <put-attribute name="title" value="Welcome from Tile" />
+        <put-attribute name="title" value="home.title" />
         <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
     </definition>
     
     <definition name="new-deal-input" extends="base.definition">
-        <put-attribute name="title" value="New Deal" />
+        <put-attribute name="title" value="newdeal.title" />
         <put-attribute name="body" value="/WEB-INF/views/new-deal-input.jsp" />
     </definition>
     
     <definition name="new-deal-success" extends="base.definition">
-        <put-attribute name="title" value="New Deal" />
+        <put-attribute name="title" value="newdeal.title" />
         <put-attribute name="body" value="/WEB-INF/views/new-deal-success.jsp" />
     </definition>
     
     <definition name="campaign/new" extends="base.definition">
-        <put-attribute name="title" value="New Deal" />
+        <put-attribute name="title" value="newcampaign.title" />
         <put-attribute name="body" value="/WEB-INF/views/campaign/new.jsp" />
     </definition>
     
     <definition name="campaign/added" extends="base.definition">
-        <put-attribute name="title" value="New Deal" />
+        <put-attribute name="title" value="updatedcampaign.title" />
         <put-attribute name="body" value="/WEB-INF/views/campaign/added.jsp" />
     </definition>
     
     <definition name="campaign/edit" extends="base.definition">
-        <put-attribute name="title" value="edit.campaign.title" />
+        <put-attribute name="title" value="editcampaign.title" />
         <put-attribute name="body" value="/WEB-INF/views/campaign/edit.jsp" />
     </definition>
  

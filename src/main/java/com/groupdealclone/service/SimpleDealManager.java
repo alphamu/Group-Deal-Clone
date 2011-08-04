@@ -17,7 +17,17 @@ public class SimpleDealManager implements DealManager {
 
 	@Override
 	public void setDeals(Set<Deal> deals) {
-		this.deals = deals;
+		this.deals=deals;
+		
+	}
+
+	@Override
+	public Deal getDeal(Long id) {
+		for(Deal d:deals){
+			if(d.getId().equals(id))
+				return d;
+		}
+		return null;
 	}
 
 }

@@ -42,7 +42,7 @@
 		<beans:property name="company" ref="company1" />
 	</beans:bean>
 
-	<beans:bean id="dealManager"
+ 	<beans:bean id="deals"
 		class="com.groupdealclone.service.SimpleDealManager">
 		<beans:property name="deals">
 			<beans:list>
@@ -52,7 +52,7 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-
+	
 	<beans:bean id="product1" class="com.groupdealclone.domain.Deal">
 		<beans:property name="id" value="101" />
 		<beans:property name="description" value="Lamp" />
