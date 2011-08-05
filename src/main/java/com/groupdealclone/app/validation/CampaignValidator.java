@@ -1,11 +1,11 @@
-package com.groupdealclone.validation;
+package com.groupdealclone.app.validation;
 
 import java.util.Date;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.groupdealclone.domain.Campaign;
+import com.groupdealclone.app.domain.Campaign;
 
 
 public class CampaignValidator implements Validator {

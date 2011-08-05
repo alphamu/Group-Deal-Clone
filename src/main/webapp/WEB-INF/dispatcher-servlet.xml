@@ -12,9 +12,7 @@ http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 ">
 	<!-- Enable annotation driven controllers, validation etc... -->
-	<mvc:annotation-driven />
-	
-	<context:component-scan base-package="com.groupdealclone.web" />
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>

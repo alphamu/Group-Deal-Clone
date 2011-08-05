@@ -1,4 +1,4 @@
-package com.groupdealclone.domain;
+package com.groupdealclone.app.domain;
 
 import static org.junit.Assert.*;
 

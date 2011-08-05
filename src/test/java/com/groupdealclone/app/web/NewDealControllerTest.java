@@ -1,4 +1,4 @@
-package com.groupdealclone.web;
+package com.groupdealclone.app.web;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.MapBindingResult;
 
-import com.groupdealclone.domain.Deal;
-import com.groupdealclone.service.DealManager;
-import com.groupdealclone.service.SimpleDealManager;
+import com.groupdealclone.app.domain.Deal;
+import com.groupdealclone.app.service.DealManager;
+import com.groupdealclone.app.service.SimpleDealManager;
 
 public class NewDealControllerTest {
 	private static final Logger logger = LoggerFactory.getLogger(NewDealControllerTest.class);

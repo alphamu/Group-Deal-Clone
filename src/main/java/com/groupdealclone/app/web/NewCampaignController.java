@@ -1,4 +1,4 @@
-package com.groupdealclone.web;
+package com.groupdealclone.app.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.groupdealclone.domain.Campaign;
-import com.groupdealclone.service.CampaignManager;
-import com.groupdealclone.validation.CampaignValidator;
+import com.groupdealclone.app.domain.Campaign;
+import com.groupdealclone.app.service.CampaignManager;
+import com.groupdealclone.app.validation.CampaignValidator;
 
 @Controller
 public class NewCampaignController {

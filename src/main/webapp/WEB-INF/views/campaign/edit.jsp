@@ -28,6 +28,6 @@
 
 <input type="submit" value="Execute">
 </form:form>
-<a href="<c:url value="home"/>">Home</a>
+<a href="<c:url value="/home"/>">Home</a>
 </body>
 </html>

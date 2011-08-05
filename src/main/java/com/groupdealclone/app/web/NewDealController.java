@@ -1,4 +1,4 @@
-package com.groupdealclone.web;
+package com.groupdealclone.app.web;
 
 import java.util.Map;
 
@@ -10,8 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.groupdealclone.domain.Deal;
-import com.groupdealclone.service.DealManager;
+import com.groupdealclone.app.domain.Deal;
+import com.groupdealclone.app.service.DealManager;
 
 @Controller
 public class NewDealController {

@@ -1,4 +1,4 @@
-package com.groupdealclone.web;
+package com.groupdealclone.app.web;
 
 import java.text.DateFormat;
 import java.util.Date;

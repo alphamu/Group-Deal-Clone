@@ -1,10 +1,10 @@
-package com.groupdealclone.service;
+package com.groupdealclone.app.service;
 
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.groupdealclone.domain.Deal;
+import com.groupdealclone.app.domain.Deal;
 
 @Service
 public class SimpleDealManager implements DealManager {

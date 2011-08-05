@@ -5,7 +5,7 @@
   <title><fmt:message key="title"/></title>
 </head>
 <body>
-<h1><fmt:message key="newdeal.heading"/></h1>
+<h1><fmt:message key="newdeal.title"/></h1>
 <form:form action="new" commandName="campaign">
  <table>
 <tr><td>Company Name:<FONT color="red"><form:errors path="company.name" /></FONT></td></tr>
@@ -31,6 +31,6 @@
 
 <input type="submit" value="Execute">
 </form:form>
-<a href="<c:url value="home.html"/>">Home</a>
+<a href="<c:url value="/home"/>">Home</a>
 </body>
 </html>

@@ -25,6 +25,6 @@
 <tr><td><c:out value="${campaign.featured}" /></td></tr>
 </table>
 
-<a href="<c:url value="home"/>">Home</a>
+<a href="<c:url value="/home"/>">Home</a>
 </body>
 </html>

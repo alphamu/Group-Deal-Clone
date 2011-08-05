@@ -25,7 +25,7 @@
 	 <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
 	     p:dataSource-ref="dataSource"
 	     p:configLocation="${hibernate.config}"
-	     p:packagesToScan="com.groupdealclone"/>
+	     p:packagesToScan="com.groupdealclone.app"/>
 	  
 	 <!-- Declare a datasource that has pooling capabilities--> 
 	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"

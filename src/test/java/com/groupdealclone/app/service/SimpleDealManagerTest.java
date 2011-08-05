@@ -1,4 +1,4 @@
-package com.groupdealclone.service;
+package com.groupdealclone.app.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,7 +11,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.groupdealclone.domain.Deal;
+import com.groupdealclone.app.domain.Deal;
 
 public class SimpleDealManagerTest {
 

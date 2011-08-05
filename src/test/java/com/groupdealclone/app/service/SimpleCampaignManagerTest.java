@@ -1,13 +1,19 @@
-package com.groupdealclone.domain;
+package com.groupdealclone.app.service;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import com.groupdealclone.app.domain.Campaign;
+import com.groupdealclone.app.domain.Company;
+import com.groupdealclone.app.domain.Deal;
 
-public class CampaignTest {
+public class SimpleCampaignManagerTest {
+	SimpleCampaignManager campaignManager;
 	Company company;
 	Campaign campaign;
 	Deal deal;
@@ -26,7 +32,7 @@ public class CampaignTest {
 	int DEAL_DISCOUNT = 10;
 	int DEAL_MIN = 3;
 	Long DEAL_ID = new Long(3);
-	
+
 	@Before
 	public void setUp() throws Exception {
 		company = new Company();
@@ -41,10 +47,6 @@ public class CampaignTest {
 		deal.setId(DEAL_ID);
 		
 		campaign = new Campaign();
-	}
-	
-	@Test
-	public void testSetAndGetCampaign() {
 		campaign.setDeal(deal);
 		campaign.setCompany(company);
 		campaign.setName(CAM_NAME);
@@ -52,19 +54,19 @@ public class CampaignTest {
 		campaign.setEndDate(END_DATE);
 		campaign.setId(CAM_ID);
 		
-		assertNotNull(campaign);
-		assertNotNull(campaign.getDeal());
-		assertNotNull(campaign.getCompany());
-		
-		assertEquals(campaign.getDeal(),deal);
-		assertEquals(campaign.getCompany(),company);
-		
-		assertEquals(campaign.getName(),CAM_NAME);
-		assertEquals(campaign.getStartDate(),START_DATE);
-		assertEquals(campaign.getEndDate(),END_DATE);
-		assertEquals(campaign.getId(),CAM_ID,0);
-		
-		
+		campaignManager = new SimpleCampaignManager();
+	}
+
+	@Test
+	public void testSetAndGetCampaign() {
+		campaignManager.setCampaign(campaign);
+		assertNotNull(campaignManager.getCampaign(new Long(2)));
+		assertEquals(campaignManager.getCampaign(CAM_ID),campaign);
+		Campaign tmp = campaignManager.getCampaign(CAM_ID);
+		assertNotNull(tmp.getCompany());
+		assertNotNull(tmp.getDeal());
+		assertEquals(tmp.getCompany(), company);
+		assertEquals(tmp.getDeal(), deal);
 	}
 
 }

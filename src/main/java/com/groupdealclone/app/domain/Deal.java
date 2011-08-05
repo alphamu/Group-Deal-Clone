@@ -1,4 +1,4 @@
-package com.groupdealclone.domain;
+package com.groupdealclone.app.domain;
 
 import java.io.Serializable;
 

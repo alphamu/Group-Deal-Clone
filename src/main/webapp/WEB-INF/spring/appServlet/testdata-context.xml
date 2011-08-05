@@ -6,13 +6,12 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		
-	<beans:bean id="company1" class="com.groupdealclone.domain.Company">
+	<beans:bean id="company1" class="com.groupdealclone.app.domain.Company">
 		<beans:property name="id" value="101" />
 		<beans:property name="name" value="Unilever" />
 	</beans:bean>
 
-	<beans:bean id="campaignManager"
-		class="com.groupdealclone.service.SimpleCampaignManager">
+	<beans:bean id="campaignManager" class="com.groupdealclone.app.service.SimpleCampaignManager">
 		<beans:property name="campaigns">
 			<beans:map>
 				<beans:entry key="101" value-ref="camp1" />
@@ -20,7 +19,7 @@
 		</beans:property>
 	</beans:bean>
 
-	<beans:bean id="camp1" class="com.groupdealclone.domain.Campaign">
+	<beans:bean id="camp1" class="com.groupdealclone.app.domain.Campaign">
 		<beans:property name="id" value="101" />
 		<beans:property name="name" value="Lifebouy" />
 		<beans:property name="startDate" >
@@ -38,7 +37,7 @@
 	</beans:bean>
 
  	<beans:bean id="deals"
-		class="com.groupdealclone.service.SimpleDealManager">
+		class="com.groupdealclone.app.service.SimpleDealManager">
 		<beans:property name="deals">
 			<beans:list>
 				<beans:ref bean="product1" />
@@ -48,7 +47,7 @@
 		</beans:property>
 	</beans:bean>
 	
-	<beans:bean id="product1" class="com.groupdealclone.domain.Deal">
+	<beans:bean id="product1" class="com.groupdealclone.app.domain.Deal">
 		<beans:property name="id" value="101" />
 		<beans:property name="description" value="Lamp" />
 		<beans:property name="price" value="5.75" />
@@ -56,7 +55,7 @@
 		<beans:property name="discountPercentage" value="20" />
 	</beans:bean>
 
-	<beans:bean id="product2" class="com.groupdealclone.domain.Deal">
+	<beans:bean id="product2" class="com.groupdealclone.app.domain.Deal">
 		<beans:property name="id" value="102" />
 		<beans:property name="description" value="Table" />
 		<beans:property name="price" value="75.25" />
@@ -64,7 +63,7 @@
 		<beans:property name="discountPercentage" value="10" />
 	</beans:bean>
 
-	<beans:bean id="product3" class="com.groupdealclone.domain.Deal">
+	<beans:bean id="product3" class="com.groupdealclone.app.domain.Deal">
 		<beans:property name="id" value="103" />
 		<beans:property name="description" value="Chair" />
 		<beans:property name="price" value="22.79" />

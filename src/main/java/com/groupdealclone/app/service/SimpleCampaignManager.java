@@ -1,11 +1,11 @@
-package com.groupdealclone.service;
+package com.groupdealclone.app.service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.groupdealclone.domain.Campaign;
+import com.groupdealclone.app.domain.Campaign;
 
 @Service
 public class SimpleCampaignManager implements CampaignManager {
