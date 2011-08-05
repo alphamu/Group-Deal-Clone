@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupdealclone.domain.Deal;
 import com.groupdealclone.service.DealManager;
-import com.groupdealclone.util.HibernateUtil;
+//import com.groupdealclone.util.HibernateUtil;
 
 /**
  * Handles requests for the application home page.
@@ -37,9 +37,9 @@ public class HomeController{
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
-		//just to test
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.close();
+//		//just to test
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		session.close();
 		
 		logger.info("Welcome home! the client locale is {} ", locale.toString());
 		

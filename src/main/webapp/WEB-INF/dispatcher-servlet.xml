@@ -17,16 +17,12 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 	<context:component-scan base-package="com.groupdealclone.web" />
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/views/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
 	</bean>
 	
-	<bean id="messageSource"
+ 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="/WEB-INF/messages" />
-	</bean>
+		<property name="basename" value="messages" />
+	</bean> 
 </beans>

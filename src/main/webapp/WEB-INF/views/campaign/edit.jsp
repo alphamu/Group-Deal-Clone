@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/WEB-INF/views/include.jsp" %>
 
-<h1><fmt:message key="edit.campaign.title"/></h1>
+<h1><fmt:message key="editcampaign.title"/></h1>
 <form:form action="edit" commandName="campaign">
 <form:hidden path="id" />
  <table>

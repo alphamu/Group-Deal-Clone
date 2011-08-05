@@ -44,5 +44,4 @@
 		<constructor-arg value="dd-MM-yyyy" />
 	</bean>
 
-
 </beans>

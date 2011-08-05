@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		
+	<beans:bean id="company1" class="com.groupdealclone.domain.Company">
+		<beans:property name="id" value="101" />
+		<beans:property name="name" value="Unilever" />
+	</beans:bean>
+
+	<beans:bean id="campaignManager"
+		class="com.groupdealclone.service.SimpleCampaignManager">
+		<beans:property name="campaigns">
+			<beans:map>
+				<beans:entry key="101" value-ref="camp1" />
+			</beans:map>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="camp1" class="com.groupdealclone.domain.Campaign">
+		<beans:property name="id" value="101" />
+		<beans:property name="name" value="Lifebouy" />
+		<beans:property name="startDate" >
+			<beans:bean factory-bean="dateFormat" factory-method="parse">
+				<beans:constructor-arg value="01-10-2010" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="endDate">
+			<beans:bean factory-bean="dateFormat" factory-method="parse">
+				<beans:constructor-arg value="07-10-2010" />
+			</beans:bean>
+		</beans:property>
+		<beans:property name="deal" ref="product1" />
+		<beans:property name="company" ref="company1" />
+	</beans:bean>
+
+ 	<beans:bean id="deals"
+		class="com.groupdealclone.service.SimpleDealManager">
+		<beans:property name="deals">
+			<beans:list>
+				<beans:ref bean="product1" />
+				<beans:ref bean="product2" />
+				<beans:ref bean="product3" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="product1" class="com.groupdealclone.domain.Deal">
+		<beans:property name="id" value="101" />
+		<beans:property name="description" value="Lamp" />
+		<beans:property name="price" value="5.75" />
+		<beans:property name="minSaleRequired" value="2" />
+		<beans:property name="discountPercentage" value="20" />
+	</beans:bean>
+
+	<beans:bean id="product2" class="com.groupdealclone.domain.Deal">
+		<beans:property name="id" value="102" />
+		<beans:property name="description" value="Table" />
+		<beans:property name="price" value="75.25" />
+		<beans:property name="minSaleRequired" value="1" />
+		<beans:property name="discountPercentage" value="10" />
+	</beans:bean>
+
+	<beans:bean id="product3" class="com.groupdealclone.domain.Deal">
+		<beans:property name="id" value="103" />
+		<beans:property name="description" value="Chair" />
+		<beans:property name="price" value="22.79" />
+		<beans:property name="minSaleRequired" value="3" />
+		<beans:property name="discountPercentage" value="30" />
+	</beans:bean>
+</beans:beans>
