@@ -7,14 +7,9 @@
 <body>
 	<h1><fmt:message key="title"/></h1>
 
-	<P>The time on the server is ${model.serverTime}.</P>
-
 	<h3>Products</h3>
-	<c:forEach items="${model.deals}" var="deal">
-		<c:out value="${deal.description}" />
-		<i>$<c:out value="${deal.price}" /></i>
-		<br>
-		<br>
-	</c:forEach>
+<c:forEach var="deal" items="${deals.deals}">
+	${deal.id} - ${deal.description}<br/>
+</c:forEach>
 </body>
 </html>

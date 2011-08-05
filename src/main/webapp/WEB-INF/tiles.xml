@@ -12,7 +12,7 @@
         <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
     </definition>
  
-    <definition name="home" extends="base.definition">
+    <definition name="homeView" extends="base.definition">
         <put-attribute name="title" value="home.title" />
         <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
     </definition>

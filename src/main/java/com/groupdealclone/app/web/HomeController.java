@@ -1,10 +1,6 @@
 package com.groupdealclone.app.web;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupdealclone.app.domain.Deal;
 import com.groupdealclone.app.service.DealManager;
-//import com.groupdealclone.util.HibernateUtil;
 
 /**
  * Handles requests for the application home page.
@@ -36,21 +31,19 @@ public class HomeController{
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
-//		//just to test
-//		Session session = HibernateUtil.getSessionFactory().openSession();
-//		session.close();
 		
 		logger.info("Welcome home! the client locale is {} ", locale.toString());
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
+		return new ModelAndView("homeView", "deals", this.dealManager);
 		
-        Map<String, Object> myModel = new HashMap<String, Object>();
-        myModel.put("serverTime", formattedDate);
-        myModel.put("deals", this.dealManager.getDeals());
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
+	public ModelAndView homeXml(Locale locale, Model model) {
+	
+		logger.info("Welcome home! the client locale is {} ", locale.toString());
 		
-		return new ModelAndView("home", "model", myModel);
+		return new ModelAndView("homeView", "deals", this.dealManager);
 		
 	}
 	

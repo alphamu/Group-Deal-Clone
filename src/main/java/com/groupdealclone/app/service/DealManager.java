@@ -2,11 +2,14 @@ package com.groupdealclone.app.service;
 
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Service;
 
 import com.groupdealclone.app.domain.Deal;
 
 @Service
+@XmlRootElement
 public interface DealManager {
 	
 	public Set<Deal> getDeals();

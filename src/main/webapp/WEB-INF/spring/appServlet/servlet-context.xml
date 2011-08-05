@@ -50,6 +50,12 @@
 
 	<!-- Load Hibernate related configuration -->
 	<beans:import resource="hibernate-context.xml" />
+	
+	<!-- Load Hibernate related configuration -->
+	<beans:import resource="jaxb-context.xml" />
+	
+	<!-- Load Tiles related configuration -->
+	<beans:import resource="tiles-context.xml" />
 
 
 
