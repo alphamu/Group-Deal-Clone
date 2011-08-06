@@ -52,7 +52,7 @@
 	<beans:import resource="hibernate-context.xml" />
 	
 	<!-- Load Hibernate related configuration -->
-	<beans:import resource="jaxb-context.xml" />
+	<beans:import resource="rest-context.xml" />
 	
 	<!-- Load Tiles related configuration -->
 	<beans:import resource="tiles-context.xml" />

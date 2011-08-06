@@ -12,19 +12,9 @@
         <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
     </definition>
  
-    <definition name="homeView" extends="base.definition">
+    <definition name="home-tile" extends="base.definition">
         <put-attribute name="title" value="home.title" />
         <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
-    </definition>
-    
-    <definition name="new-deal-input" extends="base.definition">
-        <put-attribute name="title" value="newdeal.title" />
-        <put-attribute name="body" value="/WEB-INF/views/new-deal-input.jsp" />
-    </definition>
-    
-    <definition name="new-deal-success" extends="base.definition">
-        <put-attribute name="title" value="newdeal.title" />
-        <put-attribute name="body" value="/WEB-INF/views/new-deal-success.jsp" />
     </definition>
     
     <definition name="campaign/new" extends="base.definition">

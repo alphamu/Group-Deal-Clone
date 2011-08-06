@@ -29,22 +29,18 @@ public class HomeController{
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale, Model model) {
-		
+	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=text/html")
+	public ModelAndView home(Locale locale, Model model) {	
 		logger.info("Welcome home! the client locale is {} ", locale.toString());
-		
-		return new ModelAndView("homeView", "deals", this.dealManager);
-		
+		return new ModelAndView("home-tile", "deals", this.dealManager);	
 	}
 	
-	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public ModelAndView homeXml(Locale locale, Model model) {
+	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=application/xml, application/json")
+	public @ResponseBody DealManager homeXmlJson(Locale locale, Model model) {
 	
 		logger.info("Welcome home! the client locale is {} ", locale.toString());
 		
-		return new ModelAndView("homeView", "deals", this.dealManager);
-		
+		return this.dealManager;
 	}
 	
 	@RequestMapping(value = "/home/{dealId}", method = RequestMethod.GET)

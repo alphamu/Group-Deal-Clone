@@ -49,7 +49,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<!-- Roo dependencies -->
 		<dependency>
 			<groupId>org.springframework.roo</groupId>
@@ -208,6 +208,18 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>3.0.5.RELEASE</version>
+		</dependency>
+
+		<!-- codehaus -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-lgpl</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>1.8.4</version>
 		</dependency>
 
 	</dependencies>
