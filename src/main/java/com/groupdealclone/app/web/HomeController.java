@@ -7,13 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.groupdealclone.app.domain.Deal;
 import com.groupdealclone.app.service.DealManager;
 
 /**
@@ -31,27 +29,16 @@ public class HomeController{
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=text/html")
 	public ModelAndView home(Locale locale, Model model) {	
-		logger.info("Welcome home! the client locale is {} ", locale.toString());
+		logger.info("Rendering home in HTML {}", locale.toString());
 		return new ModelAndView("home-tile", "deals", this.dealManager);	
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=application/xml, application/json")
 	public @ResponseBody DealManager homeXmlJson(Locale locale, Model model) {
 	
-		logger.info("Welcome home! the client locale is {} ", locale.toString());
+		logger.info("Rendering home in XML or JSON {} ", locale.toString());
 		
 		return this.dealManager;
 	}
-	
-	@RequestMapping(value = "/home/{dealId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Deal getDeal(@PathVariable("dealId") Long id){
-		return dealManager.getDeal(id);
-	}
-	
-	public void setDealManager(DealManager dealManager){
-		this.dealManager = dealManager;
-	}
-
 	
 }

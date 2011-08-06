@@ -4,15 +4,13 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import org.springframework.stereotype.Service;
 
 import com.groupdealclone.app.domain.Deal;
 
 @Service
-@XmlRootElement
-@XmlType
+@XmlRootElement(name="deals")
 public class SimpleDealManager implements DealManager {
 
 	private Set<Deal> deals;
