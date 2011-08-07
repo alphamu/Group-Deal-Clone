@@ -2,6 +2,7 @@ package com.groupdealclone.app.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.service.CampaignManager;
+import com.groupdealclone.app.service.SimpleCampaignManager;
 import com.groupdealclone.app.validation.CampaignValidator;
 
 @Controller
@@ -25,6 +27,7 @@ public class NewCampaignController {
 	
 	@Autowired
 	private CampaignManager campaignManager;
+	
 	@Autowired
 	SimpleDateFormat dateFormat;
 	@Autowired
@@ -32,6 +35,7 @@ public class NewCampaignController {
 
 	@RequestMapping(value = "campaign/new", method = RequestMethod.GET)
 	public String showForm(Map<String, Object> model) {
+		//List<Campaign> campaigns = campaignManager.getCampaigns();
 		Campaign campaignForm = new Campaign();
 		model.put("campaign", campaignForm);
 		return "campaign/new";
@@ -43,8 +47,9 @@ public class NewCampaignController {
 		if (result.hasErrors()) {
 			return "campaign/new";
 		}
-		model.put("campaign", campaignForm);
 		this.campaignManager.setCampaign(campaignForm);
+		model.put("campaign", campaignForm);
+		model.put("campaigns", this.campaignManager.getCampaigns());
 		return "campaign/added";
 	}
 	

@@ -1,6 +1,6 @@
 package com.groupdealclone.app.service;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -11,13 +11,13 @@ public interface CampaignManager {
 	
 	public Campaign getCampaign(Long id);
 	
-	public Map<Long,Campaign> getCampaigns();
+	public List<Campaign> getCampaigns();
 	
 	public void setCampaign(Campaign campaign);
 	
 	public void setCampaign(Long id, Campaign campaign);
 	
-	public void setCampaigns(Map<Long, Campaign> campaigns);
+	public void setCampaigns(List<Campaign> campaigns);
 	
 	
 

@@ -24,7 +24,6 @@ import com.groupdealclone.app.validation.CampaignValidator;
 public class EditCampaignController {
 	//private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
 	
-	@Autowired
 	private CampaignManager campaignManager;
 	@Autowired
 	SimpleDateFormat dateFormat;

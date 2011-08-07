@@ -30,6 +30,13 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+    <filter>
+        <filter-name>hibernateFilter</filter-name>
+        <filter-class>
+            org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter
+        </filter-class>
+    </filter>
+
 	<welcome-file-list>
 		<welcome-file>
       		index.jsp

@@ -13,15 +13,15 @@
 		<beans:property name="name" value="Unilever" />
 	</beans:bean>
 
-	<beans:bean id="campaignManager" class="com.groupdealclone.app.service.SimpleCampaignManager">
+<!-- 	<beans:bean id="campaignManager" class="com.groupdealclone.app.service.SimpleCampaignManager">
 		<beans:property name="campaigns">
 			<beans:map>
-				<beans:entry key="101" value-ref="camp1" />
+				<beans:ref  bean="camp1" />
 			</beans:map>
 		</beans:property>
-	</beans:bean>
+	</beans:bean> -->
 
-	<beans:bean id="camp1" class="com.groupdealclone.app.domain.Campaign">
+<!-- 	<beans:bean id="camp1" class="com.groupdealclone.app.domain.Campaign">
 		<beans:property name="id" value="101" />
 		<beans:property name="name" value="Lifebouy" />
 		<beans:property name="startDate" >
@@ -36,7 +36,7 @@
 		</beans:property>
 		<beans:property name="deal" ref="product1" />
 		<beans:property name="company" ref="company1" />
-	</beans:bean>
+	</beans:bean> -->
 
  	<beans:bean id="dealManager"
 		class="com.groupdealclone.app.service.SimpleDealManager">

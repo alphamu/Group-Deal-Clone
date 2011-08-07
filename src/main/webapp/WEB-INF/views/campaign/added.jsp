@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Campaign Updated</h1>
- <table>
+<table>
 
 <tr><td>Campaign Name:</td></tr>
 <tr><td><c:out value="${campaign.name}" /></td></tr>
@@ -24,7 +24,9 @@
 <tr><td>Featured:</td></tr>
 <tr><td><c:out value="${campaign.featured}" /></td></tr>
 </table>
-
+<c:forEach var="camp" items="${campaigns}">
+	${camp.id} - ${camp.name}<br/>
+</c:forEach>
 <a href="<c:url value="/home"/>">Home</a>
 </body>
 </html>
