@@ -1,6 +1,7 @@
 package com.groupdealclone.app.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.groupdealclone.app.dao.CampaignDao;
 import com.groupdealclone.app.domain.Campaign;
+import com.groupdealclone.app.domain.CampaignCities;
+import com.groupdealclone.app.domain.City;
 
 @Service
 public class SimpleCampaignManager implements CampaignManager {
@@ -54,6 +57,12 @@ public class SimpleCampaignManager implements CampaignManager {
 
 	@Override
 	public void updateCampaign(Campaign camp) {
+		Campaign oldCamp = campaignDao.getCampaign(camp.getId());
+		CampaignCities campCities = oldCamp.getCities();
+		Set<City> oldCities = campCities.getCities();
+		oldCities.clear();
+		oldCities.addAll(camp.getCities().getCities());
+		camp.setCities(campCities);
 		campaignDao.updateCampaign(camp);
 	}
 
