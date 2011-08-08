@@ -2,7 +2,6 @@ package com.groupdealclone.app.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -40,7 +40,8 @@ public class Campaign implements Serializable {
 	@Valid
 	private Company company;
 	
-	private Set<City> validCities;
+	@OneToOne
+	private CampaignCities cities = new CampaignCities();
 	
 	private boolean featured;
 	
@@ -102,14 +103,15 @@ public class Campaign implements Serializable {
 		this.featured = featured;
 	}
 
-	@OneToMany
-	public Set<City> getValidCities() {
-		return validCities;
+	@OneToOne
+	public CampaignCities getCities() {
+		return cities;
 	}
 
-	public void setValidCities(Set<City> validCities) {
-		this.validCities = validCities;
+	public void setCities(CampaignCities cities) {
+		this.cities = cities;
 	}
+	
 	
 }
 

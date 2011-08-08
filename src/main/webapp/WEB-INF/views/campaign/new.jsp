@@ -103,16 +103,9 @@
 				<td><form:input path="deal.discountPercentage" />
 				</td>
 			</tr>
-			<c:forEach items="${campaign.validCities}" varStatus="gridRow">
-				<spring:bind path="campaign.validCities[${gridRow.index}].id">
-					<c:out value="${status.value}" />
-					<form:input path="validCities[${gridRow.index}].id" />
-				</spring:bind>
-				<spring:bind path="campaign.validCities[${gridRow.index}].name">
-					<c:out value="${status.value}" />
-					<form:input path="validCities[${gridRow.index}].name" />
-				</spring:bind>
-			</c:forEach>
+			<tr>
+				<td colspan="2"><form:checkboxes items="${campaignCities.cities}" path="cities" itemLabel="name" itemValue="id" delimiter="<br/>" /></td>
+			</tr>
 
 
 		</table>
