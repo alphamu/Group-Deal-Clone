@@ -2,6 +2,8 @@ package com.groupdealclone.app.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,6 +17,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.groupdealclone.app.dao.CityDao;
+import com.groupdealclone.app.dao.JdbcCityDao;
 
 @Entity
 @javax.persistence.Table(uniqueConstraints={@UniqueConstraint(columnNames={"name","company_id"}), @UniqueConstraint(columnNames={"id"})})
@@ -40,8 +46,7 @@ public class Campaign implements Serializable {
 	@Valid
 	private Company company;
 	
-	@OneToOne
-	private CampaignCities cities = new CampaignCities();
+	private CampaignCities cities;
 	
 	private boolean featured;
 	
@@ -103,15 +108,14 @@ public class Campaign implements Serializable {
 		this.featured = featured;
 	}
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	public CampaignCities getCities() {
 		return cities;
 	}
-
-	public void setCities(CampaignCities cities) {
-		this.cities = cities;
-	}
 	
+	public void setCities(CampaignCities cities){
+		this.cities = cities;
+	}	
 	
 }
 

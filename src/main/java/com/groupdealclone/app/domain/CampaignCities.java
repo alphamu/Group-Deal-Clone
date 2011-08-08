@@ -10,16 +10,16 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class CampaignCities {
-	private long id;
+	private Long id;
 	private Set<City> cities = new HashSet<City>();
 	
 	@Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

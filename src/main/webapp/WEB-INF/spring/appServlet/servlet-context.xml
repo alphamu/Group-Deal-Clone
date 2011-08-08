@@ -43,7 +43,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
  -->
-	<context:component-scan base-package="com.groupdealclone.app.web" />
+	<context:component-scan base-package="com.groupdealclone.app" />
 
 	<!-- data injection for test data -->
 	<beans:import resource="testdata-context.xml" />

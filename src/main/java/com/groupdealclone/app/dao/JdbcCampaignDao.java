@@ -40,6 +40,7 @@ public class JdbcCampaignDao implements CampaignDao {
 	public void saveCampaign(Campaign campaign) {
 		EntityManager em = getEntityManager();
 		em.getTransaction().begin();
+		//em.persist(campaign.getCities());
 		em.merge(campaign);
 		em.getTransaction().commit();
 	}

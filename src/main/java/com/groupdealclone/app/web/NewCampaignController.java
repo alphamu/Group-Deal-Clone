@@ -1,5 +1,6 @@
 package com.groupdealclone.app.web;
 
+import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -25,7 +27,7 @@ import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
 
-@SessionAttributes(value={"campaign", "campaignCities"})
+@SessionAttributes(value={"campaignCities"})
 @Controller
 public class NewCampaignController {
 	//private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
@@ -38,6 +40,7 @@ public class NewCampaignController {
 	SimpleDateFormat dateFormat;
 	@Autowired
 	CustomDateEditor dateEditor;
+
 
 	@RequestMapping(value = "campaign/new", method = RequestMethod.GET)
 	public String showForm(Map<String, Object> model) {
@@ -52,7 +55,7 @@ public class NewCampaignController {
 	}
 
 	@RequestMapping(value = "campaign/new", method = RequestMethod.POST)
-	public String processForm(@Valid Campaign campaignForm, BindingResult result, Map<String,Object> model) {
+	public String processForm(@Valid Campaign campaignForm,  BindingResult result, Map<String,Object> model) {
 		new CampaignValidator().validate(campaignForm, result);
 		if (result.hasErrors()) {
 			return "campaign/new";
@@ -71,6 +74,27 @@ public class NewCampaignController {
 	public void initBinder(WebDataBinder binder) {
 	    dateFormat.setLenient(false);
 	    binder.registerCustomEditor(Date.class, dateEditor);
+	    
+	    binder.registerCustomEditor(CampaignCities.class, "cities", new PropertyEditorSupport() {
+	        @Override
+	        public void setAsText(String text) {
+	        	String [] ids = text.split(",");
+	        	CampaignCities cities = null;
+	        	for(String id:ids){
+	        		if(cities == null)
+	        			cities = new CampaignCities();
+	        		City city = cityManager.getCity(new Long(id));
+	        		if(city != null)
+	        			cities.getCities().add(city);
+	        		
+	        	}
+	        	if(cities != null){
+	        		cities.setId(null);
+	        		setValue(cities);
+	        	}
+	        }
+	    });
+
 	}
 	
 
