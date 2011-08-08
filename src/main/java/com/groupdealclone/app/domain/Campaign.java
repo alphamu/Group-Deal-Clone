@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
@@ -75,7 +76,7 @@ public class Campaign implements Serializable {
 		this.endDate = endDate;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	public Deal getDeal() {
 		return deal;
 	}
@@ -84,7 +85,7 @@ public class Campaign implements Serializable {
 		this.deal = deal;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	public Company getCompany() {
 		return company;
 	}
@@ -110,6 +111,5 @@ public class Campaign implements Serializable {
 		this.validCities = validCities;
 	}
 	
-	
-
 }
+

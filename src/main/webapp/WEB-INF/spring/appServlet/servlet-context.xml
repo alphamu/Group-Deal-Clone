@@ -57,6 +57,4 @@
 	<!-- Load Tiles related configuration -->
 	<beans:import resource="tiles-context.xml" />
 
-
-
 </beans:beans>

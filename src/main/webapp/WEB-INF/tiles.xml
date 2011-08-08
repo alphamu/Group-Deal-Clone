@@ -4,32 +4,47 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-    <definition name="base.definition" template="/WEB-INF/views/layouts/layout.jsp">
-        <put-attribute name="title" value="" />
-        <put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/views/includes/menu.jsp" />
-        <put-attribute name="body" value="" />
-        <put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
-    </definition>
- 
-    <definition name="home-tile" extends="base.definition">
-        <put-attribute name="title" value="home.title" />
-        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
-    </definition>
-    
-    <definition name="campaign/new" extends="base.definition">
-        <put-attribute name="title" value="newcampaign.title" />
-        <put-attribute name="body" value="/WEB-INF/views/campaign/new.jsp" />
-    </definition>
-    
-    <definition name="campaign/added" extends="base.definition">
-        <put-attribute name="title" value="updatedcampaign.title" />
-        <put-attribute name="body" value="/WEB-INF/views/campaign/added.jsp" />
-    </definition>
-    
-    <definition name="campaign/edit" extends="base.definition">
-        <put-attribute name="title" value="editcampaign.title" />
-        <put-attribute name="body" value="/WEB-INF/views/campaign/edit.jsp" />
-    </definition>
- 
+	<definition name="base.definition" template="/WEB-INF/views/layouts/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/includes/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/includes/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/includes/footer.jsp" />
+	</definition>
+
+	<definition name="home-tile" extends="base.definition">
+		<put-attribute name="title" value="home.title" />
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+	</definition>
+
+	<definition name="campaign/new" extends="base.definition">
+		<put-attribute name="title" value="newcampaign.title" />
+		<put-attribute name="body" value="/WEB-INF/views/campaign/new.jsp" />
+	</definition>
+
+	<definition name="campaign/added" extends="base.definition">
+		<put-attribute name="title" value="updatedcampaign.title" />
+		<put-attribute name="body" value="/WEB-INF/views/campaign/added.jsp" />
+	</definition>
+
+	<definition name="campaign/edit" extends="base.definition">
+		<put-attribute name="title" value="editcampaign.title" />
+		<put-attribute name="body" value="/WEB-INF/views/campaign/edit.jsp" />
+	</definition>
+	
+	<definition name="city/new" extends="base.definition">
+		<put-attribute name="title" value="newcity.title" />
+		<put-attribute name="body" value="/WEB-INF/views/city/new.jsp" />
+	</definition>
+
+	<definition name="city/added" extends="base.definition">
+		<put-attribute name="title" value="updatedcity.title" />
+		<put-attribute name="body" value="/WEB-INF/views/city/added.jsp" />
+	</definition>
+
+	<definition name="city/edit" extends="base.definition">
+		<put-attribute name="title" value="editcity.title" />
+		<put-attribute name="body" value="/WEB-INF/views/city/edit.jsp" />
+	</definition>
+
 </tiles-definitions>

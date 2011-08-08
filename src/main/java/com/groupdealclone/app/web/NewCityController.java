@@ -2,7 +2,6 @@ package com.groupdealclone.app.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -16,18 +15,13 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.City;
-import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CityManager;
-import com.groupdealclone.app.validation.CampaignValidator;
 
 @Controller
-public class NewCampaignController {
+public class NewCityController {
 	//private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
 	
-	@Autowired
-	private CampaignManager campaignManager;
 	@Autowired
 	private CityManager cityManager;
 	@Autowired
@@ -35,29 +29,26 @@ public class NewCampaignController {
 	@Autowired
 	CustomDateEditor dateEditor;
 
-	@RequestMapping(value = "campaign/new", method = RequestMethod.GET)
+	@RequestMapping(value = "city/new", method = RequestMethod.GET)
 	public String showForm(Map<String, Object> model) {
-		//List<Campaign> campaigns = campaignManager.getCampaigns();
-		Campaign campaignForm = new Campaign();
-		campaignForm.setValidCities(new HashSet<City>(cityManager.getCity()));
-		model.put("campaign", campaignForm);
-		return "campaign/new";
+		City cityForm = new City();
+		model.put("city", cityForm);
+		return "city/new";
 	}
 
-	@RequestMapping(value = "campaign/new", method = RequestMethod.POST)
-	public String processForm(@Valid Campaign campaignForm, BindingResult result, Map<String,Object> model) {
-		new CampaignValidator().validate(campaignForm, result);
+	@RequestMapping(value = "city/new", method = RequestMethod.POST)
+	public String processForm(@Valid City cityForm, BindingResult result, Map<String,Object> model) {
 		if (result.hasErrors()) {
-			return "campaign/new";
+			return "city/new";
 		}
-		this.campaignManager.saveCampaign(campaignForm);
-		model.put("campaign", campaignForm);
-		model.put("campaigns", this.campaignManager.getCampaigns());
-		return "campaign/added";
+		this.cityManager.saveCity(cityForm);
+		model.put("city", cityForm);
+		model.put("citys", this.cityManager.getCity());
+		return "city/added";
 	}
 	
-	public void setCampaignManager(CampaignManager dealManager){
-		this.campaignManager = dealManager;
+	public void setCityManager(CityManager dealManager){
+		this.cityManager = dealManager;
 	}
 	
 	@InitBinder

@@ -65,10 +65,16 @@
 
 	<!-- Declare a datasource that has pooling capabilities -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close" p:driverClass="${app.jdbc.driverClassName}"
-		p:jdbcUrl="${app.jdbc.url}" p:user="${app.jdbc.username}" p:password="${app.jdbc.password}"
-		p:acquireIncrement="5" p:idleConnectionTestPeriod="60" p:maxPoolSize="100"
-		p:maxStatements="50" p:minPoolSize="10" />
+		destroy-method="close" 
+		p:driverClass="${app.jdbc.driverClassName}"
+		p:jdbcUrl="${app.jdbc.url}" 
+		p:user="${app.jdbc.username}" 
+		p:password="${app.jdbc.password}"
+		p:acquireIncrement="5" 
+		p:idleConnectionTestPeriod="60" 
+		p:maxPoolSize="100"
+		p:maxStatements="50" 
+		p:minPoolSize="10" />
 		
 	<!-- Publishing session factory to be able view statistics -->
 	<bean id="sessionFactory" factory-bean="entityManagerFactory" factory-method="getSessionFactory" />
@@ -78,6 +84,11 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
 		p:sessionFactory-ref="sessionFactory" />
 		
+		<!-- Bindings used in the application -->
 	 <bean id="campaignManager" class="com.groupdealclone.app.service.SimpleCampaignManager" />
+	 <bean id="campaignDao" class="com.groupdealclone.app.dao.JdbcCampaignDao" />
+	 
+	 <bean id="cityManager" class="com.groupdealclone.app.service.SimpleCityManager" />
+	 <bean id="cityDao" class="com.groupdealclone.app.dao.JdbcCityDao" />
 	
 </beans>

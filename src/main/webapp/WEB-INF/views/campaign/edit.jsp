@@ -4,6 +4,8 @@
 <h1><fmt:message key="editcampaign.title"/></h1>
 <form:form action="edit" commandName="campaign">
 <form:hidden path="id" />
+<form:hidden path="company.id" />
+<form:hidden path="deal.id" />
  <table>
 <tr><td>Company Name:<FONT color="red"><form:errors path="company.name" /></FONT></td></tr>
 <tr><td><form:input path="company.name" /></td></tr>

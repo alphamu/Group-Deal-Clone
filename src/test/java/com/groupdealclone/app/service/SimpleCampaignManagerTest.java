@@ -59,7 +59,7 @@ public class SimpleCampaignManagerTest {
 
 	@Test
 	public void testSetAndGetCampaign() {
-		campaignManager.setCampaign(campaign);
+		campaignManager.saveCampaign(campaign);
 		assertNotNull(campaignManager.getCampaign(new Long(2)));
 		assertEquals(campaignManager.getCampaign(CAM_ID),campaign);
 		Campaign tmp = campaignManager.getCampaign(CAM_ID);

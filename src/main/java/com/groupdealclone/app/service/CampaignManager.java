@@ -13,12 +13,8 @@ public interface CampaignManager {
 	
 	public List<Campaign> getCampaigns();
 	
-	public void setCampaign(Campaign campaign);
+	public void saveCampaign(Campaign camp);
 	
-	public void setCampaign(Long id, Campaign campaign);
-	
-	public void setCampaigns(List<Campaign> campaigns);
-	
-	
+	public void updateCampaign(Campaign camp);
 
 }
