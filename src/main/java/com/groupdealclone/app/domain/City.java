@@ -32,5 +32,23 @@ public class City implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+    @Override
+    public boolean equals(Object other)
+    {
+        if (other == null)  return false;
+        if (other == this)  return true;
+        if (other.getClass() != getClass()) return false;
+
+        long otherId=((City) other).getId();
+        if (otherId!=id)
+            return(false);
+
+        // other id == id here
+        if (id!=0)
+            return(true);
+
+        return(super.equals(other));
+    }
 
 }

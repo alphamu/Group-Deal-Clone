@@ -84,4 +84,22 @@ public class Deal implements Serializable {
         buffer.append("Discount %: " + discountPercentage + "; ");
         return buffer.toString();
     }
+    
+    @Override
+    public boolean equals(Object other)
+    {
+        if (other == null)  return false;
+        if (other == this)  return true;
+        if (other.getClass() != getClass()) return false;
+
+        long otherId=((Deal) other).getId();
+        if (otherId!=id)
+            return(false);
+
+        // other id == id here
+        if (id!=0)
+            return(true);
+
+        return(super.equals(other));
+    }
 }

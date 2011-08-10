@@ -25,15 +25,6 @@ public class SimpleCampaignManager implements CampaignManager {
 	@Transactional
 	public void saveCampaign(Campaign camp) {
 		campaignDao.saveCampaign(camp);
-		
-	}
-
-	public void setCampaign(Long id, Campaign campaign) {
-
-	}
-
-	public void setCampaigns(List<Campaign> campaigns) {
-		
 	}
 
 	public List<Campaign> getCampaigns() {
@@ -58,11 +49,11 @@ public class SimpleCampaignManager implements CampaignManager {
 	@Override
 	public void updateCampaign(Campaign camp) {
 		Campaign oldCamp = campaignDao.getCampaign(camp.getId());
-		CampaignCities campCities = oldCamp.getCities();
+		CampaignCities campCities = oldCamp.getCampaignCities();
 		Set<City> oldCities = campCities.getCities();
 		oldCities.clear();
-		oldCities.addAll(camp.getCities().getCities());
-		camp.setCities(campCities);
+		oldCities.addAll(camp.getCampaignCities().getCities());
+		camp.setCampaignCities(campCities);
 		campaignDao.updateCampaign(camp);
 	}
 

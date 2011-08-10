@@ -2,25 +2,17 @@ package com.groupdealclone.app.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.groupdealclone.app.dao.CityDao;
-import com.groupdealclone.app.dao.JdbcCityDao;
 
 @Entity
 @javax.persistence.Table(uniqueConstraints={@UniqueConstraint(columnNames={"name","company_id"}), @UniqueConstraint(columnNames={"id"})})
@@ -46,7 +38,7 @@ public class Campaign implements Serializable {
 	@Valid
 	private Company company;
 	
-	private CampaignCities cities;
+	private CampaignCities campaignCities;
 	
 	private boolean featured;
 	
@@ -109,13 +101,31 @@ public class Campaign implements Serializable {
 	}
 
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	public CampaignCities getCities() {
-		return cities;
+	public CampaignCities getCampaignCities() {
+		return campaignCities;
 	}
 	
-	public void setCities(CampaignCities cities){
-		this.cities = cities;
+	public void setCampaignCities(CampaignCities cities){
+		this.campaignCities = cities;
 	}	
+	
+    @Override
+    public boolean equals(Object other)
+    {
+        if (other == null)  return false;
+        if (other == this)  return true;
+        if (other.getClass() != getClass()) return false;
+
+        long otherId=((Campaign) other).getId();
+        if (otherId!=id)
+            return(false);
+
+        // other id == id here
+        if (id!=0)
+            return(true);
+
+        return(super.equals(other));
+    }
 	
 }
 

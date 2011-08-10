@@ -45,7 +45,7 @@ public class EditCampaignController {
 		Campaign campaignForm = this.campaignManager.getCampaign(new Long(petId));
 		CampaignCities cities = new CampaignCities();
 		cities.setCities(new HashSet<City>(cityManager.getCity()));
-		cities.setId(campaignForm.getCities().getId());
+		cities.setId(campaignForm.getCampaignCities().getId());
 		model.put("campaignCities", cities);
 		model.put("campaign", campaignForm);
 		return "campaign/edit";
@@ -72,7 +72,7 @@ public class EditCampaignController {
 	    dateFormat.setLenient(false);
 	    binder.registerCustomEditor(Date.class, dateEditor);
 	    
-	    binder.registerCustomEditor(CampaignCities.class, "cities", new PropertyEditorSupport() {
+	    binder.registerCustomEditor(CampaignCities.class, "campaignCities", new PropertyEditorSupport() {
 	        @Override
 	        public void setAsText(String text) {
 	        	Object object = getValue();

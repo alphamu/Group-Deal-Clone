@@ -97,14 +97,14 @@
 				</td>
 				<td>
 				<c:set var="contains" value="false" />
-				<c:forEach var="item" items="${campaign.cities.cities}">
+				<c:forEach var="item" items="${campaign.campaignCities.cities}">
 						<c:if test="${item.name eq city.name}">
 							<c:set var="contains" value="true" />					
-							<input type="checkbox" id="cities${city.id}" name="cities" value="${city.id}" checked />
+							<input type="checkbox" id="campaignCities${city.id}" name="campaignCities" value="${city.id}" checked />
 						</c:if>
 				</c:forEach>
 				<c:if test="${!contains}">
-					<input type="checkbox" id="cities${city.id}" name="cities" value="${city.id}" />
+					<input type="checkbox" id="campaignCities${city.id}" name="campaignCities" value="${city.id}" />
 				</c:if>
 				</td>
 			</tr>

@@ -73,7 +73,7 @@ public class NewCampaignController {
 	    dateFormat.setLenient(false);
 	    binder.registerCustomEditor(Date.class, dateEditor);
 	    
-	    binder.registerCustomEditor(CampaignCities.class, "cities", new PropertyEditorSupport() {
+	    binder.registerCustomEditor(CampaignCities.class, "campaignCities", new PropertyEditorSupport() {
 	        @Override
 	        public void setAsText(String text) {
 	        	String [] ids = text.split(",");

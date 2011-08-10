@@ -8,6 +8,7 @@ import java.sql.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.groupdealclone.app.dao.InMemoryCampaignDao;
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.Company;
 import com.groupdealclone.app.domain.Deal;
@@ -59,7 +60,7 @@ public class SimpleCampaignManagerTest {
 
 	@Test
 	public void testSetAndGetCampaign() {
-		campaignManager.saveCampaign(campaign);
+		campaignManager.setCampaignDao(new InMemoryCampaignDao(campaign));
 		assertNotNull(campaignManager.getCampaign(new Long(2)));
 		assertEquals(campaignManager.getCampaign(CAM_ID),campaign);
 		Campaign tmp = campaignManager.getCampaign(CAM_ID);

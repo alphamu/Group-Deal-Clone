@@ -104,7 +104,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><form:checkboxes items="${campaignCities.cities}" path="cities" itemLabel="name" itemValue="id" delimiter="<br/>" /></td>
+				<td colspan="2"><form:checkboxes items="${campaignCities.cities}" path="campaignCities" itemLabel="name" itemValue="id" delimiter="<br/>" /></td>
 			</tr>
 
 
