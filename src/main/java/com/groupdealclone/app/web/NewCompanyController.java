@@ -15,40 +15,40 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.groupdealclone.app.domain.City;
-import com.groupdealclone.app.service.CityManager;
+import com.groupdealclone.app.domain.Company;
+import com.groupdealclone.app.service.CompanyManager;
 
 @Controller
-public class NewCityController {
+public class NewCompanyController {
 	//private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
 	
 	@Autowired
-	private CityManager cityManager;
+	private CompanyManager companyManager;
 	@Autowired
 	SimpleDateFormat dateFormat;
 	@Autowired
 	CustomDateEditor dateEditor;
 
-	@RequestMapping(value = "city/new", method = RequestMethod.GET)
+	@RequestMapping(value = "company/new", method = RequestMethod.GET)
 	public String showForm(Map<String, Object> model) {
-		City cityForm = new City();
-		model.put("city", cityForm);
-		return "city/new";
+		Company companyForm = new Company();
+		model.put("company", companyForm);
+		return "company/new";
 	}
 
-	@RequestMapping(value = "city/new", method = RequestMethod.POST)
-	public String processForm(@Valid City cityForm, BindingResult result, Map<String,Object> model) {
+	@RequestMapping(value = "company/new", method = RequestMethod.POST)
+	public String processForm(@Valid Company companyForm, BindingResult result, Map<String,Object> model) {
 		if (result.hasErrors()) {
-			return "city/new";
+			return "company/new";
 		}
-		this.cityManager.saveCity(cityForm);
-		model.put("city", cityForm);
-		model.put("citys", this.cityManager.getCity());
-		return "city/added";
+		this.companyManager.saveCompany(companyForm);
+		model.put("company", companyForm);
+		model.put("companys", this.companyManager.getCompany());
+		return "company/added";
 	}
 	
-	public void setCityManager(CityManager cityManager){
-		this.cityManager = cityManager;
+	public void setCompanyManager(CompanyManager companyManager){
+		this.companyManager = companyManager;
 	}
 	
 	@InitBinder

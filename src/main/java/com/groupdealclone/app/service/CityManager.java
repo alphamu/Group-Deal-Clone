@@ -13,9 +13,9 @@ public interface CityManager {
 	
 	public List<City> getCity();
 	
-	public void saveCity(City camp);
+	public void saveCity(City city);
 	
-	public void updateCity(City camp);
+	public void updateCity(City city);
 
 
 }

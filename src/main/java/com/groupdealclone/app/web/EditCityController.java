@@ -43,7 +43,7 @@ public class EditCityController {
 			return "city/edit";
 		}
 		model.put("city", cityForm);
-		model.put("citys", this.cityManager.getCity());
+		//model.put("citys", this.cityManager.getCity());
 		this.cityManager.updateCity(cityForm);
 		return "city/added";
 	}

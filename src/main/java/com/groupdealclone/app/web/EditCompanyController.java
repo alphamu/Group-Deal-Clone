@@ -12,43 +12,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.groupdealclone.app.domain.City;
-import com.groupdealclone.app.service.CityManager;
+import com.groupdealclone.app.domain.Company;
+import com.groupdealclone.app.service.CompanyManager;
 
 @Controller
-public class NewCityController {
+public class EditCompanyController {
 	//private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
 	
 	@Autowired
-	private CityManager cityManager;
+	private CompanyManager companyManager;
 	@Autowired
 	SimpleDateFormat dateFormat;
 	@Autowired
 	CustomDateEditor dateEditor;
 
-	@RequestMapping(value = "city/new", method = RequestMethod.GET)
-	public String showForm(Map<String, Object> model) {
-		City cityForm = new City();
-		model.put("city", cityForm);
-		return "city/new";
+	@RequestMapping(value = "company/{companyId}/edit", method = RequestMethod.GET)
+	public String showForm(@PathVariable("companyId") long companyId, Map<String, Object> model) {
+		Company companyForm = this.companyManager.getCompany(new Long(companyId));
+		model.put("company", companyForm);
+		return "company/edit";
 	}
 
-	@RequestMapping(value = "city/new", method = RequestMethod.POST)
-	public String processForm(@Valid City cityForm, BindingResult result, Map<String,Object> model) {
+	@RequestMapping(value = "company/{companyId}/edit", method = RequestMethod.POST)
+	public String processForm(@Valid Company companyForm, BindingResult result, Map<String,Object> model) {
 		if (result.hasErrors()) {
-			return "city/new";
+			return "company/edit";
 		}
-		this.cityManager.saveCity(cityForm);
-		model.put("city", cityForm);
-		model.put("citys", this.cityManager.getCity());
-		return "city/added";
+		model.put("company", companyForm);
+		//model.put("companys", this.companyManager.getCompany());
+		this.companyManager.updateCompany(companyForm);
+		return "company/added";
 	}
 	
-	public void setCityManager(CityManager cityManager){
-		this.cityManager = cityManager;
+	public void setCompanyManager(CompanyManager companyManager){
+		this.companyManager = companyManager;
 	}
 	
 	@InitBinder
@@ -56,6 +57,5 @@ public class NewCityController {
 	    dateFormat.setLenient(false);
 	    binder.registerCustomEditor(Date.class, dateEditor);
 	}
-	
 
 }

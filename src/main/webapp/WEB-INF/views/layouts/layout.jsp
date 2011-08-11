@@ -1,4 +1,3 @@
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ include file="/WEB-INF/views/include.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,17 +16,25 @@ td.menu {
 <c:set var="titleKey">
 	<tiles:insertAttribute name="title" ignore="true" />
 </c:set>
+<c:set var="titleValue" >
+	<fmt:message key="${titleKey}" />
+</c:set>
 <title><fmt:message key="${titleKey}" /></title>
 
 </head>
 <body>
 <table id="layout" border="1" cellpadding="2" cellspacing="2" align="center">
     <tr>
-        <td colspan="2" class="header"><tiles:insertAttribute name="header" /></td>
+        <td colspan="2" class="header"><tiles:insertAttribute name="header" >
+        	<tiles:putAttribute name="title" value="${titleValue}" />
+        	</tiles:insertAttribute></td>
     </tr>
     <tr>
-        <td class="menu"><tiles:insertAttribute name="menu" /></td>
-        <td class="body"><tiles:insertAttribute name="body" /></td>
+        <td class="menu">
+        <tiles:insertAttribute name="menu" /></td>
+        <td class="body"><tiles:insertAttribute name="body" >
+        	<tiles:putAttribute name="title" value="${titleValue}"></tiles:putAttribute>
+        </tiles:insertAttribute></td>
     </tr>
     <tr>
         <td colspan="2"><tiles:insertAttribute name="footer" /></td>

@@ -1,11 +1,7 @@
 <%@ include file="/WEB-INF/views/include.jsp" %>
-<html>
-<head>
-  <title><fmt:message key="title"/></title>
-</head>
-<body>
-<h1><fmt:message key="newdeal.heading"/></h1>
- <table>
+
+<h1><tiles:insertAttribute name="title" ignore="true" /></h1>
+<table>
 
 <tr><td>Deal Description:</td></tr>
 <tr><td><c:out value="${deal.description}" /></td></tr>
@@ -19,5 +15,3 @@
 </table>
 
 <a href="<c:url value="home.html"/>">Home</a>
-</body>
-</html>

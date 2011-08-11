@@ -13,38 +13,53 @@
 	</definition>
 
 	<definition name="home-tile" extends="base.definition">
-		<put-attribute name="title" value="home.title" />
+		<put-attribute name="title" value="Home.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
 
 	<definition name="campaign/new" extends="base.definition">
-		<put-attribute name="title" value="newcampaign.title" />
+		<put-attribute name="title" value="New.Campaign.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/campaign/new.jsp" />
 	</definition>
 
 	<definition name="campaign/added" extends="base.definition">
-		<put-attribute name="title" value="updatedcampaign.title" />
+		<put-attribute name="title" value="Updated.Campaign.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/campaign/added.jsp" />
 	</definition>
 
 	<definition name="campaign/edit" extends="base.definition">
-		<put-attribute name="title" value="editcampaign.title" />
+		<put-attribute name="title" value="Edit.Campaign.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/campaign/edit.jsp" />
 	</definition>
 	
 	<definition name="city/new" extends="base.definition">
-		<put-attribute name="title" value="newcity.title" />
+		<put-attribute name="title" value="New.City.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/city/new.jsp" />
 	</definition>
 
 	<definition name="city/added" extends="base.definition">
-		<put-attribute name="title" value="updatedcity.title" />
+		<put-attribute name="title" value="Updated.City.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/city/added.jsp" />
 	</definition>
 
 	<definition name="city/edit" extends="base.definition">
-		<put-attribute name="title" value="editcity.title" />
+		<put-attribute name="title" value="Edit.City.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/city/edit.jsp" />
+	</definition>
+
+	<definition name="company/new" extends="base.definition">
+		<put-attribute name="title" value="New.Company.Title" />
+		<put-attribute name="body" value="/WEB-INF/views/company/new.jsp" />
+	</definition>
+
+	<definition name="company/added" extends="base.definition">
+		<put-attribute name="title" value="updatedcompany.title" />
+		<put-attribute name="body" value="/WEB-INF/views/company/added.jsp" />
+	</definition>
+
+	<definition name="company/edit" extends="base.definition">
+		<put-attribute name="title" value="Edit.Company.Title" />
+		<put-attribute name="body" value="/WEB-INF/views/company/edit.jsp" />
 	</definition>
 
 </tiles-definitions>

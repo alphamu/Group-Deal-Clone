@@ -82,4 +82,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 	<bean id="cityManager" class="com.groupdealclone.app.service.SimpleCityManager" />
 	<bean id="cityDao" class="com.groupdealclone.app.dao.JdbcCityDao" />
 
+	<bean id="companyManager" class="com.groupdealclone.app.service.SimpleCompanyManager" />
+	<bean id="companyDao" class="com.groupdealclone.app.dao.JdbcCompanyDao" />
+	
 </beans>

@@ -1,11 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<form:form action="edit" commandName="city">
-	<form:hidden path="id" />
+<form:form action="new" commandName="company">
 	<table>
 		<tr>
-			<td>City Name:<FONT color="red"><form:errors path="name" />
+			<td>Company Name:<FONT color="red"><form:errors
+						path="name" />
 			</FONT>
 			</td>
 		</tr>
@@ -14,6 +14,7 @@
 			</td>
 		</tr>
 	</table>
+
 	<input type="submit" value="Execute">
 </form:form>
 <a href="<c:url value="/home"/>">Home</a>

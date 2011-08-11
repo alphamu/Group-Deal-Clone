@@ -1,9 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<h1>
-	<fmt:message key="editcampaign.title" />
-</h1>
 <form:form action="edit" commandName="campaign">
 	<form:hidden path="id" />
 	<form:hidden path="company.id" />
@@ -95,17 +92,17 @@
 			<tr id="city_${city.id}">
 				<td><c:out value="${city.name}" />
 				</td>
-				<td>
-				<c:set var="contains" value="false" />
-				<c:forEach var="item" items="${campaign.campaignCities.cities}">
+				<td><c:set var="contains" value="false" /> <c:forEach
+						var="item" items="${campaign.campaignCities.cities}">
 						<c:if test="${item.name eq city.name}">
-							<c:set var="contains" value="true" />					
-							<input type="checkbox" id="campaignCities${city.id}" name="campaignCities" value="${city.id}" checked />
+							<c:set var="contains" value="true" />
+							<input type="checkbox" id="campaignCities${city.id}"
+								name="campaignCities" value="${city.id}" checked />
 						</c:if>
-				</c:forEach>
-				<c:if test="${!contains}">
-					<input type="checkbox" id="campaignCities${city.id}" name="campaignCities" value="${city.id}" />
-				</c:if>
+					</c:forEach> <c:if test="${!contains}">
+						<input type="checkbox" id="campaignCities${city.id}"
+							name="campaignCities" value="${city.id}" />
+					</c:if>
 				</td>
 			</tr>
 		</c:forEach>
@@ -114,5 +111,3 @@
 	<input type="submit" value="Execute">
 </form:form>
 <a href="<c:url value="/home"/>">Home</a>
-</body>
-</html>

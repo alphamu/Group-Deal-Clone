@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class City implements Serializable {
@@ -12,6 +15,8 @@ public class City implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty
+	@Size(min=1, max=100)
 	private String name;
 	private Long id;
 	

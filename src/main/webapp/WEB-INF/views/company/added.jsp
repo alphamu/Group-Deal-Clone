@@ -1,12 +1,11 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-
 <table>
 	<tr>
-		<td>City Name:</td>
+		<td>Company Name:</td>
 	</tr>
 	<tr>
-		<td><c:out value="${city.name}" />
+		<td><c:out value="${company.name}" />
 		</td>
 	</tr>
 </table>

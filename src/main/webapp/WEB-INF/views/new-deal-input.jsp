@@ -1,11 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/WEB-INF/views/include.jsp" %>
-<html>
-<head>
-  <title><fmt:message key="title"/></title>
-</head>
-<body>
-<h1><fmt:message key="newdeal.heading"/></h1>
+
+<h1><tiles:insertAttribute name="title" ignore="true" /></h1>
 <form:form action="new-deal-input.html" commandName="deal">
  <table>
 
@@ -23,5 +19,3 @@
 <input type="submit" value="Execute">
 </form:form>
 <a href="<c:url value="home.html"/>">Home</a>
-</body>
-</html>
