@@ -64,8 +64,12 @@ public class NewCampaignController {
 		return "campaign/added";
 	}
 	
-	public void setCampaignManager(CampaignManager dealManager){
-		this.campaignManager = dealManager;
+	public void setCampaignManager(CampaignManager campaignManager){
+		this.campaignManager = campaignManager;
+	}
+	
+	public void setCityManager(CityManager cityManager){
+		this.cityManager = cityManager;
 	}
 	
 	@InitBinder
