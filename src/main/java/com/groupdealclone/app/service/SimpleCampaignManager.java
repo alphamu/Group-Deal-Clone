@@ -11,12 +11,14 @@ import com.groupdealclone.app.dao.CampaignDao;
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
+import com.groupdealclone.app.domain.Image;
+import com.groupdealclone.app.domain.ImageStore;
 
 @Service
 public class SimpleCampaignManager implements CampaignManager {
-	
-	@Autowired 
-	private CampaignDao campaignDao;
+
+	@Autowired
+	private CampaignDao	campaignDao;
 
 	public Campaign getCampaign(Long id) {
 		return campaignDao.getCampaign(id);
@@ -31,33 +33,45 @@ public class SimpleCampaignManager implements CampaignManager {
 		return campaignDao.getCampaignList();
 	}
 
-//	@Transactional
-//	public <T> void save(T t) {
-//		// begin transaction
-//		EntityManager em = getEntityManager();
-//		em.getTransaction().begin();
-//		if (!em.contains(t)) {
-//			// persist object - add to entity manager
-//			em.persist(t);
-//			// flush em - save to DB
-//			em.flush();
-//		}
-//		// commit transaction at all
-//		em.getTransaction().commit();
-//	}
+	// @Transactional
+	// public <T> void save(T t) {
+	// // begin transaction
+	// EntityManager em = getEntityManager();
+	// em.getTransaction().begin();
+	// if (!em.contains(t)) {
+	// // persist object - add to entity manager
+	// em.persist(t);
+	// // flush em - save to DB
+	// em.flush();
+	// }
+	// // commit transaction at all
+	// em.getTransaction().commit();
+	// }
 
 	@Override
 	public void updateCampaign(Campaign camp) {
 		Campaign oldCamp = campaignDao.getCampaign(camp.getId());
+		
 		CampaignCities campCities = oldCamp.getCampaignCities();
-		Set<City> oldCities = campCities.getCities();
-		oldCities.clear();
-		oldCities.addAll(camp.getCampaignCities().getCities());
-		camp.setCampaignCities(campCities);
+		if (campCities != null) {
+			Set<City> oldCities = campCities.getCities();
+			oldCities.clear();
+			oldCities.addAll(camp.getCampaignCities().getCities());
+			camp.setCampaignCities(campCities);
+		}
+		
+		ImageStore imgStore = oldCamp.getImageStore();
+		if(imgStore != null) {
+			List<Image> oldImgList=imgStore.getImage();
+			oldImgList.clear();
+			oldImgList.addAll(camp.getImageStore().getImage());
+			camp.setImageStore(imgStore);
+		}
+		
 		campaignDao.updateCampaign(camp);
 	}
-	
-	public void removeImage(Long campaignId, Long imageId){
+
+	public void removeImage(Long campaignId, Long imageId) {
 		campaignDao.removeImage(campaignId, imageId);
 	}
 

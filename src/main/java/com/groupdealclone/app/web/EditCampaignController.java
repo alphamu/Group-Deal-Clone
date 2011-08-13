@@ -1,12 +1,8 @@
 package com.groupdealclone.app.web;
 
-import java.beans.PropertyEditorSupport;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -21,16 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
-import com.groupdealclone.app.domain.Image;
 import com.groupdealclone.app.domain.ImageStore;
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
+import com.groupdealclone.app.validation.CustomByteArrayToImageStoreEditor;
+import com.groupdealclone.app.validation.CustomStringToCampaignCitiesEditor;
 
 @Controller
 @SessionAttributes(value = { "campaignCities" })
@@ -96,91 +92,9 @@ public class EditCampaignController {
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, dateEditor);
 
-		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(String text) {
-				String[] ids = text.split(",");
-				CampaignCities cities = null;
-				for (String id : ids) {
-					if (cities == null)
-						cities = new CampaignCities();
-					City city = cityManager.getCity(new Long(id));
-					if (city != null)
-						cities.getCities().add(city);
+		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new CustomStringToCampaignCitiesEditor(cityManager));
 
-				}
-				if (cities != null) {
-					cities.setId(null);
-					setValue(cities);
-				}
-			}
-
-		});
-
-		binder.registerCustomEditor(ImageStore.class, "imageStore", new PropertyEditorSupport() {
-			@Override
-			public void setValue(Object value) {
-				if (value instanceof List) {
-					List<Image> images = new LinkedList<Image>();
-					for (Object val : ((List<?>) value)) {
-						Image image = new Image();
-						if (val instanceof MultipartFile) {
-							MultipartFile multipartFile = (MultipartFile) val;
-							try {
-								byte[] bytes = multipartFile.getBytes();
-								if (bytes.length > 0) {
-									image.setImage(bytes);
-									images.add(image);
-								}
-							} catch (IOException ex) {
-								throw new IllegalArgumentException("Cannot read contents of multipart file", ex);
-							}
-						} else if (val instanceof byte[]) {
-							if (((byte[]) val).length > 0) {
-								image.setImage((byte[]) val);
-								images.add(image);
-							}
-						} else {
-							if (val != null) {
-								byte[] bytes = val.toString().getBytes();
-								if (bytes.length > 0) {
-									image.setImage(bytes);
-									images.add(image);
-								}
-							}
-						}
-					}
-					if (images.size() > 0) {
-						ImageStore img = new ImageStore();
-						img.setImage(images);
-						super.setValue(img);
-					} else {
-						super.setValue(null);
-					}
-				} // if instance of List
-				else if (value instanceof MultipartFile) {
-					List<Image> images = new LinkedList<Image>();
-					Image image = new Image();
-					MultipartFile multipartFile = (MultipartFile) value;
-					try {
-						byte[] bytes = multipartFile.getBytes();
-						if (bytes.length > 0) {
-							image.setImage(bytes);
-							images.add(image);
-						}
-					} catch (IOException ex) {
-						throw new IllegalArgumentException("Cannot read contents of multipart file", ex);
-					}
-					if (images.size() > 0) {
-						ImageStore imageStore = new ImageStore();
-						imageStore.setImage(images);
-						super.setValue(imageStore);
-					} else {
-						super.setValue(null);
-					}
-				}
-			}
-		});
+		binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
 
 	}
 
