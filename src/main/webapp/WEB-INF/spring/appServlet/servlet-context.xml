@@ -56,5 +56,11 @@
 	
 	<!-- Load Tiles related configuration -->
 	<beans:import resource="tiles-context.xml" />
+	
+	<beans:bean id="multipartResolver"
+    	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<!-- one of the properties available; the maximum file size in bytes -->
+    	<beans:property name="maxUploadSize" value="1048576"/>  	
+	</beans:bean>
 
 </beans:beans>

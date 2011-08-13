@@ -40,6 +40,8 @@ public class Campaign implements Serializable {
 	
 	private CampaignCities campaignCities;
 	
+	private Images images;
+	
 	private boolean featured;
 	
 	@javax.persistence.Id
@@ -107,9 +109,18 @@ public class Campaign implements Serializable {
 	
 	public void setCampaignCities(CampaignCities cities){
 		this.campaignCities = cities;
-	}	
+	}
 	
-    @Override
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    public Images getImages() {
+		return images;
+	}
+
+	public void setImages(Images images) {
+		this.images = images;
+	}
+
+	@Override
     public boolean equals(Object other)
     {
         if (other == null)  return false;

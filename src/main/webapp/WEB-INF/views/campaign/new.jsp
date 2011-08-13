@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<form:form action="new" commandName="campaign">
+<form:form action="new" commandName="campaign" enctype="multipart/form-data">
 	<form:hidden path="id" />
 	<form:hidden path="company.id" />
 	<table>
@@ -91,10 +91,14 @@
 					items="${campaignCities.cities}" path="campaignCities"
 					itemLabel="name" itemValue="id" delimiter="<br/>" /></td>
 		</tr>
-
-
+		<tr>
+			<td>Campaign Image</td>
+			<td><input type="file" name="images"/></td>
+			<td><input type="file" name="images"/></td>
+		</tr>
 	</table>
+	
 
-	<input type="submit" value="Execute">
+	<input type="submit" value="Add New Compaign">
 </form:form>
 <a href="<c:url value="/home"/>">Home</a>
