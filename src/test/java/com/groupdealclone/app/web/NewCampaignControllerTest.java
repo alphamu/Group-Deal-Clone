@@ -24,6 +24,7 @@ import com.groupdealclone.app.service.SimpleCityManager;
 
 public class NewCampaignControllerTest {
 	
+	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(NewCampaignControllerTest.class);
 	
 	Company company;

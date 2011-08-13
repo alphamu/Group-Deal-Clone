@@ -16,5 +16,7 @@ public interface CampaignManager {
 	public void saveCampaign(Campaign camp);
 	
 	public void updateCampaign(Campaign camp);
+	
+	public void removeImage(Long campaignId, Long id);
 
 }

@@ -1,7 +1,6 @@
 package com.groupdealclone.app.web;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,16 +16,16 @@ import com.groupdealclone.app.service.ImagesManager;
 
 @Controller
 public class ImageController {
+	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
 	
 	@Autowired
 	ImagesManager imagesManager;
 	
 	@RequestMapping(value = "images/stored/{imageId}", method = RequestMethod.GET, headers="Accept=image/*")
-	public @ResponseBody byte[] showImage(@PathVariable("imageId") long imageId, HashMap<String,Object> model){
-		
+	public @ResponseBody byte[] showImage(@PathVariable("imageId") long imageId, HashMap<String,Object> model){	
 		Image img=imagesManager.getImage(imageId);
-		return img.getImage();
-		
+		return img.getImage();	
 	}
+	
 }

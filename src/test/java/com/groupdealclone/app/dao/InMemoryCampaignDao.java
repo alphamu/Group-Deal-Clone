@@ -48,4 +48,10 @@ public class InMemoryCampaignDao implements CampaignDao {
 		return null;
 	}
 
+	@Override
+	public void removeImage(Long campaignId, Long imageId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

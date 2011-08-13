@@ -56,6 +56,10 @@ public class SimpleCampaignManager implements CampaignManager {
 		camp.setCampaignCities(campCities);
 		campaignDao.updateCampaign(camp);
 	}
+	
+	public void removeImage(Long campaignId, Long imageId){
+		campaignDao.removeImage(campaignId, imageId);
+	}
 
 	public void setCampaignDao(CampaignDao campaignDao) {
 		this.campaignDao = campaignDao;

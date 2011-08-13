@@ -13,4 +13,6 @@ public interface CampaignDao {
     public void updateCampaign(Campaign camp);
     
     public Campaign getCampaign(Long id);
+    
+    public void removeImage(Long campaignId, Long imageId);
 }

@@ -29,6 +29,9 @@ public class CampaignValidator implements Validator {
         if(startDate != null && endDate != null && endDate.before(startDate)){
         	errors.rejectValue("endDate", "validation.notbefore.startdate");
         }
+//        if(c.getImageStore() == null || c.getImageStore().getImage() == null || c.getImageStore().getImage().size() > 0){
+//        	errors.rejectValue("imageStore", "validation.required");
+//        }
 	}
 
 }

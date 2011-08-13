@@ -33,36 +33,37 @@ import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
 
-@SessionAttributes(value={"campaignCities"})
+@SessionAttributes(value = { "campaignCities" })
 @Controller
 public class NewCampaignController {
-	private static final Logger logger = LoggerFactory.getLogger(NewCampaignController.class);
-	
-	@Autowired
-	private CampaignManager campaignManager;
-	@Autowired
-	private CityManager cityManager;
-	@Autowired
-	SimpleDateFormat dateFormat;
-	@Autowired
-	CustomDateEditor dateEditor;
+	@SuppressWarnings("unused")
+	private static final Logger	logger	= LoggerFactory.getLogger(NewCampaignController.class);
 
+	@Autowired
+	private CampaignManager		campaignManager;
+	@Autowired
+	private CityManager			cityManager;
+	@Autowired
+	SimpleDateFormat			dateFormat;
+	@Autowired
+	CustomDateEditor			dateEditor;
 
 	@RequestMapping(value = "campaign/new", method = RequestMethod.GET)
 	public String showForm(Map<String, Object> model) {
-		//List<Campaign> campaigns = campaignManager.getCampaigns();
 		Campaign campaignForm = new Campaign();
 		CampaignCities cities = new CampaignCities();
 		cities.setCities(new HashSet<City>(cityManager.getCity()));
-		//campaignForm.setCities(cities);
 		model.put("campaignCities", cities);
 		model.put("campaign", campaignForm);
 		return "campaign/new";
 	}
 
 	@RequestMapping(value = "campaign/new", method = RequestMethod.POST)
-	public String processForm(@Valid Campaign campaignForm,  BindingResult result, Map<String,Object> model) {
+	public String processForm(@Valid Campaign campaignForm, BindingResult result, Map<String, Object> model) {
 		new CampaignValidator().validate(campaignForm, result);
+		if (campaignForm.getImageStore() == null || campaignForm.getImageStore().getImage() == null || campaignForm.getImageStore().getImage().size() == 0) {
+			result.rejectValue("imageStore", "validation.required");
+		}
 		if (result.hasErrors()) {
 			return "campaign/new";
 		}
@@ -71,83 +72,106 @@ public class NewCampaignController {
 		model.put("campaigns", this.campaignManager.getCampaigns());
 		return "campaign/added";
 	}
-	
-	public void setCampaignManager(CampaignManager campaignManager){
+
+	public void setCampaignManager(CampaignManager campaignManager) {
 		this.campaignManager = campaignManager;
 	}
-	
-	public void setCityManager(CityManager cityManager){
+
+	public void setCityManager(CityManager cityManager) {
 		this.cityManager = cityManager;
 	}
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-	    dateFormat.setLenient(false);
-	    binder.registerCustomEditor(Date.class, dateEditor);
-	    
-		binder.registerCustomEditor(ImageStore.class, "imageStore",
-				new PropertyEditorSupport() {
-					@Override
-					public void setValue(Object value) {
-						if (value instanceof List) {
-							List<Image> images = new LinkedList<Image>();
-							for (Object val : ((List<?>) value)) {
-								Image image = new Image();
-								if (val instanceof MultipartFile) {
-									MultipartFile multipartFile = (MultipartFile) val;
-									try {
-										image.setImage(multipartFile.getBytes());
-										images.add(image);
-									} catch (IOException ex) {
-										throw new IllegalArgumentException(
-												"Cannot read contents of multipart file",
-												ex);
-									}
-								} else if (val instanceof byte[]) {
-									image.setImage((byte[]) val);
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, dateEditor);
+
+		binder.registerCustomEditor(ImageStore.class, "imageStore", new PropertyEditorSupport() {
+			@Override
+			public void setValue(Object value) {
+				if (value instanceof List) {
+					List<Image> images = new LinkedList<Image>();
+					for (Object val : ((List<?>) value)) {
+						Image image = new Image();
+						if (val instanceof MultipartFile) {
+							MultipartFile multipartFile = (MultipartFile) val;
+							try {
+								byte[] bytes = multipartFile.getBytes();
+								if (bytes.length > 0) {
+									image.setImage(bytes);
 									images.add(image);
-								} else {
-									image.setImage(val != null ? val.toString()
-											.getBytes() : null);
+								}
+							} catch (IOException ex) {
+								throw new IllegalArgumentException("Cannot read contents of multipart file", ex);
+							}
+						} else if (val instanceof byte[]) {
+							if (((byte[]) val).length > 0) {
+								image.setImage((byte[]) val);
+								images.add(image);
+							}
+						} else {
+							if (val != null) {
+								byte[] bytes = val.toString().getBytes();
+								if (bytes.length > 0) {
+									image.setImage(bytes);
 									images.add(image);
 								}
 							}
-							ImageStore img = new ImageStore();
-							img.setImage(images.size() > 0 ? images : null);
-							super.setValue(img);
-						} // if instanceof List
-						else if(value instanceof ImageStore) {
-							logger.debug("test");
-						}
-						else{
-							logger.debug("test");
 						}
 					}
-				});
+					if (images.size() > 0) {
+						ImageStore img = new ImageStore();
+						img.setImage(images);
+						super.setValue(img);
+					} else {
+						super.setValue(null);
+					}
+				} // if instanceof List
+				else if (value instanceof MultipartFile) {
+					List<Image> images = new LinkedList<Image>();
+					Image image = new Image();
+					MultipartFile multipartFile = (MultipartFile) value;
+					try {
+						byte[] bytes = multipartFile.getBytes();
+						if (bytes.length > 0) {
+							image.setImage(bytes);
+							images.add(image);
+						}
+					} catch (IOException ex) {
+						throw new IllegalArgumentException("Cannot read contents of multipart file", ex);
+					}
+					if (images.size() > 0) {
+						ImageStore imageStore = new ImageStore();
+						imageStore.setImage(images);
+						super.setValue(imageStore);
+					} else {
+						super.setValue(null);
+					}
+				}
+			}
+		});
 
-	    
-	    binder.registerCustomEditor(CampaignCities.class, "campaignCities", new PropertyEditorSupport() {
-	        @Override
-	        public void setAsText(String text) {
-	        	String [] ids = text.split(",");
-	        	CampaignCities cities = null;
-	        	for(String id:ids){
-	        		if(cities == null)
-	        			cities = new CampaignCities();
-	        		City city = cityManager.getCity(new Long(id));
-	        		if(city != null)
-	        			cities.getCities().add(city);
-	        		
-	        	}
-	        	if(cities != null){
-	        		cities.setId(null);
-	        		setValue(cities);
-	        	}
-	        }
-	        
-	    });
+		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				String[] ids = text.split(",");
+				CampaignCities cities = null;
+				for (String id : ids) {
+					if (cities == null)
+						cities = new CampaignCities();
+					City city = cityManager.getCity(new Long(id));
+					if (city != null)
+						cities.getCities().add(city);
+
+				}
+				if (cities != null) {
+					cities.setId(null);
+					setValue(cities);
+				}
+			}
+
+		});
 
 	}
-	
 
 }

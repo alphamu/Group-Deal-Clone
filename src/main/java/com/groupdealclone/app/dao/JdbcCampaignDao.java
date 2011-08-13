@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.groupdealclone.app.domain.Campaign;
+import com.groupdealclone.app.domain.Image;
+import com.groupdealclone.app.domain.ImageStore;
 
 @Repository
 @Transactional
@@ -63,6 +65,28 @@ public class JdbcCampaignDao implements CampaignDao {
 		em.merge(camp);
 		em.getTransaction().commit();
 		
+	}
+
+	@Override
+	public void removeImage(Long campaignId, Long imageId) {
+		EntityManager em = getEntityManager();
+		Campaign camp = em.find(Campaign.class,campaignId);
+		if(camp != null) {
+			ImageStore imgstore = camp.getImageStore();
+			List<Image> imgs = imgstore.getImage();
+			Image image = null;
+			for(Image i : imgs){
+				if(i.getId().equals(imageId)){
+					image = i;
+					imgs.remove(i);
+					break;
+				}
+			}
+			em.getTransaction().begin();
+			em.merge(camp);
+			em.remove(image);
+			em.getTransaction().commit();
+		}
 	}
 
 }
