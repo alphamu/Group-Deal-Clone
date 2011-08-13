@@ -106,6 +106,14 @@
 				</td>
 			</tr>
 		</c:forEach>
+		
+		<c:forEach varStatus="n" var="img" items="${campaign.imageStore.image}">
+		<tr>
+			<td>Image ${img.id}</td>
+			<td><img src="/Group-Deal-Clone/images/stored/${img.id}" /></td>
+		</tr>
+		</c:forEach>
+		
 	</table>
 
 	<input type="submit" value="Execute">

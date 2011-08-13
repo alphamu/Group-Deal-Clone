@@ -1,17 +1,16 @@
 package com.groupdealclone.app.dao;
 
-import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.Image;
-import com.groupdealclone.app.domain.Images;
+import com.groupdealclone.app.domain.ImageStore;
 
 public interface ImagesDao {
-	public Images getImages(Long id);
+	public ImageStore getImages(Long id);
 	
-	public void saveImages(Images images);
+	public void saveImages(ImageStore images);
 	
-	public void updateImages(Images images);
+	public void updateImages(ImageStore images);
 	
-	public Image getImage(Campaign campaign, Long imageId);
+	public Image getImage(Long imageId);
 	
 	public void setImage(Image image);
 	

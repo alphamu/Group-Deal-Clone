@@ -9,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Images {
+public class ImageStore {
 	
 	Long id;
-	List<Image> images;
+	List<Image> image;
 
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
@@ -25,12 +25,12 @@ public class Images {
 	}
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	public List<Image> getImages() {
-		return images;
+	public List<Image> getImage() {
+		return image;
 	}
 
-	public void setImages(List<Image> images) {
-		this.images = images;
+	public void setImage(List<Image> image) {
+		this.image = image;
 	}
 	
     @Override
@@ -40,7 +40,7 @@ public class Images {
         if (other == this)  return true;
         if (other.getClass() != getClass()) return false;
 
-        long otherId=((Images) other).getId();
+        long otherId=((ImageStore) other).getId();
         if (otherId!=id)
             return(false);
 

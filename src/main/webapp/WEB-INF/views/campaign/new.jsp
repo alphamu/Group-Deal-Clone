@@ -93,8 +93,8 @@
 		</tr>
 		<tr>
 			<td>Campaign Image</td>
-			<td><input type="file" name="images"/></td>
-			<td><input type="file" name="images"/></td>
+			<td><input type="file" name="imageStore"/></td>
+			<td><input type="file" name="imageStore"/></td>
 		</tr>
 	</table>
 	

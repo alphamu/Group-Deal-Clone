@@ -11,10 +11,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.groupdealclone.app.domain.Company;
 
+@Repository
 @Transactional
 public class JdbcCompanyDao implements CompanyDao {
 

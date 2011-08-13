@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 
-import org.hibernate.annotations.Columns;
-
 @Entity
 public class Image {
 	private Long id;

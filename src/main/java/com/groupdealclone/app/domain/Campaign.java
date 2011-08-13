@@ -40,7 +40,7 @@ public class Campaign implements Serializable {
 	
 	private CampaignCities campaignCities;
 	
-	private Images images;
+	private ImageStore imageStore;
 	
 	private boolean featured;
 	
@@ -112,12 +112,12 @@ public class Campaign implements Serializable {
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    public Images getImages() {
-		return images;
+    public ImageStore getImageStore() {
+		return imageStore;
 	}
 
-	public void setImages(Images images) {
-		this.images = images;
+	public void setImageStore(ImageStore images) {
+		this.imageStore = images;
 	}
 
 	@Override

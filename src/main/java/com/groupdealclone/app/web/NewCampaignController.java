@@ -23,13 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
 import com.groupdealclone.app.domain.Image;
-import com.groupdealclone.app.domain.Images;
+import com.groupdealclone.app.domain.ImageStore;
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
@@ -86,7 +85,7 @@ public class NewCampaignController {
 	    dateFormat.setLenient(false);
 	    binder.registerCustomEditor(Date.class, dateEditor);
 	    
-		binder.registerCustomEditor(Images.class, "images",
+		binder.registerCustomEditor(ImageStore.class, "imageStore",
 				new PropertyEditorSupport() {
 					@Override
 					public void setValue(Object value) {
@@ -113,11 +112,11 @@ public class NewCampaignController {
 									images.add(image);
 								}
 							}
-							Images img = new Images();
-							img.setImages(images.size() > 0 ? images : null);
+							ImageStore img = new ImageStore();
+							img.setImage(images.size() > 0 ? images : null);
 							super.setValue(img);
 						} // if instanceof List
-						else if(value instanceof Images) {
+						else if(value instanceof ImageStore) {
 							logger.debug("test");
 						}
 						else{

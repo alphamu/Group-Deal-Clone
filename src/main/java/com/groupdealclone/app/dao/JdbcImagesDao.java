@@ -5,10 +5,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-import com.groupdealclone.app.domain.Campaign;
-import com.groupdealclone.app.domain.Image;
-import com.groupdealclone.app.domain.Images;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.groupdealclone.app.domain.Image;
+import com.groupdealclone.app.domain.ImageStore;
+
+@Transactional
+@Repository
 public class JdbcImagesDao implements ImagesDao {
 
 	@PersistenceUnit(unitName = "dbcon")
@@ -18,13 +22,13 @@ public class JdbcImagesDao implements ImagesDao {
 	EntityManager em;
 	
 	@Override
-	public Images getImages(Long id) {
-		Images images = em.find(Images.class,id);
+	public ImageStore getImages(Long id) {
+		ImageStore images = em.find(ImageStore.class,id);
 		return images;
 	}
 
 	@Override
-	public void saveImages(Images images) {
+	public void saveImages(ImageStore images) {
 		EntityManager em = getEntityManager();
 		em.getTransaction().begin();
 		//em.persist(campaign.getCities());
@@ -32,7 +36,7 @@ public class JdbcImagesDao implements ImagesDao {
 		em.getTransaction().commit();
 	}
 	@Override
-	public void updateImages(Images images) {
+	public void updateImages(ImageStore images) {
 		EntityManager em = getEntityManager();
 		em.getTransaction().begin();
 		em.merge(images);
@@ -40,8 +44,9 @@ public class JdbcImagesDao implements ImagesDao {
 	}
 
 	@Override
-	public Image getImage(Campaign campaign, Long campaignId) {
-		return null;
+	public Image getImage(Long imageId) {
+		Image image = em.find(Image.class,imageId);
+		return image;
 	}
 
 	@Override
