@@ -87,5 +87,6 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 
 	<bean id="imagesManager" class="com.groupdealclone.app.service.SimpleImagesManager" />
 	<bean id="imagesDao" class="com.groupdealclone.app.dao.JdbcImagesDao" />
-	
+
+
 </beans>

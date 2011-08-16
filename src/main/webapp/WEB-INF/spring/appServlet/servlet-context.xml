@@ -49,7 +49,7 @@
 	<beans:import resource="testdata-context.xml" />
 
 	<!-- Load Hibernate related configuration -->
-	<beans:import resource="hibernate-context.xml" />
+	<!--  <beans:import resource="hibernate-context.xml" /> -->
 	
 	<!-- Load Hibernate related configuration -->
 	<beans:import resource="rest-context.xml" />
@@ -62,5 +62,6 @@
     	<!-- one of the properties available; the maximum file size in bytes -->
     	<beans:property name="maxUploadSize" value="1048576"/>  	
 	</beans:bean>
+
 
 </beans:beans>

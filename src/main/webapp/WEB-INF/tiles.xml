@@ -61,5 +61,8 @@
 		<put-attribute name="title" value="Edit.Company.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/company/edit.jsp" />
 	</definition>
+	
+	<definition name="loginpage" template="/WEB-INF/views/auth/loginpage.jsp" />
+	<definition name="deniedpage" template="/WEB-INF/views/auth/deniedpage.jsp" />
 
 </tiles-definitions>
