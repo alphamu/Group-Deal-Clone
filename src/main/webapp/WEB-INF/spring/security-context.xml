@@ -8,7 +8,7 @@
 
 	<!-- This is where we configure Spring-Security -->
 	<security:http auto-config="true" use-expressions="true"
-		access-denied-page="/krams/auth/denied">
+		access-denied-page="/auth/denied">
 
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/campaign/*"
@@ -21,7 +21,9 @@
 
 		<security:form-login login-page="/auth/login"
 			authentication-failure-url="/auth/login?error=true"
-			default-target-url="/home" />
+			default-target-url="/home" 
+			always-use-default-target="false"
+		/>
 
 		<security:logout invalidate-session="true"
 			logout-success-url="/auth/login" logout-url="/auth/logout" />

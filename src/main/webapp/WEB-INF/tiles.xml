@@ -63,6 +63,7 @@
 	</definition>
 	
 	<definition name="loginpage" template="/WEB-INF/views/auth/loginpage.jsp" />
+	
 	<definition name="deniedpage" template="/WEB-INF/views/auth/deniedpage.jsp" />
 
 </tiles-definitions>
