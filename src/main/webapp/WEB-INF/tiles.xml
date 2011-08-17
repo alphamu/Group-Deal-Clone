@@ -65,5 +65,8 @@
 	<definition name="loginpage" template="/WEB-INF/views/auth/loginpage.jsp" />
 	
 	<definition name="deniedpage" template="/WEB-INF/views/auth/deniedpage.jsp" />
+	
+	<definition name="chpwd" template="/WEB-INF/views/user/chpwd.jsp" />
+	<definition name="chpwd-success" template="/WEB-INF/views/user/chpwd-success.jsp" />
 
 </tiles-definitions>

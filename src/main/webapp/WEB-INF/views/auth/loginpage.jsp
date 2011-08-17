@@ -17,24 +17,24 @@
 <div id="login-error">${error}</div>
 
 <form action="../j_spring_security_check" method="post" >
-
-<p>
-	<label for="j_username">Username</label>
-	<input id="j_username" name="j_username" type="text" />
-</p>
-
-<p>
-	<label for="j_password">Password</label>
-	<input id="j_password" name="j_password" type="password" />
-</p>
-
-<p>
-	<label for="_spring_security_remember_me">Password</label>
-	<input type='checkbox' name='_spring_security_remember_me'/>
-</p>
-
-<input  type="submit" value="Login"/>								
-	
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td><label for="j_username">Username:</label></td>
+	<td><input id="j_username" name="j_username" type="text" /></td>
+</tr>
+<tr>
+	<td><label for="j_password">Password:</label></td>
+	<td><input id="j_password" name="j_password" type="password" /></td>
+</tr>
+<tr>
+	<td><label for="_spring_security_remember_me">Remember Me:</label></td>
+	<td><input type='checkbox' name='_spring_security_remember_me'/></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input  type="submit" value="Login"/></td>
+</tr>								
+</table>	
 </form>
 
 </body>

@@ -15,6 +15,14 @@
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<beans:property name="basename" value="messages" />
 	</beans:bean>
+	
+	<beans:bean id="appConfig"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basename" value="application" />
+	</beans:bean>
+	
+	
+
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />

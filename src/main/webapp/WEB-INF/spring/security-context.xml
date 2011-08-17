@@ -13,17 +13,18 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/campaign/*"
 			access="hasRole('ROLE_ADMIN')" />
-		<!-- <security:intercept-url pattern="/city/*" access="hasRole('ROLE_ADMIN')"/> -->
+		<security:intercept-url pattern="/city/*"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/deal/*"
+			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/company/*"
 			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/krams/main/common"
+		<security:intercept-url pattern="/user/chpwd"
 			access="hasRole('ROLE_USER')" />
 
 		<security:form-login login-page="/auth/login"
 			authentication-failure-url="/auth/login?error=true"
-			default-target-url="/home" 
-			always-use-default-target="false"
-		/>
+			default-target-url="/home" always-use-default-target="false" />
 
 		<security:logout invalidate-session="true"
 			logout-success-url="/auth/login" logout-url="/auth/logout" />
@@ -46,19 +47,21 @@
 	</bean>
 
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="userDetailsService">
-			<security:password-encoder hash="md5" />
+		<security:authentication-provider
+			user-service-ref="userDetailsService">
+			<security:password-encoder hash="md5">
+				
+			</security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
-	<bean id="accountDao" class="com.groupdealclone.app.dao.JdbcAccountDao" >	
-		
-	</bean>
-	
-	<bean id="userDetailsService" 
-      class="com.groupdealclone.app.service.AccountService" >
-    
-</bean>
+
+	<bean id="accountDao" class="com.groupdealclone.app.dao.JdbcAccountDao"></bean>
+
+	<bean id="userDetailsService" class="com.groupdealclone.app.service.AccountService"></bean>
+
+	<bean
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"
+		id="passwordEncoder" />
 
 
 

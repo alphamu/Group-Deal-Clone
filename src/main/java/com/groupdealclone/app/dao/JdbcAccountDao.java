@@ -1,8 +1,10 @@
 package com.groupdealclone.app.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,9 @@ import com.groupdealclone.app.domain.Account;
 @Transactional
 public class JdbcAccountDao implements AccountDao {
 
+	@PersistenceUnit(unitName = "dbcon")
+	EntityManagerFactory emf;
+	
 	@PersistenceContext
 	EntityManager em;
 
@@ -27,6 +32,13 @@ public class JdbcAccountDao implements AccountDao {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	
+	public void updateUser(Account account){
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(account);
+		em.getTransaction().commit();
 	}
 	
 
