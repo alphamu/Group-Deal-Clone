@@ -48,4 +48,16 @@ public class AccountService implements UserDetailsService {
 	public void setAccountDao(AccountDao accountDao) {
 		this.accountDao = accountDao;
 	}
+	
+	@Transactional
+	public void updateAccount(Account account){
+		accountDao.updateUser(account);
+	}
+	
+	@Transactional
+	public void saveAccount(Account account){
+		accountDao.saveUser(account);
+	}
+	
+	
 }

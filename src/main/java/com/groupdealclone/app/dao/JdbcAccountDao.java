@@ -21,6 +21,7 @@ public class JdbcAccountDao implements AccountDao {
 	@PersistenceContext
 	EntityManager em;
 
+	@Override
 	public Account getUser(String username) {
 		try {
 			Account account = em
@@ -34,10 +35,19 @@ public class JdbcAccountDao implements AccountDao {
 		}
 	}
 	
+	@Override
 	public void updateUser(Account account){
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(account);
+		em.getTransaction().commit();
+	}
+	
+	@Override
+	public void saveUser(Account account){
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(account);
 		em.getTransaction().commit();
 	}
 	

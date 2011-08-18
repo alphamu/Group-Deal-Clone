@@ -27,6 +27,9 @@ public class Account implements UserDetails {
 	@NotEmpty
 	@Size(min = 1, max = 50)
 	private String password;
+	
+	@Size(max = 50)
+	private String confirmPassword;
 
 	@NotEmpty
 	@Size(min = 1, max = 100)
@@ -125,6 +128,15 @@ public class Account implements UserDetails {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	@Transient
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 }
