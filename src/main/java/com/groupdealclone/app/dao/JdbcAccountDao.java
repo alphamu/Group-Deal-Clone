@@ -50,6 +50,20 @@ public class JdbcAccountDao implements AccountDao {
 		em.persist(account);
 		em.getTransaction().commit();
 	}
+
+	@Override
+	public Account getUser(Long id) {
+		try {
+			Account account = em
+					.createQuery("from Account where id = ?1", Account.class)
+					.setParameter(1, id).getSingleResult();
+			return account;
+		} catch (NoResultException noResult) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 	
 
 

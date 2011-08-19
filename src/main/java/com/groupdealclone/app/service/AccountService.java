@@ -31,6 +31,15 @@ public class AccountService implements UserDetailsService {
 		if (account == null)
 			throw new UsernameNotFoundException("No account found for '"
 					+ username + "'");
+		
+		return account;
+	}
+	public UserDetails loadUserById(Long id)
+			throws UsernameNotFoundException, DataAccessException {
+		
+		Account account = accountDao.getUser(id);
+		if (account == null)
+			throw new UsernameNotFoundException("No account found");
 
 		return account;
 	}

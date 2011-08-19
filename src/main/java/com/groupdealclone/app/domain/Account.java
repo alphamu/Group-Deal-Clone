@@ -24,8 +24,7 @@ public class Account implements UserDetails {
 
 	Long id;
 
-	@NotEmpty
-	@Size(min = 1, max = 50)
+	@Size(max = 50)
 	private String password;
 	
 	@Size(max = 50)

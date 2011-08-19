@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.groupdealclone.app.dao.AccountDao;
 import com.groupdealclone.app.domain.Account;
 import com.groupdealclone.app.service.AccountService;
+import com.groupdealclone.app.validation.EditUserValidator;
+import com.groupdealclone.app.validation.NewUserValidator;
 
 @Controller
 @RequestMapping("/user")
@@ -55,13 +56,51 @@ public class UserManagementController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String showEditUserPage(@RequestParam(value = "username", required = false) String username, ModelMap model) {
+		try{
 		Account a = (Account) userDetailsService.loadUserByUsername(username);
 		model.put("account", a);
 		return "user/edit";
+		}catch (Exception e){
+			model.put("username", username);
+			return "user/not-found";
+		}
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String doEditUserPage(@Valid Account account, BindingResult result, ModelMap model){
+		new EditUserValidator().validate(account, result);
+		if(result.hasErrors()) {
+			return "user/edit";
+		}
+		
+		String password = account.getPassword();
+		if(password == null || password.length() == 0) {
+			Account a = (Account) ((AccountService)userDetailsService).loadUserById(account.getId());
+			if(a != null) {
+				password = a.getPassword();
+				account.setPassword(passwordEncoder.encodePassword(password, null));
+			}
+		}
+		((AccountService)userDetailsService).updateAccount(account);
+		model.put("username", account.getUsername());
+		return "user/edit-success";
+	}
+	
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public String doNewUserPage(@Valid Account account, BindingResult result, ModelMap model){
+		new NewUserValidator().validate(account, result);
+		if(result.hasErrors()) {
+			return "user/new";
+		}
+		String password = account.getPassword();
+		account.setPassword(passwordEncoder.encodePassword(password, null));
+		((AccountService)userDetailsService).saveAccount(account);
+		model.put("username", account.getUsername());
+		return "user/new-success";
 	}
 
 	@RequestMapping(value = "/chpwd", method = RequestMethod.POST)
-	public String doChangePassowrdPage(@Valid ChangePassword chpwd, BindingResult result, ModelMap model, Locale locale) {
+	public String doChangePasswordPage(@Valid ChangePassword chpwd, BindingResult result, ModelMap model, Locale locale) {
 		String passwd = chpwd.getCurrentpwd();
 		String newpasswd = chpwd.getNewpwd();
 		String confirmpwd = chpwd.getConfirmpwd();
@@ -95,7 +134,8 @@ public class UserManagementController {
 		}
 		a.setPassword(newHash);
 		((AccountService)userDetailsService).updateAccount(a);
-
+		model.put("username", a.getUsername());
+		
 		return "chpwd-success";
 	}
 

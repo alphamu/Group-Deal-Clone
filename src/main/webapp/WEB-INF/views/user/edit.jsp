@@ -4,7 +4,8 @@
 <html>
 <head><title></title></head>
 <body>
-<form:form action="new" commandName="account" >
+<form:form action="edit" commandName="account" >
+<form:hidden path="id" />
 	<table>
 		<tr>
 			<td>Email Address:</td>
@@ -43,7 +44,7 @@
 		</tr>
 		<tr>
 			<td>Account Enabled:</td>
-			<td><form:checkbox path="enabled" value="true"/></td>
+			<td><form:checkbox path="enabled" /></td>
 			<td><FONT color="red"><form:errors path="enabled" /></FONT></td>
 		</tr>
 

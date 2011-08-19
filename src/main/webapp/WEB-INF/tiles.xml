@@ -67,8 +67,11 @@
 	<definition name="deniedpage" template="/WEB-INF/views/auth/deniedpage.jsp" />
 	
 	<definition name="user/new" template="/WEB-INF/views/user/new.jsp" />
+	<definition name="user/new-success" template="/WEB-INF/views/user/new-success.jsp" />
 	<definition name="user/edit" template="/WEB-INF/views/user/edit.jsp" />
+	<definition name="user/edit-success" template="/WEB-INF/views/user/edit-success.jsp" />
 	<definition name="chpwd" template="/WEB-INF/views/user/chpwd.jsp" />
 	<definition name="chpwd-success" template="/WEB-INF/views/user/chpwd-success.jsp" />
+	<definition name="user/not-found" template="/WEB-INF/views/user/not-found.jsp" />
 
 </tiles-definitions>

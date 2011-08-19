@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h1>Password for user "${username}" changed.</h1>
+<h1>New user "${username}" created.</h1>
 
 </body>
 </html>
