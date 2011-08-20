@@ -3,6 +3,7 @@ package com.groupdealclone.app.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.junit.Before;
@@ -42,7 +43,7 @@ public class SimpleCampaignManagerTest {
 		
 		deal = new Deal();
 		deal.setDescription(DEAL_DESC);
-		deal.setPrice(DEAL_PRICE);
+		deal.setPrice(new BigDecimal(DEAL_PRICE));
 		deal.setDiscountPercentage(DEAL_DISCOUNT);
 		deal.setMinSaleRequired(DEAL_MIN);
 		deal.setId(DEAL_ID);

@@ -1,6 +1,7 @@
 package com.groupdealclone.app.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Deal implements Serializable {
 	private String description;
 	
 	@Min(value=1)
-    private double price;
+    private BigDecimal price;
 	
 	@Min(value=1)
     private int minSaleRequired;
@@ -57,11 +58,11 @@ public class Deal implements Serializable {
         this.description = description;
     }
     
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
     
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
     

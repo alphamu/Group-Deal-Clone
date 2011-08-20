@@ -1,6 +1,9 @@
 package com.groupdealclone.app.domain;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import java.math.BigDecimal;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,10 +27,10 @@ public class DealTest {
 	
 	@Test
     public void testSetAndGetPrice() {
-        double testPrice = 100.00;
+        BigDecimal testPrice =new BigDecimal(100.00);
         assertEquals(0, 0, 0);    
         deal.setPrice(testPrice);
-        assertEquals(testPrice, deal.getPrice(), 0);
+        assertEquals(testPrice.doubleValue(), deal.getPrice().doubleValue(), 0);
     }
 
 	@Test

@@ -1,5 +1,6 @@
 package com.groupdealclone.app.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class CampaignTest {
 	Date END_DATE = new Date(System.currentTimeMillis()+SEVEN_DAYS);
 	
 	String DEAL_DESC = "aDescription";
-	double DEAL_PRICE = 10.10;
+	BigDecimal DEAL_PRICE = new BigDecimal(10.10);
 	int DEAL_DISCOUNT = 10;
 	int DEAL_MIN = 3;
 	Long DEAL_ID = new Long(3);

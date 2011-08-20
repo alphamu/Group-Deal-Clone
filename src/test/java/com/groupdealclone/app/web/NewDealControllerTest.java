@@ -3,6 +3,7 @@ package com.groupdealclone.app.web;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -48,7 +49,7 @@ public class NewDealControllerTest {
         	model = new HashMap<String, Object>();
         	newDeal = new Deal();
         	newDeal.setDescription(DESCRIPTION[i]);
-        	newDeal.setPrice(PRICE[i]);
+        	newDeal.setPrice(new BigDecimal(PRICE[i]));
         	newDeal.setMinSaleRequired(MIN_REQUIRED[i]);
         	newDeal.setDiscountPercentage(DISCOUNT[i]);
 

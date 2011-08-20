@@ -2,6 +2,7 @@ package com.groupdealclone.app.web;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.HashMap;
 
@@ -60,7 +61,7 @@ public class NewCampaignControllerTest {
 		
 		deal = new Deal();
 		deal.setDescription(DEAL_DESC);
-		deal.setPrice(DEAL_PRICE);
+		deal.setPrice(new BigDecimal(DEAL_PRICE));
 		deal.setDiscountPercentage(DEAL_DISCOUNT);
 		deal.setMinSaleRequired(DEAL_MIN);
 		deal.setId(DEAL_ID);
