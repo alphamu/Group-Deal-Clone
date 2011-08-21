@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,12 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Account Activation</title>
 </head>
 <body>
-
-<h1>New user "${username}" created.</h1>
-<p>We have sent you an email. In order to activate your account, please click the link in the email.</p>
-
+<p>${message}</p>
+<p>
+Account activation 
+<c:if test="${success}">
+was successful - <a href="<c:url value="/auth/login"/>">Login</a>
+</c:if>
+<c:if test="!${success}">failed</c:if>
+</p>
 </body>
 </html>

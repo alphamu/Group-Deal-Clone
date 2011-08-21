@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,9 @@ import com.groupdealclone.app.domain.Account;
 public class AccountService implements UserDetailsService {
 	
 	@Autowired
+	PasswordEncoder	passwordEncoder;
+	
+	@Autowired
 	AccountDao accountDao;
 
 	@Override
@@ -27,10 +31,10 @@ public class AccountService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
 		
-		Account account = accountDao.getUser(username);
+		Account account = accountDao.getUser(username.toLowerCase());
 		if (account == null)
 			throw new UsernameNotFoundException("No account found for '"
-					+ username + "'");
+					+ username.toLowerCase() + "'");
 		
 		return account;
 	}
@@ -60,11 +64,25 @@ public class AccountService implements UserDetailsService {
 	
 	@Transactional
 	public void updateAccount(Account account){
+		String lowerCaseUsername = account.getUsername().toLowerCase();
+		account.setUsername(lowerCaseUsername);
 		accountDao.updateUser(account);
 	}
 	
+	/***
+	 * Only to be used when creating a new account
+	 * @param account
+	 */
 	@Transactional
 	public void saveAccount(Account account){
+		String lowerCaseUsername = account.getUsername().toLowerCase();
+		account.setUsername(lowerCaseUsername);
+		long time = System.currentTimeMillis();
+		account.setMemberSince(new java.sql.Date(time));
+		String timeAsSalt = String.valueOf(time);
+		String code = passwordEncoder.encodePassword(account.getUsername(), timeAsSalt);
+		account.setActivationCode(code);
+		account.setEnabled(false); //should become true on activation.
 		accountDao.saveUser(account);
 	}
 	

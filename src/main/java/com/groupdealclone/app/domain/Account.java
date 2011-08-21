@@ -1,5 +1,6 @@
 package com.groupdealclone.app.domain;
 
+import java.sql.Date;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Set;
@@ -44,6 +45,10 @@ public class Account implements UserDetails {
 	private boolean credentialsNonExpired;
 	private boolean enabled;
 	private boolean admin;
+	
+	private Date memberSince;
+	
+	private String activationCode;
 
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
@@ -150,5 +155,22 @@ public class Account implements UserDetails {
 		this.fullname = fullname;
 	}
 
+	public Date getMemberSince() {
+		return memberSince;
+	}
+
+	public void setMemberSince(Date memberSince) {
+		this.memberSince = memberSince;
+	}
+
+	public String getActivationCode() {
+		return activationCode;
+	}
+
+	public void setActivationCode(String activationCode) {
+		this.activationCode = activationCode;
+	}
+
+	
 	
 }

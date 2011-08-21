@@ -11,4 +11,5 @@ public interface AccountDao {
 	public void updateUser(Account account);
 	
 	public void saveUser(Account account);
+	
 }
