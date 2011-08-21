@@ -10,29 +10,31 @@ import org.springframework.stereotype.Service;
 import com.groupdealclone.app.domain.Deal;
 
 @Service
-@XmlRootElement(name="deals")
+@XmlRootElement(name = "deals")
 public class SimpleDealManager implements DealManager {
 
-	private Set<Deal> deals;
-	
+	private Set<Deal>	deals;
+
 	public SimpleDealManager() {}
 
-	@XmlElement(name="deal")
+	@XmlElement(name = "deal")
 	public Set<Deal> getDeals() {
 		return deals;
 	}
 
 	@Override
 	public void setDeals(Set<Deal> deals) {
-		this.deals=deals;
-		
+		this.deals = deals;
+
 	}
 
 	@Override
 	public Deal getDeal(Long id) {
-		for(Deal d:deals){
-			if(d.getId().equals(id))
-				return d;
+		if (deals != null) {
+			for (Deal d : deals) {
+				if (d.getId().equals(id))
+					return d;
+			}
 		}
 		return null;
 	}

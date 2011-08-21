@@ -1,6 +1,7 @@
 package com.groupdealclone.app.domain;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ public class ShoppingCart {
 
 	private Long		id;
 	private Account		account;
-	private List<Deal>	deals;
+	private List<Deal>	deals = new LinkedList<Deal>();
 
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,5 +53,24 @@ public class ShoppingCart {
 		}
 		return total;
 	}
+	
+    @Override
+    public boolean equals(Object other)
+    {
+        if (other == null)  return false;
+        if (other == this)  return true;
+        if (other.getClass() != getClass()) return false;
+
+        long otherId=((ShoppingCart) other).getId();
+        if (otherId!=id)
+            return(false);
+
+        // other id == id here
+        if (id!=0)
+            return(true);
+
+        return(super.equals(other));
+    }
+	
 
 }

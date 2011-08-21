@@ -73,5 +73,7 @@
 	<definition name="chpwd" template="/WEB-INF/views/user/chpwd.jsp" />
 	<definition name="chpwd-success" template="/WEB-INF/views/user/chpwd-success.jsp" />
 	<definition name="user/not-found" template="/WEB-INF/views/user/not-found.jsp" />
+	
+	<definition name="shoppingcart" template="/WEB-INF/views/shoppingcart/show.jsp" />
 
 </tiles-definitions>
