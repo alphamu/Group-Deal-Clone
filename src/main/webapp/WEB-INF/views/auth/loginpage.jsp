@@ -37,5 +37,7 @@
 </table>	
 </form>
 
+<span class="newMembersSignup"><a href="<c:url value="/user/new"/>">New members sign-up</a></span> 
+<span class="forgotPassword"><a href="<c:url value="/user/forgot"/>">Forgot password?</a></span>
 </body>
 </html>

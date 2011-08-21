@@ -7,6 +7,11 @@
 <form:form action="new" commandName="account" >
 	<table>
 		<tr>
+			<td>Full Name:</td>
+			<td><form:input path="fullname" /></td>
+			<td><FONT color="red"><form:errors path="fullname" /></FONT></td>
+		</tr>
+		<tr>
 			<td>Email Address:</td>
 			<td><form:input path="username" /></td>
 			<td><FONT color="red"><form:errors path="username" /></FONT></td>

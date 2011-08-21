@@ -33,6 +33,10 @@ public class Account implements UserDetails {
 	@NotEmpty
 	@Size(min = 1, max = 100)
 	private String username;
+	
+	@NotEmpty
+	@Size(min = 1, max = 100)
+	private String fullname;
 
 	private Collection<GrantedAuthority> authorities;
 	private boolean accountNonExpired;
@@ -138,4 +142,13 @@ public class Account implements UserDetails {
 		this.confirmPassword = confirmPassword;
 	}
 
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	
 }

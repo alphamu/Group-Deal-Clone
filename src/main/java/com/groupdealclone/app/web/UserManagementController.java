@@ -2,11 +2,18 @@ package com.groupdealclone.app.web;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Random;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailMessage;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,7 +33,7 @@ import com.groupdealclone.app.validation.NewUserValidator;
 @Controller
 @RequestMapping("/user")
 public class UserManagementController {
-
+	private static final Logger logger = LoggerFactory.getLogger(UserManagementController.class);
 	@Autowired
 	UserDetailsService userDetailsService;
 
@@ -35,6 +42,12 @@ public class UserManagementController {
 
 	@Autowired
 	MessageSource	appConfig;
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	
+	@Autowired
+	MailMessage passwordResetMessage;
 
 	@RequestMapping(value = "/chpwd", method = RequestMethod.GET)
 	public String showChangePassowrdPage(ModelMap model) {
@@ -139,37 +152,133 @@ public class UserManagementController {
 		return "chpwd-success";
 	}
 
-	class ChangePassword {
-
-		private String	currentpwd;
-
-		private String	newpwd;
-
-		private String	confirmpwd;
-
-		public String getCurrentpwd() {
-			return currentpwd;
+	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
+	public String resetPassword(ModelMap model) {
+		model.put("resetPassword", new ResetPassword());
+		return "user/forgot";
+	}
+	
+	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
+	public String resetPassword(@Valid ResetPassword resetPassword, BindingResult result, ModelMap model, Locale locale) {
+		if(resetPassword.getUsername().length() < 4) {
+			model.put("error", "Email Address too short");
+			return "user/forgot";
 		}
-
-		public void setCurrentpwd(String currentpwd) {
-			this.currentpwd = currentpwd;
+		final String username = resetPassword.getUsername();
+		Account a = null;
+		try{
+			a = (Account) userDetailsService.loadUserByUsername(username);
+		} catch(Exception e) {
+			logger.error("Account does not exist {}", username);
+			model.put("error", "No account with email address '"+username+"' found.");
+			return "user/forgot";
 		}
-
-		public String getNewpwd() {
-			return newpwd;
+		if(a == null) {
+			logger.error("Account does not exist {}", username);
+			model.put("error", "No account with email address '"+username+"' found.");
+			return "user/forgot";
 		}
-
-		public void setNewpwd(String newpwd) {
-			this.newpwd = newpwd;
+		
+		String newPassword = getRandomString(8);
+		try {
+		String newHash = passwordEncoder.encodePassword(newPassword, null);
+		a.setPassword(newHash);
+		((AccountService)userDetailsService).updateAccount(a);
+		}catch(Exception e){
+			logger.error("Error while trying to change password {}", e);
+			model.put("error", "Internal error, please try again later");
+			return "user/forgot";
 		}
+		
+		Object[] vals = {a.getFullname(), newPassword};
+		String text = appConfig.getMessage("password.reset.message",vals,locale);
+		passwordResetMessage.setTo(a.getUsername());
+		passwordResetMessage.setText(text);
+		
+		 try {
+	            this.mailSender.send((SimpleMailMessage)passwordResetMessage);
+	        }
+	        catch (MailException ex) {
+	            // simply log it and go on...
+	           	logger.error("JavaMail error {}",ex);     
+				model.put("error", "Internal error, please try again later");
+				return "user/forgot";
+	        }
+		 
+		model.put("message", "A new password has been generated and sent to your email address.");
+		return "user/reset-success";
+	}
+	
+	
+    private static final String charset = "!0123456789abcdefghijklmnopqrstuvwxyz";
+    
+    public static String getRandomString(int length) {
+        Random rand = new Random(System.currentTimeMillis());
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int pos = rand.nextInt(charset.length());
+            sb.append(charset.charAt(pos));
+        }
+        return sb.toString();
+    }
 
-		public String getConfirmpwd() {
-			return confirmpwd;
-		}
+}
 
-		public void setConfirmpwd(String confirmpwd) {
-			this.confirmpwd = confirmpwd;
-		}
+/***
+ * ChangePassword Bean
+ *
+ * @author Ali
+ */
+class ChangePassword {
+
+	private String	currentpwd;
+
+	private String	newpwd;
+
+	private String	confirmpwd;
+
+	public String getCurrentpwd() {
+		return currentpwd;
 	}
 
+	public void setCurrentpwd(String currentpwd) {
+		this.currentpwd = currentpwd;
+	}
+
+	public String getNewpwd() {
+		return newpwd;
+	}
+
+	public void setNewpwd(String newpwd) {
+		this.newpwd = newpwd;
+	}
+
+	public String getConfirmpwd() {
+		return confirmpwd;
+	}
+
+	public void setConfirmpwd(String confirmpwd) {
+		this.confirmpwd = confirmpwd;
+	}
+}
+
+/***
+ * ResetPassword Bean
+ * 
+ */
+class ResetPassword{
+	private String username;
+	
+	public ResetPassword(){
+		
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 }

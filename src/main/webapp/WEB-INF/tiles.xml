@@ -72,7 +72,9 @@
 	<definition name="user/edit-success" template="/WEB-INF/views/user/edit-success.jsp" />
 	<definition name="chpwd" template="/WEB-INF/views/user/chpwd.jsp" />
 	<definition name="chpwd-success" template="/WEB-INF/views/user/chpwd-success.jsp" />
+	<definition name="user/forgot" template="/WEB-INF/views/user/forgot.jsp" />
 	<definition name="user/not-found" template="/WEB-INF/views/user/not-found.jsp" />
+	<definition name="user/reset-success" template="/WEB-INF/views/user/reset-success.jsp" />
 	
 	<definition name="shoppingcart" template="/WEB-INF/views/shoppingcart/show.jsp" />
 
