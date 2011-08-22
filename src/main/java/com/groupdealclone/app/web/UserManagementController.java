@@ -234,7 +234,7 @@ public class UserManagementController {
 			return "user/forgot";
 		}
 
-		String newPassword = getRandomString(8);
+		String newPassword = getRandomString(Integer.parseInt(appConfig.getMessage("min.password.size", null, locale)));
 		try {
 			String newHash = passwordEncoder.encodePassword(newPassword, null);
 			a.setPassword(newHash);
