@@ -83,6 +83,9 @@ public class AccountService implements UserDetailsService {
 		String code = passwordEncoder.encodePassword(account.getUsername(), timeAsSalt);
 		account.setActivationCode(code);
 		account.setEnabled(false); //should become true on activation.
+		account.setCredentialsNonExpired(true);
+		account.setAccountNonLocked(true);
+		account.setAccountNonExpired(true);
 		accountDao.saveUser(account);
 	}
 	

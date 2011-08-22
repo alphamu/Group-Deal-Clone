@@ -75,7 +75,10 @@
 	<definition name="user/forgot" template="/WEB-INF/views/user/forgot.jsp" />
 	<definition name="user/not-found" template="/WEB-INF/views/user/not-found.jsp" />
 	<definition name="user/reset-success" template="/WEB-INF/views/user/reset-success.jsp" />
+	<definition name="user/activation" template="/WEB-INF/views/user/activation.jsp" />
 	
 	<definition name="shoppingcart" template="/WEB-INF/views/shoppingcart/show.jsp" />
+	
+	<definition name="page-not-found" template="/WEB-INF/views/page-not-found.jsp" />
 
 </tiles-definitions>

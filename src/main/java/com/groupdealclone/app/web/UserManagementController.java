@@ -145,9 +145,13 @@ public class UserManagementController {
 		model.put("success", false);
 		String[] split = activate.split(":");
 		Account a = (Account) userDetailsService.loadUserByUsername(split[0]);
+		if(a.getActivationCode() == null) {
+			return "page-not-found";
+		}
 		try {
 			if (a.getActivationCode().equals(split[1])) {
 				a.setEnabled(true);
+				a.setActivationCode(null);
 				((AccountService) userDetailsService).updateAccount(a);
 				model.put("success", true);
 			}
