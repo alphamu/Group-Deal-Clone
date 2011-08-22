@@ -1,6 +1,7 @@
 package com.groupdealclone.app.web;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/auth")
 public class LoginLogoutController {
 
-	protected static Logger	logger	= Logger.getLogger(LoginLogoutController.class);
+	protected static Logger	logger	= LoggerFactory.getLogger(LoginLogoutController.class);
 
 	/**
 	 * Handles and retrieves the login JSP page

@@ -15,6 +15,7 @@
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<spring.security.version>3.0.5.RELEASE</spring.security.version>
 		<spring.social.version>1.0.0.M1</spring.social.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -323,6 +324,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
@@ -331,8 +333,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
 				<configuration>
-					<warName>abc</warName>
+					<warName>group-deal-clone</warName>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -384,6 +387,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.9</version>
 				<configuration>
 					<junitArtifactName>junit:junit</junitArtifactName>
 					<excludes>
