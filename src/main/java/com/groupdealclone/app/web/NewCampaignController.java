@@ -23,6 +23,7 @@ import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
 import com.groupdealclone.app.domain.ImageStore;
+import com.groupdealclone.app.exception.CompanyNotFoundException;
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
@@ -63,7 +64,13 @@ public class NewCampaignController {
 		if (result.hasErrors()) {
 			return "campaign/new";
 		}
-		this.campaignManager.saveCampaign(campaignForm);
+		try {
+			this.campaignManager.saveCampaign(campaignForm);
+		} catch (CompanyNotFoundException e) {
+			logger.error("Error while trying to add new campaign {}", e);
+			result.rejectValue("company.name", "company.not.found", e.getMessage());
+			return "campaign/new";
+		}
 		model.put("campaign", campaignForm);
 		model.put("campaigns", this.campaignManager.getCampaigns());
 		return "campaign/added";

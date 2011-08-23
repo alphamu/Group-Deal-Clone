@@ -9,6 +9,8 @@ public interface CompanyDao {
 	
 	public Company getCompany(Long id);
 	
+	public Company getCompany(String name);
+	
 	public void saveCompany(Company company);
 	
 	public void updateCompany(Company company);

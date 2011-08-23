@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
 import com.groupdealclone.app.domain.ImageStore;
+import com.groupdealclone.app.exception.CompanyNotFoundException;
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
@@ -31,7 +34,7 @@ import com.groupdealclone.app.validation.CustomStringToCampaignCitiesEditor;
 @Controller
 @SessionAttributes(value = { "campaignCities" })
 public class EditCampaignController {
-	// private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
+	private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
 
 	@Autowired
 	private CampaignManager	campaignManager;
@@ -72,7 +75,13 @@ public class EditCampaignController {
 
 		model.put("campaign", campaignForm);
 		model.put("campaigns", this.campaignManager.getCampaigns());
-		this.campaignManager.updateCampaign(campaignForm);
+		try {
+			this.campaignManager.updateCampaign(campaignForm);
+		} catch (CompanyNotFoundException e) {
+			logger.error("error while trying to update campaign: {}",e);
+			result.rejectValue("company.name", "company.not.found", e.getMessage());
+			return "campaign/edit";
+		}
 		return "campaign/added";
 	}
 

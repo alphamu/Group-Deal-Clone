@@ -21,6 +21,8 @@ public class SimpleCityManager implements CityManager {
 
 	@Transactional
 	public void saveCity(City city) {
+		String name = city.getName().trim().toLowerCase();
+		city.setName(name);
 		cityDao.saveCity(city);
 		
 	}
@@ -30,7 +32,10 @@ public class SimpleCityManager implements CityManager {
 	}
 
 	@Override
+	@Transactional
 	public void updateCity(City city) {
+		String name = city.getName().trim().toLowerCase();
+		city.setName(name);
 		cityDao.updateCity(city);
 	}
 

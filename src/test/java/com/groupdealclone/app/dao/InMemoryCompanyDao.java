@@ -41,4 +41,14 @@ public class InMemoryCompanyDao implements CompanyDao {
 		}
 	}
 
+	@Override
+	public Company getCompany(String name) {
+		for(Company c: companies){
+			if(c.getName().equals(name)){
+				return c;
+			}
+		}
+		return null;
+	}
+
 }

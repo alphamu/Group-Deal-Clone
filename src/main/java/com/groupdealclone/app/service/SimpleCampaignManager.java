@@ -9,24 +9,41 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.groupdealclone.app.dao.CampaignDao;
+import com.groupdealclone.app.dao.CompanyDao;
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
+import com.groupdealclone.app.domain.Company;
 import com.groupdealclone.app.domain.Image;
 import com.groupdealclone.app.domain.ImageStore;
+import com.groupdealclone.app.exception.CompanyNotFoundException;
 
 @Service
 public class SimpleCampaignManager implements CampaignManager {
 
 	@Autowired
 	private CampaignDao	campaignDao;
+	@Autowired
+	private CompanyDao	companyDao;
 
 	public Campaign getCampaign(Long id) {
 		return campaignDao.getCampaign(id);
 	}
 
 	@Transactional
-	public void saveCampaign(Campaign camp) {
+	public void saveCampaign(Campaign camp) throws CompanyNotFoundException {
+		//check if the company whose name has been input exists and if it does update campaign. else throw error.
+		Company inputCo = camp.getCompany();
+		String inputCoName = inputCo.getName().trim().toLowerCase();
+		Company coFound = null;
+		if(inputCoName.length() > 0) { //company id will always be null, name should be min 1 char, this check is to ensure it's not a whitespace.
+			coFound = companyDao.getCompany(inputCoName);
+		}
+		if(coFound == null)
+			throw new CompanyNotFoundException("Company '"+inputCo.getName()+"' not found. Add a new company first.");
+		else {
+			camp.setCompany(coFound);
+		}
 		campaignDao.saveCampaign(camp);
 	}
 
@@ -50,7 +67,7 @@ public class SimpleCampaignManager implements CampaignManager {
 	// }
 
 	@Override
-	public void updateCampaign(Campaign camp) {
+	public void updateCampaign(Campaign camp) throws CompanyNotFoundException {
 		Campaign oldCamp = campaignDao.getCampaign(camp.getId());
 		
 		CampaignCities campCities = oldCamp.getCampaignCities();
@@ -61,6 +78,7 @@ public class SimpleCampaignManager implements CampaignManager {
 			camp.setCampaignCities(campCities);
 		}
 		
+		//update the images by adding the list of new images to the old ones.
 		ImageStore imgStore = oldCamp.getImageStore();
 		if(imgStore != null) {
 			List<Image> oldImgList=imgStore.getImage();
@@ -74,6 +92,20 @@ public class SimpleCampaignManager implements CampaignManager {
 					oldImgList.addAll(newImgList);
 			}
 			camp.setImageStore(imgStore);
+		}
+		
+		//check if company exists. replace input company object with one from the DB
+		//this should prevent people from changing the company name when editing a campaign.
+		Company inputCo = camp.getCompany();
+		String inputCoName = inputCo.getName().trim().toLowerCase();
+		Company coFound = null;
+		if(inputCoName.length() > 0) { //this should never be null (for validation)
+			coFound = companyDao.getCompany(inputCoName);
+		}		
+		if(coFound == null)
+			throw new CompanyNotFoundException("Company '"+inputCo.getName()+"' not found. Add a new company first.");
+		else {
+			camp.setCompany(coFound);
 		}
 		
 		campaignDao.updateCampaign(camp);

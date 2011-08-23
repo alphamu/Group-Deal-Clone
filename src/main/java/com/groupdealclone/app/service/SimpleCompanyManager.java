@@ -21,6 +21,8 @@ public class SimpleCompanyManager implements CompanyManager {
 
 	@Transactional
 	public void saveCompany(Company company) {
+		String name = company.getName().trim().toLowerCase();
+		company.setName(name);
 		companyDao.saveCompany(company);
 		
 	}
@@ -31,6 +33,8 @@ public class SimpleCompanyManager implements CompanyManager {
 
 	@Override
 	public void updateCompany(Company company) {
+		String name = company.getName().trim().toLowerCase();
+		company.setName(name);
 		companyDao.updateCompany(company);
 	}
 

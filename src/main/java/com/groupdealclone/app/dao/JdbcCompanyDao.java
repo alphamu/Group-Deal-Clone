@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
@@ -41,6 +42,8 @@ public class JdbcCompanyDao implements CompanyDao {
 	@Override
 	@Transactional
 	public void saveCompany(Company company) {
+		//foce company name to upper case
+		company.setName(company.getName().trim().toUpperCase());
 		// begin transaction
 		EntityManager em = getEntityManager();
 		em.getTransaction().begin();
@@ -61,6 +64,9 @@ public class JdbcCompanyDao implements CompanyDao {
 	@Override
 	@Transactional
 	public void updateCompany(Company company) {
+		//force company name to upper case
+		company.setName(company.getName().trim().toUpperCase());
+		
 		EntityManager em = getEntityManager();
 		em.getTransaction().begin();
 		em.merge(company);
@@ -71,6 +77,20 @@ public class JdbcCompanyDao implements CompanyDao {
 	public Company getCompany(Long id){
 		Company company = em.find(Company.class,id);
 		return company;
+	}
+
+	@Override
+	public Company getCompany(String name) {
+		try {
+			Company co = em
+					.createQuery("from Company where name = ?1", Company.class)
+					.setParameter(1, name.trim().toUpperCase()).getSingleResult();
+			return co;
+		} catch (NoResultException noResult) {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
