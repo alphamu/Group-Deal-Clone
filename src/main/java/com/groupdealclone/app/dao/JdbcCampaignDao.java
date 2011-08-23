@@ -30,10 +30,10 @@ public class JdbcCampaignDao implements CampaignDao {
 		String query = "FROM Campaign camp WHERE ?1 BETWEEN camp.startDate AND camp.endDate";
 		switch (campaignType) {
 		case FEATURED_ONLY:
-			query += " featured=true";
+			query += " AND featured=true";
 			break;
 		case REGULAR_ONLY:
-			query += " featured=false";
+			query += " AND featured=false";
 			break;
 		}
 		List<Campaign> camp = em.createQuery(query, Campaign.class).setParameter(1, new java.util.Date(), TemporalType.DATE).getResultList();

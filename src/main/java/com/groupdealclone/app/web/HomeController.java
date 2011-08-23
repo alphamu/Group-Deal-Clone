@@ -10,8 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.groupdealclone.app.service.CampaignManager;
+import com.groupdealclone.app.service.CompanyManager;
 import com.groupdealclone.app.service.DealManager;
 
 /**
@@ -24,13 +25,22 @@ public class HomeController{
 	
 	@Autowired
 	private DealManager dealManager;
+	@Autowired
+	private CampaignManager campaignManager;
+	@Autowired
+	private CompanyManager companyManager;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=text/html")
-	public ModelAndView home(Locale locale, Model model) {	
+	public String home(Locale locale, Model model) {		
+		
+		model.addAttribute("featured", campaignManager.getFeaturedCampaigns());
+		model.addAttribute("regular", campaignManager.getRegularCampaigns());
+		model.addAttribute("company", companyManager.getCompany());
+		
 		logger.info("Rendering home in HTML {}", locale.toString());
-		return new ModelAndView("home-tile", "deals", this.dealManager);	
+		return "home-tile";	
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=application/xml, application/json")

@@ -7,8 +7,9 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-<context:property-placeholder
-		location="/WEB-INF/classes/application.properties" />
+
+	<context:property-placeholder location="/WEB-INF/classes/application.properties" />
+	
 	<!-- Mail service -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${email.smtp.host}" />
@@ -28,13 +29,15 @@
 	<!-- this is a template message that we can pre-load with default state -->
 	<bean id="passwordResetMessage" class="org.springframework.mail.SimpleMailMessage">
 		<property name="from" value="${no.reply.email}" />
-		<property name="subject" value="Your ${application.name} Password has been reset" />
+		<property name="subject"
+			value="Your ${application.name} Password has been reset" />
 	</bean>
-	
+
 	<!-- this is a template message that we can pre-load with default state -->
 	<bean id="newAccountMessage" class="org.springframework.mail.SimpleMailMessage">
 		<property name="from" value="${no.reply.email}" />
-		<property name="subject" value="Please confirm your ${application.name} account" />
+		<property name="subject"
+			value="Please confirm your ${application.name} account" />
 	</bean>
 
 </beans>

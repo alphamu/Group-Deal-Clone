@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.groupdealclone.app.dao.CampaignDao;
+import com.groupdealclone.app.dao.CampaignDao.CampaignType;
 import com.groupdealclone.app.dao.CompanyDao;
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
@@ -117,6 +118,21 @@ public class SimpleCampaignManager implements CampaignManager {
 
 	public void setCampaignDao(CampaignDao campaignDao) {
 		this.campaignDao = campaignDao;
+	}
+
+	@Override
+	public List<Campaign> getFeaturedCampaigns() {		
+		return campaignDao.getFeaturedCampaignList();
+	}
+
+	@Override
+	public List<Campaign> getRegularCampaigns() {
+		return campaignDao.getRegularCampaignList();
+	}
+
+	@Override
+	public List<Campaign> getCampaigns(CampaignType campaignType) {
+		return campaignDao.getCampaignList(campaignType);
 	}
 
 }

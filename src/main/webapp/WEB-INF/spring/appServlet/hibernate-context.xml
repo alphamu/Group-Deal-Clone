@@ -14,8 +14,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
    http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<context:property-placeholder
-		location="/WEB-INF/classes/hiberbate-context.properties" />
+	<context:property-placeholder 
+		location="/WEB-INF/classes/application.properties" />
 
 	<!-- Enable annotation style of managing transactions -->
 	<tx:annotation-driven transaction-manager="transactionManager" />

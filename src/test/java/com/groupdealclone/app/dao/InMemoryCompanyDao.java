@@ -51,4 +51,9 @@ public class InMemoryCompanyDao implements CompanyDao {
 		return null;
 	}
 
+	@Override
+	public List<Company> getAllCompanies() {
+		return companies;
+	}
+
 }
