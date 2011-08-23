@@ -5,8 +5,14 @@ import java.util.List;
 import com.groupdealclone.app.domain.Campaign;
 
 public interface CampaignDao {
-	
-    public List<Campaign> getCampaignList();
+	public enum CampaignType {
+	    FEATURED_ONLY, REGULAR_ONLY, ALL
+	}
+
+	public List<Campaign> getCampaignList();
+	public List<Campaign> getCampaignList(CampaignType campaignType);
+	public List<Campaign> getRegularCampaignList();
+    public List<Campaign> getFeaturedCampaignList();
 
     public void saveCampaign(Campaign camp);
     

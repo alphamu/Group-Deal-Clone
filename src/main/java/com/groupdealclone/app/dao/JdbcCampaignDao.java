@@ -20,21 +20,40 @@ import com.groupdealclone.app.domain.ImageStore;
 public class JdbcCampaignDao implements CampaignDao {
 
 	@PersistenceUnit(unitName = "dbcon")
-	EntityManagerFactory emf;
+	EntityManagerFactory	emf;
 
 	@PersistenceContext
-	EntityManager em;
+	EntityManager			em;
+
+	@Override
+	public List<Campaign> getCampaignList(CampaignType campaignType) {
+		String query = "FROM Campaign camp WHERE ?1 BETWEEN camp.startDate AND camp.endDate";
+		switch (campaignType) {
+		case FEATURED_ONLY:
+			query += " featured=true";
+			break;
+		case REGULAR_ONLY:
+			query += " featured=false";
+			break;
+		}
+		List<Campaign> camp = em.createQuery(query, Campaign.class).setParameter(1, new java.util.Date(), TemporalType.DATE).getResultList();
+
+		return camp;
+	}
 
 	@Override
 	public List<Campaign> getCampaignList() {
-		List<Campaign> camp = em
-				.createQuery(
-						"FROM Campaign camp WHERE ?1 BETWEEN camp.startDate AND camp.endDate",
-						Campaign.class)
-				.setParameter(1, new java.util.Date(), TemporalType.DATE)
-				.getResultList();
+		return getCampaignList(CampaignType.ALL);
+	}
 
-		return camp;
+	@Override
+	public List<Campaign> getRegularCampaignList() {
+		return getCampaignList(CampaignType.REGULAR_ONLY);
+	}
+
+	@Override
+	public List<Campaign> getFeaturedCampaignList() {
+		return getCampaignList(CampaignType.FEATURED_ONLY);
 	}
 
 	@Override
@@ -42,14 +61,14 @@ public class JdbcCampaignDao implements CampaignDao {
 	public void saveCampaign(Campaign campaign) {
 		EntityManager em = getEntityManager();
 		em.getTransaction().begin();
-		//em.persist(campaign.getCities());
+		// em.persist(campaign.getCities());
 		em.merge(campaign);
 		em.getTransaction().commit();
 	}
 
 	@Override
 	public Campaign getCampaign(Long id) {
-		Campaign camp = em.find(Campaign.class,id);
+		Campaign camp = em.find(Campaign.class, id);
 		return camp;
 	}
 
@@ -64,19 +83,19 @@ public class JdbcCampaignDao implements CampaignDao {
 		em.getTransaction().begin();
 		em.merge(camp);
 		em.getTransaction().commit();
-		
+
 	}
 
 	@Override
 	public void removeImage(Long campaignId, Long imageId) {
 		EntityManager em = getEntityManager();
-		Campaign camp = em.find(Campaign.class,campaignId);
-		if(camp != null) {
+		Campaign camp = em.find(Campaign.class, campaignId);
+		if (camp != null) {
 			ImageStore imgstore = camp.getImageStore();
 			List<Image> imgs = imgstore.getImage();
 			Image image = null;
-			for(Image i : imgs){
-				if(i.getId().equals(imageId)){
+			for (Image i : imgs) {
+				if (i.getId().equals(imageId)) {
 					image = i;
 					imgs.remove(i);
 					break;
