@@ -11,7 +11,9 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
@@ -37,9 +39,13 @@ import com.groupdealclone.app.validation.EditUserValidator;
 import com.groupdealclone.app.validation.NewUserValidator;
 
 @Controller
+@Configuration
 @RequestMapping("/user")
 public class UserManagementController {
 	private static final Logger	logger	= LoggerFactory.getLogger(UserManagementController.class);
+	
+	private @Value("#{config.minPasswordSize}") int minPasswordLength;
+	
 	@Autowired
 	UserDetailsService			userDetailsService;
 
@@ -180,7 +186,7 @@ public class UserManagementController {
 		boolean error = false;
 		if (passwdHash.equals(a.getPassword())) {
 			if (newpasswd.equals(confirmpwd)) {
-				int minLength = Integer.parseInt(appConfig.getMessage("min.password.size", null, locale));
+				int minLength = minPasswordLength;
 				if (newpasswd.length() >= minLength) {
 					newHash = passwordEncoder.encodePassword(newpasswd, null);
 				} else {
@@ -234,7 +240,7 @@ public class UserManagementController {
 			return "user/forgot";
 		}
 
-		String newPassword = getRandomString(Integer.parseInt(appConfig.getMessage("min.password.size", null, locale)));
+		String newPassword = getRandomString(minPasswordLength);
 		try {
 			String newHash = passwordEncoder.encodePassword(newPassword, null);
 			a.setPassword(newHash);
