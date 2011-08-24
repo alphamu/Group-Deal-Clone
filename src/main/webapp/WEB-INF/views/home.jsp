@@ -1,31 +1,54 @@
-<%@ include file="/WEB-INF/views/include.jsp" %>
+<%@ include file="/WEB-INF/views/include.jsp"%>
 <%@ page session="false"%>
 
-<h3><tiles:insertAttribute name="title" ignore="true" /></h3>
+<h3>
+	<tiles:insertAttribute name="title" ignore="true" />
+</h3>
 
 <h2>Featured Deals</h2>
-<c:forEach var="f" items="${featured}">
-	<div class="featured-deal deal">
-		<div class="desc">${f.deal.description}</div>
-		<div class="discount">${f.deal.discountPercentage}</div>
-		<div class="price">${f.deal.price}</div>
-		<div class="minSale">${f.deal.minSaleRequired}</div>
+<c:if test="${not empty regular}">
+	<div class="featured-deal">
+		<c:forEach var="f" items="${featured}">
+			<ul class="deal">
+				<li><span class="desc">${r.deal.description}</span></li>
+				<li><span class="discount">${r.deal.discountPercentage}</span>
+				</li>
+				<li><span class="price">${r.deal.price}</span></li>
+				<li><span class="minSale">${r.deal.minSaleRequired}</span></li>
+			</ul>
+		</c:forEach>
 	</div>
-</c:forEach>
+</c:if>
 
 <h2>Deals in progress</h2>
-<c:forEach var="r" items="${regular}">
-	<div class="regular-deal deal">
-		<div class="desc">${r.deal.description}</div>
-		<div class="discount">${r.deal.discountPercentage}</div>
-		<div class="price">${r.deal.price}</div>
-		<div class="minSale">${r.deal.minSaleRequired}</div>
+<c:if test="${not empty regular}">
+	<div class="regular-deal">
+		<c:forEach var="r" items="${regular}">
+			<ul class="deal">
+				<li><span class="desc">${r.deal.description}</span></li>
+				<li><span class="discount">${r.deal.discountPercentage}</span>
+				</li>
+				<li><span class="price">${r.deal.price}</span></li>
+				<li><span class="minSale">${r.deal.minSaleRequired}</span></li>
+			</ul>
+		</c:forEach>
 	</div>
-</c:forEach>
+</c:if>
 
 <h2>Companies</h2>
-<c:forEach var="co" items="${company}">
-	<div class="companies">
-		<div class="name">${co.name}</div>
-	</div>
-</c:forEach>
+<c:if test="${not empty company}">
+	<ul class="company">
+		<c:forEach var="co" items="${company}">
+			<li><span class="name">${co.name}</span></li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+<h2>Categories</h2>
+<c:if test="${not empty categories}">
+	<ul class="category">
+		<c:forEach var="cat" items="${categories}">
+			<li><span class="name">${cat.name}</span></li>
+		</c:forEach>
+	</ul>
+</c:if>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.groupdealclone.app.service.CampaignManager;
+import com.groupdealclone.app.service.CategoryManager;
 import com.groupdealclone.app.service.CompanyManager;
 import com.groupdealclone.app.service.DealManager;
 
@@ -29,6 +30,8 @@ public class HomeController{
 	private CampaignManager campaignManager;
 	@Autowired
 	private CompanyManager companyManager;
+	@Autowired
+	private CategoryManager categoryManager;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -38,6 +41,7 @@ public class HomeController{
 		model.addAttribute("featured", campaignManager.getFeaturedCampaigns());
 		model.addAttribute("regular", campaignManager.getRegularCampaigns());
 		model.addAttribute("company", companyManager.getCompany());
+		model.addAttribute("categories", categoryManager.getCategories());
 		
 		logger.info("Rendering home in HTML {}", locale.toString());
 		return "home-tile";	

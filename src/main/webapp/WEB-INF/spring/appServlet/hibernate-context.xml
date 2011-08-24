@@ -78,6 +78,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 	<!-- Bindings used in the application -->
 	<bean id="campaignManager" class="com.groupdealclone.app.service.SimpleCampaignManager" />
 	<bean id="campaignDao" class="com.groupdealclone.app.dao.JdbcCampaignDao" />
+	
+	<bean id="categoryManager" class="com.groupdealclone.app.service.SimpleCategoryManager" />
+	<bean id="categoryDao" class="com.groupdealclone.app.dao.JdbcCategoryDao" />
 
 	<bean id="cityManager" class="com.groupdealclone.app.service.SimpleCityManager" />
 	<bean id="cityDao" class="com.groupdealclone.app.dao.JdbcCityDao" />

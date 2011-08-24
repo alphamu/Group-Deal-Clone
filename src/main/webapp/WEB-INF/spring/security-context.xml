@@ -19,6 +19,8 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/company/*"
 			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/category/*"
+			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/user/edit"
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/user/chpwd"

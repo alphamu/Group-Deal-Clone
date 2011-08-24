@@ -2,11 +2,13 @@ package com.groupdealclone.app.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
@@ -43,6 +45,8 @@ public class Campaign implements Serializable {
 	private CampaignCities campaignCities;
 	
 	private ImageStore imageStore;
+	
+	private List<Category> categories;
 	
 	private boolean featured;
 	
@@ -120,6 +124,15 @@ public class Campaign implements Serializable {
 
 	public void setImageStore(ImageStore images) {
 		this.imageStore = images;
+	}
+	
+	@ManyToMany
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	@Override

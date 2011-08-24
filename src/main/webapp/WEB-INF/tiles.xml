@@ -46,6 +46,21 @@
 		<put-attribute name="title" value="Edit.City.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/city/edit.jsp" />
 	</definition>
+	
+	<definition name="category/new" extends="base.definition">
+		<put-attribute name="title" value="New.Category.Title" />
+		<put-attribute name="body" value="/WEB-INF/views/category/new.jsp" />
+	</definition>
+
+	<definition name="category/added" extends="base.definition">
+		<put-attribute name="title" value="Updated.Category.Title" />
+		<put-attribute name="body" value="/WEB-INF/views/category/added.jsp" />
+	</definition>
+
+	<definition name="category/edit" extends="base.definition">
+		<put-attribute name="title" value="Edit.Category.Title" />
+		<put-attribute name="body" value="/WEB-INF/views/category/edit.jsp" />
+	</definition>
 
 	<definition name="company/new" extends="base.definition">
 		<put-attribute name="title" value="New.Company.Title" />
