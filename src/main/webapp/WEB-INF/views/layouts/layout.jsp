@@ -11,8 +11,8 @@ table#layout {
 td.menu {
 	width: 15%;
 }
-
 </style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/smoothness/jquery-ui-1.8.16.custom.css"/>" />
 <c:set var="titleKey">
 	<tiles:insertAttribute name="title" ignore="true" />
 </c:set>
@@ -20,7 +20,6 @@ td.menu {
 	<fmt:message key="${titleKey}" />
 </c:set>
 <title><fmt:message key="${titleKey}" /></title>
-
 </head>
 <body>
 <table id="layout" border="1" cellpadding="2" cellspacing="2" align="center">
@@ -40,5 +39,40 @@ td.menu {
         <td colspan="2"><tiles:insertAttribute name="footer" /></td>
     </tr>
 </table>
+<script src="<c:url value="/resources/js/jquery-1.6.2.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
+<script type="text/javascript">
+$(function() {
+
+	$( "#company\\.name" ).autocomplete({
+		source: "<c:url value="/company/list"/>",
+		minLength: 2,
+		select: function( event, ui ) {
+			if(ui.item) {
+				$( "#company\\.id" ).val(ui.item.id);
+			}
+		}
+	});
+	
+	$( "#categories" ).autocomplete({
+		source: "<c:url value="/category/list"/>",
+		minLength: 2,
+		select: function( event, ui ) {
+			if(ui.item) {
+				var val = $( this ).val();
+				if(val.lastIndexOf(',') == -1) {
+					$(this).val(ui.item.label);
+				} else {
+					val = val.substring(0, val.lastIndexOf(',')+1);
+					val += ui.item.label;
+					$( this ).val(val);
+				}
+				return false;
+			}
+		}
+	});
+});
+
+</script>
 </body>
 </html>

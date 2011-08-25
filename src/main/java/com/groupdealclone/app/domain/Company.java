@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@JsonIgnoreProperties({"address"})
 public class Company implements Serializable {
 	/**
 	 * 

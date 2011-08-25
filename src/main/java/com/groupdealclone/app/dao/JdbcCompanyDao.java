@@ -9,6 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,23 +45,40 @@ public class JdbcCompanyDao implements CompanyDao {
 		List<Company> co = q.getResultList();
 		return co;
 	}
+	
+	public List<Company> getCompanies(String nameLike) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Company> criteria = builder.createQuery(Company.class);
+		Root<Company> co = criteria.from(Company.class);
+		criteria.select(co).where(builder.like(co.<String>get("name"), nameLike));
+		TypedQuery<Company> query = em.createQuery(criteria);
+		List<Company> result = null;
+		try {
+			result = query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		return result;
+	}
 
 	@Override
 	@Transactional
 	public void saveCompany(Company company) {
-		// foce company name to upper case
-		company.setName(company.getName().trim().toUpperCase());
 		// begin transaction
 		EntityManager em = getEntityManager();
-		em.getTransaction().begin();
-		if (!em.contains(company)) {
-			// persist object - add to entity manager
-			em.persist(company);
-			// flush em - save to DB
-			em.flush();
+		try {
+			em.getTransaction().begin();
+			if (!em.contains(company)) {
+				// persist object - add to entity manager
+				em.persist(company);
+				// flush em - save to DB
+				em.flush();
+			}
+			// commit transaction at all
+			em.getTransaction().commit();
+		} finally {
+			em.close();
 		}
-		// commit transaction at all
-		em.getTransaction().commit();
 	}
 
 	EntityManager getEntityManager() {
@@ -67,13 +88,14 @@ public class JdbcCompanyDao implements CompanyDao {
 	@Override
 	@Transactional
 	public void updateCompany(Company company) {
-		// force company name to upper case
-		company.setName(company.getName().trim().toUpperCase());
-
 		EntityManager em = getEntityManager();
-		em.getTransaction().begin();
-		em.merge(company);
-		em.getTransaction().commit();
+		try {
+			em.getTransaction().begin();
+			em.merge(company);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override

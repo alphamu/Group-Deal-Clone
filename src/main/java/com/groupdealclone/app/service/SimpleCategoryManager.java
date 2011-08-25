@@ -44,4 +44,9 @@ public class SimpleCategoryManager implements CategoryManager {
 		categoryDao.updateCategory(category);
 	}
 
+	@Override
+	public List<Category> getCategories(String nameLike) {
+		return categoryDao.getCategories("%"+nameLike.trim().toLowerCase()+"%");
+	}
+
 }

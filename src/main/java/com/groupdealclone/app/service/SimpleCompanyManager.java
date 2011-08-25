@@ -15,10 +15,12 @@ public class SimpleCompanyManager implements CompanyManager {
 	@Autowired 
 	private CompanyDao companyDao;
 
+	@Override
 	public Company getCompany(Long id) {
 		return companyDao.getCompany(id);
 	}
 
+	@Override
 	@Transactional
 	public void saveCompany(Company company) {
 		String name = company.getName().trim().toLowerCase();
@@ -27,6 +29,7 @@ public class SimpleCompanyManager implements CompanyManager {
 		
 	}
 
+	@Override
 	public List<Company> getCompany() {
 		return companyDao.getCompanies();
 	}
@@ -40,6 +43,11 @@ public class SimpleCompanyManager implements CompanyManager {
 
 	public void setCompanyDao(CompanyDao companyDao) {
 		this.companyDao = companyDao;
+	}
+
+	@Override
+	public List<Company> getCompanies(String nameLike) {
+		return companyDao.getCompanies("%"+nameLike.trim().toLowerCase()+"%");
 	}
 
 }

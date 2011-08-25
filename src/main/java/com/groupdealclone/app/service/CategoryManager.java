@@ -15,5 +15,7 @@ public interface CategoryManager {
 	public void updateCategory(Category category);
 	
 	public void saveCategory(Category category);
+
+	public List<Category> getCategories(String nameLike);
 	
 }

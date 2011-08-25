@@ -100,4 +100,20 @@ public class JdbcCategoryDao implements CategoryDao {
 		return result;
 	}
 
+	@Override
+	public List<Category> getCategories(String nameLike) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Category> criteria = builder.createQuery(Category.class);
+		Root<Category> cat = criteria.from(Category.class);
+		criteria.select(cat).where(builder.like(cat.<String>get("name"), nameLike));
+		TypedQuery<Category> query = em.createQuery(criteria);
+		List<Category> result = null;
+		try {
+			result = query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		return result;
+	}
+
 }

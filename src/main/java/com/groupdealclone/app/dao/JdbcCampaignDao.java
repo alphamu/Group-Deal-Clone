@@ -60,10 +60,14 @@ public class JdbcCampaignDao implements CampaignDao {
 	@Transactional
 	public void saveCampaign(Campaign campaign) {
 		EntityManager em = getEntityManager();
-		em.getTransaction().begin();
-		// em.persist(campaign.getCities());
-		em.merge(campaign);
-		em.getTransaction().commit();
+		try {
+			em.getTransaction().begin();
+			// em.persist(campaign.getCities());
+			em.merge(campaign);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
@@ -80,10 +84,13 @@ public class JdbcCampaignDao implements CampaignDao {
 	@Transactional
 	public void updateCampaign(Campaign camp) {
 		EntityManager em = getEntityManager();
-		em.getTransaction().begin();
-		em.merge(camp);
-		em.getTransaction().commit();
-
+		try {
+			em.getTransaction().begin();
+			em.merge(camp);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override

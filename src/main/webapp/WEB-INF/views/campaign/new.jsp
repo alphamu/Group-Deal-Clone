@@ -8,7 +8,7 @@
 	<table>
 		<tr>
 			<td>Company Name: <FONT color="red"><form:errors
-						path="company.name" /> </FONT></td>
+						path="company.name"  /> </FONT></td>
 		</tr>
 		<tr>
 			<td><form:input path="company.name" /></td>
@@ -68,6 +68,13 @@
 		</tr>
 		<tr>
 			<td><form:input path="deal.discountPercentage" /></td>
+		</tr>
+		<tr>
+			<td>Campaign Categories: <FONT color="red"><form:errors
+						path="categories" /> </FONT></td>
+		</tr>
+		<tr>
+			<td><form:input path="categories" /></td>
 		</tr>
 		<tr>
 			<td colspan="2"><form:checkboxes

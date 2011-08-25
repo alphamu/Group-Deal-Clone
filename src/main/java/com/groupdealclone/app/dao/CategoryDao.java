@@ -8,6 +8,8 @@ public interface CategoryDao {
 
 	public List<Category> getCategories();
 	
+	public List<Category> getCategories(String nameLike);
+	
 	public void setCategory(Category category);
 
 	public Category getCategory(String name);

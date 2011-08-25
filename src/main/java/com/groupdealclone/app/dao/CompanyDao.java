@@ -8,6 +8,8 @@ public interface CompanyDao {
 	
 	public List<Company> getCompanies();
 	
+	public List<Company> getCompanies(String nameLike);
+	
 	public List<Company> getAllCompanies();
 	
 	public Company getCompany(Long id);

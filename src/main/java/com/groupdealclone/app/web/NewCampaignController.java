@@ -1,8 +1,10 @@
 package com.groupdealclone.app.web;
 
+import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -92,6 +94,15 @@ public class NewCampaignController {
 		binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
 
 		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new CustomStringToCampaignCitiesEditor(cityManager));
+
+		binder.registerCustomEditor(List.class, "categories", new PropertyEditorSupport() {
+			@Override
+			public void setValue(Object value) {
+				if (value instanceof List) {
+
+				}
+			}
+		});
 
 	}
 

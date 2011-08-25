@@ -13,6 +13,8 @@ public interface CompanyManager {
 	
 	public List<Company> getCompany();
 	
+	public List<Company> getCompanies(String nameLike);
+	
 	public void saveCompany(Company co);
 	
 	public void updateCompany(Company co);

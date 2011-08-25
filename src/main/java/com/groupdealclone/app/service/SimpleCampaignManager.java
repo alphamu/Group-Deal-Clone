@@ -37,8 +37,12 @@ public class SimpleCampaignManager implements CampaignManager {
 		Company inputCo = camp.getCompany();
 		String inputCoName = inputCo.getName().trim().toLowerCase();
 		Company coFound = null;
-		if(inputCoName.length() > 0) { //company id will always be null, name should be min 1 char, this check is to ensure it's not a whitespace.
+		if(inputCo.getId() != null && inputCo.getId() > 0 && inputCo.getName().length() > 0) {
+			coFound = inputCo;
+			
+		} else if(inputCoName.length() > 0) { //company id will always be null, name should be min 1 char, this check is to ensure it's not a whitespace.
 			coFound = companyDao.getCompany(inputCoName);
+			
 		}
 		if(coFound == null)
 			throw new CompanyNotFoundException("Company '"+inputCo.getName()+"' not found. Add a new company first.");
@@ -100,8 +104,13 @@ public class SimpleCampaignManager implements CampaignManager {
 		Company inputCo = camp.getCompany();
 		String inputCoName = inputCo.getName().trim().toLowerCase();
 		Company coFound = null;
-		if(inputCoName.length() > 0) { //this should never be null (for validation)
+		
+		if(inputCo.getId() != null && inputCo.getId() > 0 && inputCo.getName().length() > 0) {
+			coFound = inputCo;
+			
+		} else if(inputCoName.length() > 0) { //this should never be null (for validation)
 			coFound = companyDao.getCompany(inputCoName);
+			
 		}		
 		if(coFound == null)
 			throw new CompanyNotFoundException("Company '"+inputCo.getName()+"' not found. Add a new company first.");

@@ -56,4 +56,10 @@ public class InMemoryCompanyDao implements CompanyDao {
 		return companies;
 	}
 
+	@Override
+	public List<Company> getCompanies(String nameLike) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
