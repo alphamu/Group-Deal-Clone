@@ -1,11 +1,13 @@
 package com.groupdealclone.app.dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -71,6 +73,28 @@ public class JdbcCityDao implements CityDao {
 	public City getCity(Long id){
 		City city = em.find(City.class,id);
 		return city;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<City> getCities(String... cityIn) {
+		final String jpql = "from City where name in (:names)";
+		Query q = em.createQuery(jpql,City.class);
+		
+		q.setParameter("names", Arrays.asList(cityIn));
+		
+		return q.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<City> getCities(String cityLike) {
+		final String jpql = "from City where name LIKE :names";
+		Query q = em.createQuery(jpql,City.class);
+		
+		q.setParameter("names", cityLike);
+
+		return q.getResultList();
 	}
 
 }

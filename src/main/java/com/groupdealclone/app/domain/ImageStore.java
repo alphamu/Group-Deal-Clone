@@ -1,6 +1,6 @@
 package com.groupdealclone.app.domain;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 public class ImageStore {
 	
 	Long id;
-	List<Image> image;
+	Set<Image> image;
 
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
@@ -25,11 +25,11 @@ public class ImageStore {
 	}
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	public List<Image> getImage() {
+	public Set<Image> getImage() {
 		return image;
 	}
 
-	public void setImage(List<Image> image) {
+	public void setImage(Set<Image> image) {
 		this.image = image;
 	}
 	

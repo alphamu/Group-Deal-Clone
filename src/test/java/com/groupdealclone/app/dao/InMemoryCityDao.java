@@ -41,4 +41,16 @@ public class InMemoryCityDao implements CityDao {
 		}
 	}
 
+	@Override
+	public List<City> getCities(String... cityIn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<City> getCities(String cityLike) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

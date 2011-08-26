@@ -11,15 +11,15 @@
 		access-denied-page="/auth/denied">
 
 		<security:intercept-url pattern="/" access="permitAll" />
-		<security:intercept-url pattern="/campaign/*"
+		<security:intercept-url pattern="/campaign/**"
 			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/city/*"
+		<security:intercept-url pattern="/city/**"
 			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/deal/*"
+		<security:intercept-url pattern="/deal/**"
 			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/company/*"
+		<security:intercept-url pattern="/company/**"
 			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/category/*"
+		<security:intercept-url pattern="/category/**"
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/user/edit"
 			access="hasRole('ROLE_ADMIN')" />

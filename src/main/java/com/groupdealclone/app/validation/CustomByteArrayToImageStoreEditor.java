@@ -2,8 +2,9 @@ package com.groupdealclone.app.validation;
 
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,9 +14,9 @@ import com.groupdealclone.app.domain.ImageStore;
 public class CustomByteArrayToImageStoreEditor extends PropertyEditorSupport {
 	@Override
 	public void setValue(Object value) {
-		if (value instanceof List) {
-			List<Image> images = new LinkedList<Image>();
-			for (Object val : ((List<?>) value)) {
+		if (value instanceof Collection) {
+			Set<Image> images = new HashSet<Image>();
+			for (Object val : ((Collection<?>) value)) {
 				Image image = new Image();
 				if (val instanceof MultipartFile) {
 					MultipartFile multipartFile = (MultipartFile) val;
@@ -52,7 +53,7 @@ public class CustomByteArrayToImageStoreEditor extends PropertyEditorSupport {
 			}
 		} // if instanceof List
 		else if (value instanceof MultipartFile) {
-			List<Image> images = new LinkedList<Image>();
+			Set<Image> images = new HashSet<Image>();
 			Image image = new Image();
 			MultipartFile multipartFile = (MultipartFile) value;
 			try {

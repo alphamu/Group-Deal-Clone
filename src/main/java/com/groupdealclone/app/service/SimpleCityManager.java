@@ -43,4 +43,14 @@ public class SimpleCityManager implements CityManager {
 		this.cityDao = cityDao;
 	}
 
+	@Override
+	public List<City> getCities(String... city) {
+		return cityDao.getCities(city);
+	}
+	
+	@Override
+	public List<City> getCities(String cityLike) {
+		return cityDao.getCities("%"+cityLike.trim().toLowerCase()+"%");
+	}
+
 }

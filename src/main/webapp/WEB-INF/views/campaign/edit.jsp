@@ -87,7 +87,25 @@
 			<td><form:input path="deal.discountPercentage" />
 			</td>
 		</tr>
-
+		<tr>
+			<td>Categories: <FONT color="red"><form:errors
+						path="campaignCategories" /> </FONT>
+			</td>
+		</tr>
+		<tr>
+			<td><form:input path="campaignCategories" />
+			</td>
+		</tr>
+		<tr>
+			<td>Cities: <FONT color="red"><form:errors
+						path="campaignCities" /> </FONT>
+			</td>
+		</tr>
+		<tr>
+			<td><form:input path="campaignCities" />
+			</td>
+		</tr>
+<% /*
 		<c:forEach varStatus="n" var="city" items="${campaignCities.cities}">
 			<tr id="city_${city.id}">
 				<td><c:out value="${city.name}" />
@@ -106,7 +124,7 @@
 				</td>
 			</tr>
 		</c:forEach>
-		
+	*/	 %>		
 		<c:forEach varStatus="n" var="img" items="${campaign.imageStore.image}">
 		<tr>
 			<td>Image ${n.count}</td>

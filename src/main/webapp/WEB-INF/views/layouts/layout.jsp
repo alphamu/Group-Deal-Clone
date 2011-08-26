@@ -54,8 +54,26 @@ $(function() {
 		}
 	});
 	
-	$( "#categories" ).autocomplete({
+	$( "#campaignCategories" ).autocomplete({
 		source: "<c:url value="/category/list"/>",
+		minLength: 2,
+		select: function( event, ui ) {
+			if(ui.item) {
+				var val = $( this ).val();
+				if(val.lastIndexOf(',') == -1) {
+					$(this).val(ui.item.label);
+				} else {
+					val = val.substring(0, val.lastIndexOf(',')+1);
+					val += ui.item.label;
+					$( this ).val(val);
+				}
+				return false;
+			}
+		}
+	});
+	
+	$( "#campaignCities" ).autocomplete({
+		source: "<c:url value="/city/list"/>",
 		minLength: 2,
 		select: function( event, ui ) {
 			if(ui.item) {

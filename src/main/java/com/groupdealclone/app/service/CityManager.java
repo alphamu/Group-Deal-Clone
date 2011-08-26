@@ -13,6 +13,10 @@ public interface CityManager {
 	
 	public List<City> getCity();
 	
+	public List<City> getCities(String ... city);
+	
+	public List<City> getCities(String cityLike);
+	
 	public void saveCity(City city);
 	
 	public void updateCity(City city);

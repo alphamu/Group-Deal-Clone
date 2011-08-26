@@ -71,17 +71,19 @@
 		</tr>
 		<tr>
 			<td>Campaign Categories: <FONT color="red"><form:errors
-						path="categories" /> </FONT></td>
+						path="campaignCategories" /> </FONT></td>
 		</tr>
 		<tr>
-			<td><form:input path="categories" /></td>
+			<td><form:input path="campaignCategories" /></td>
 		</tr>
 		<tr>
-			<td colspan="2"><form:checkboxes
-					items="${campaignCities.cities}" path="campaignCities"
-					itemLabel="name" itemValue="id" delimiter="<br/>" />
-			</td>
+			<td>Campaign Cities: <FONT color="red"><form:errors
+						path="campaignCities" /> </FONT></td>
 		</tr>
+		<tr>
+			<td><form:input path="campaignCities" /></td>
+		</tr>
+
 		<tr>
 			<td>Campaign Image</td>
 			<td><FONT color="red"><form:errors path="imageStore" />

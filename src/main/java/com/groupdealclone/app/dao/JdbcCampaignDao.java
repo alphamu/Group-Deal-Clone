@@ -1,6 +1,7 @@
 package com.groupdealclone.app.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -99,7 +100,7 @@ public class JdbcCampaignDao implements CampaignDao {
 		Campaign camp = em.find(Campaign.class, campaignId);
 		if (camp != null) {
 			ImageStore imgstore = camp.getImageStore();
-			List<Image> imgs = imgstore.getImage();
+			Set<Image> imgs = imgstore.getImage();
 			Image image = null;
 			for (Image i : imgs) {
 				if (i.getId().equals(imageId)) {

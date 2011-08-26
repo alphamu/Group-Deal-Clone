@@ -1,6 +1,6 @@
 package com.groupdealclone.app.service;
 
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -86,13 +86,13 @@ public class SimpleCampaignManager implements CampaignManager {
 		//update the images by adding the list of new images to the old ones.
 		ImageStore imgStore = oldCamp.getImageStore();
 		if(imgStore != null) {
-			List<Image> oldImgList=imgStore.getImage();
+			Set<Image> oldImgList=imgStore.getImage();
 			//oldImgList.clear();
 			if(oldImgList == null)
-				oldImgList = new LinkedList<Image>();
+				oldImgList = new HashSet<Image>();
 			ImageStore newImageStore = camp.getImageStore();
 			if(newImageStore != null){
-				List<Image> newImgList = newImageStore.getImage();
+				Set<Image> newImgList = newImageStore.getImage();
 				if(newImgList != null)
 					oldImgList.addAll(newImgList);
 			}

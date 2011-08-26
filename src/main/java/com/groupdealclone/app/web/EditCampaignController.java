@@ -18,32 +18,36 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.groupdealclone.app.domain.Campaign;
+import com.groupdealclone.app.domain.CampaignCategories;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
 import com.groupdealclone.app.domain.ImageStore;
 import com.groupdealclone.app.exception.CompanyNotFoundException;
 import com.groupdealclone.app.service.CampaignManager;
+import com.groupdealclone.app.service.CategoryManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
 import com.groupdealclone.app.validation.CustomByteArrayToImageStoreEditor;
-import com.groupdealclone.app.validation.CustomStringToCampaignCitiesEditor;
+import com.groupdealclone.app.validation.CustomCategoryPropertyEditor;
+import com.groupdealclone.app.validation.CustomCityPropertyEditor;
 
+//@SessionAttributes(value = { "campaignCities" })
 @Controller
-@SessionAttributes(value = { "campaignCities" })
 public class EditCampaignController {
-	private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
+	private static final Logger	logger	= LoggerFactory.getLogger(NewDealController.class);
 
 	@Autowired
-	private CampaignManager	campaignManager;
+	private CampaignManager		campaignManager;
 	@Autowired
-	private CityManager		cityManager;
+	private CityManager			cityManager;
 	@Autowired
-	SimpleDateFormat		dateFormat;
+	private CategoryManager		categoryManager;
 	@Autowired
-	CustomDateEditor		dateEditor;
+	SimpleDateFormat			dateFormat;
+	@Autowired
+	CustomDateEditor			dateEditor;
 
 	@RequestMapping(value = "campaign/{campaignId}/edit", method = RequestMethod.GET)
 	public String showForm(@PathVariable("campaignId") long petId, Map<String, Object> model) {
@@ -78,7 +82,7 @@ public class EditCampaignController {
 		try {
 			this.campaignManager.updateCampaign(campaignForm);
 		} catch (CompanyNotFoundException e) {
-			logger.error("error while trying to update campaign: {}",e);
+			logger.error("error while trying to update campaign: {}", e);
 			result.rejectValue("company.name", "company.not.found", e.getMessage());
 			return "campaign/edit";
 		}
@@ -101,7 +105,9 @@ public class EditCampaignController {
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, dateEditor);
 
-		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new CustomStringToCampaignCitiesEditor(cityManager));
+		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new CustomCityPropertyEditor(cityManager));
+
+		binder.registerCustomEditor(CampaignCategories.class, "campaignCategories", new CustomCategoryPropertyEditor(categoryManager));
 
 		binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
 

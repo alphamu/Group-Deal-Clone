@@ -1,10 +1,8 @@
 package com.groupdealclone.app.web;
 
-import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -19,11 +17,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.groupdealclone.app.domain.Campaign;
+import com.groupdealclone.app.domain.CampaignCategories;
 import com.groupdealclone.app.domain.CampaignCities;
-import com.groupdealclone.app.domain.Category;
 import com.groupdealclone.app.domain.City;
 import com.groupdealclone.app.domain.ImageStore;
 import com.groupdealclone.app.exception.CompanyNotFoundException;
@@ -32,9 +29,10 @@ import com.groupdealclone.app.service.CategoryManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
 import com.groupdealclone.app.validation.CustomByteArrayToImageStoreEditor;
-import com.groupdealclone.app.validation.CustomStringToCampaignCitiesEditor;
+import com.groupdealclone.app.validation.CustomCategoryPropertyEditor;
+import com.groupdealclone.app.validation.CustomCityPropertyEditor;
 
-@SessionAttributes(value = { "campaignCities" })
+//@SessionAttributes(value = { "campaignCities" })
 @Controller
 public class NewCampaignController {
 	
@@ -97,45 +95,9 @@ public class NewCampaignController {
 
 		binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
 
-		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new CustomStringToCampaignCitiesEditor(cityManager));
+		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new CustomCityPropertyEditor(cityManager));
 
-		binder.registerCustomEditor(List.class, "categories", new PropertyEditorSupport() {
-			@Override
-			public void setValue(Object value) {
-				if (value instanceof List) {
-					@SuppressWarnings("unchecked")
-					List<Category> l = (List<Category>) value;
-					StringBuffer sb = null;
-					for (Category c : l) {
-						if (sb != null) {
-							sb.append("," + c.getName());
-						} else {
-							sb = new StringBuffer(c.getName());
-						}
-					}
-					super.setValue(sb.toString());
-				}
-			}
-
-			@Override
-			public void setAsText(String value) {
-				if (value != null) {
-					String val = value.trim();
-					if (val.length() == 0 || val.equals(",")) {
-						super.setValue(null);
-						return;
-					}
-
-					String[] namesIn = val.split(",");
-					for (int i = 0; i < namesIn.length; i++) {
-						namesIn[i] = namesIn[i].trim();
-					}
-					List<Category> cats = categoryManager.getCategories(namesIn);
-					super.setValue(cats);
-				}
-			}
-
-		});
+		binder.registerCustomEditor(CampaignCategories.class, "campaignCategories", new CustomCategoryPropertyEditor(categoryManager));
 
 	}
 }
