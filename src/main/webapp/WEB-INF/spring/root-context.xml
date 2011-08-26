@@ -20,7 +20,7 @@
 		class="org.springframework.beans.propertyeditors.CustomDateEditor">
 		<constructor-arg>
 			<bean class="java.text.SimpleDateFormat">
-				<constructor-arg value="dd-MM-yyyy" />
+				<constructor-arg value="dd MMM yyyy" />
 			</bean>
 		</constructor-arg>
 		<constructor-arg value="true" />
@@ -36,7 +36,7 @@
 	</bean>
 
 	<bean id="dateFormat" class="java.text.SimpleDateFormat">
-		<constructor-arg value="dd-MM-yyyy" />
+		<constructor-arg value="dd MMM yyyy" />
 	</bean>
 
 	

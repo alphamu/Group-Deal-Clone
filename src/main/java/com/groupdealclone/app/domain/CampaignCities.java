@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 @Entity
@@ -25,7 +25,7 @@ public class CampaignCities {
 		this.id = id;
 	}
 	
-	@OneToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	public Set<City> getCities() {
 		return cities;
 	}

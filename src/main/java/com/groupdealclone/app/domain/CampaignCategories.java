@@ -5,7 +5,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class CampaignCategories {
@@ -21,7 +21,7 @@ public class CampaignCategories {
 		this.id = id;
 	}
 	
-	@OneToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	public Set<Category> getCategories() {
 		return categories;
 	}

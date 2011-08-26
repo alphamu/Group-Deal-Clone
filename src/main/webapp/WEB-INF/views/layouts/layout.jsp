@@ -91,6 +91,8 @@ $(function() {
 	});
 });
 
+$("#startDate, #endDate").datepicker({dateFormat:"dd M yy"});
+
 </script>
 </body>
 </html>
