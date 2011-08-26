@@ -18,4 +18,6 @@ public interface CategoryManager {
 
 	public List<Category> getCategories(String nameLike);
 	
+	public List<Category> getCategories(String ... nameIn);
+	
 }

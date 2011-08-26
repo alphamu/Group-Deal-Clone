@@ -1,5 +1,6 @@
 package com.groupdealclone.app.dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -114,6 +116,17 @@ public class JdbcCategoryDao implements CategoryDao {
 			return null;
 		}
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Category> getCategories(String... nameIn) {
+		String jpql = "from Category where name in (:names)";
+		Query q = em.createQuery(jpql,Category.class);
+		
+		q.setParameter("names", Arrays.asList(nameIn));
+
+		return q.getResultList();
 	}
 
 }

@@ -10,6 +10,8 @@ public interface CategoryDao {
 	
 	public List<Category> getCategories(String nameLike);
 	
+	public List<Category> getCategories(String ... nameIn);
+	
 	public void setCategory(Category category);
 
 	public Category getCategory(String name);

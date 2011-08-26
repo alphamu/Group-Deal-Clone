@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
+import com.groupdealclone.app.domain.Category;
 import com.groupdealclone.app.domain.City;
 import com.groupdealclone.app.domain.ImageStore;
 import com.groupdealclone.app.exception.CompanyNotFoundException;
 import com.groupdealclone.app.service.CampaignManager;
+import com.groupdealclone.app.service.CategoryManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
 import com.groupdealclone.app.validation.CustomByteArrayToImageStoreEditor;
@@ -35,13 +37,15 @@ import com.groupdealclone.app.validation.CustomStringToCampaignCitiesEditor;
 @SessionAttributes(value = { "campaignCities" })
 @Controller
 public class NewCampaignController {
-	@SuppressWarnings("unused")
+	
 	private static final Logger	logger	= LoggerFactory.getLogger(NewCampaignController.class);
 
 	@Autowired
 	private CampaignManager		campaignManager;
 	@Autowired
 	private CityManager			cityManager;
+	@Autowired
+	private CategoryManager		categoryManager;
 	@Autowired
 	SimpleDateFormat			dateFormat;
 	@Autowired
@@ -99,11 +103,39 @@ public class NewCampaignController {
 			@Override
 			public void setValue(Object value) {
 				if (value instanceof List) {
-
+					@SuppressWarnings("unchecked")
+					List<Category> l = (List<Category>) value;
+					StringBuffer sb = null;
+					for (Category c : l) {
+						if (sb != null) {
+							sb.append("," + c.getName());
+						} else {
+							sb = new StringBuffer(c.getName());
+						}
+					}
+					super.setValue(sb.toString());
 				}
 			}
+
+			@Override
+			public void setAsText(String value) {
+				if (value != null) {
+					String val = value.trim();
+					if (val.length() == 0 || val.equals(",")) {
+						super.setValue(null);
+						return;
+					}
+
+					String[] namesIn = val.split(",");
+					for (int i = 0; i < namesIn.length; i++) {
+						namesIn[i] = namesIn[i].trim();
+					}
+					List<Category> cats = categoryManager.getCategories(namesIn);
+					super.setValue(cats);
+				}
+			}
+
 		});
 
 	}
-
 }

@@ -48,5 +48,10 @@ public class SimpleCategoryManager implements CategoryManager {
 	public List<Category> getCategories(String nameLike) {
 		return categoryDao.getCategories("%"+nameLike.trim().toLowerCase()+"%");
 	}
+	
+	@Override
+	public List<Category> getCategories(String ... nameIn) {
+		return categoryDao.getCategories(nameIn);
+	}
 
 }
