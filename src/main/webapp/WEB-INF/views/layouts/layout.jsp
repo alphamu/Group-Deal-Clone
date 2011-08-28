@@ -5,14 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-table#layout {
-	width: 95%;
-}
-td.menu {
-	width: 15%;
-}
+
 </style>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/smoothness/jquery-ui-1.8.16.custom.css"/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/gdc.css"/>" />
 <c:set var="titleKey">
 	<tiles:insertAttribute name="title" ignore="true" />
 </c:set>
@@ -22,23 +18,27 @@ td.menu {
 <title><fmt:message key="${titleKey}" /></title>
 </head>
 <body>
-<table id="layout" border="1" cellpadding="2" cellspacing="2" align="center">
-    <tr>
-        <td colspan="2" class="header"><tiles:insertAttribute name="header" >
+<img id="backgroundImage" src="<c:url value="/resources/img/karachi-nobo23-2.jpg" />"/>
+<div id="layout">
+    <div id="header" class="roundCorners">
+        <tiles:insertAttribute name="header" >
         	<tiles:putAttribute name="title" value="${titleValue}" />
-        	</tiles:insertAttribute></td>
-    </tr>
-    <tr>
-        <td class="menu">
-        <tiles:insertAttribute name="menu" /></td>
-        <td class="body"><tiles:insertAttribute name="body" >
+        	</tiles:insertAttribute>
+    </div>
+    <div class="clearer"><!--  --></div>
+    <div id="menu" class="roundCorners">
+        <tiles:insertAttribute name="menu" />
+    </div>
+    <div id="content" class="roundCorners">
+        <tiles:insertAttribute name="body" >
         	<tiles:putAttribute name="title" value="${titleValue}"></tiles:putAttribute>
-        </tiles:insertAttribute></td>
-    </tr>
-    <tr>
-        <td colspan="2"><tiles:insertAttribute name="footer" /></td>
-    </tr>
-</table>
+        </tiles:insertAttribute>
+	</div>
+	<div class="clearer"><!--  --></div>
+	<div id="footer" class="roundCorners">
+        <tiles:insertAttribute name="footer" />
+    </div>
+</div>
 <script src="<c:url value="/resources/js/jquery-1.6.2.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
 <script type="text/javascript">

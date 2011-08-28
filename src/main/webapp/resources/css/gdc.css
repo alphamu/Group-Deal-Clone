@@ -1,0 +1,66 @@
+@import url("reset.css");
+body {
+	width: 980px;
+	margin:auto;
+	font-size: 100%;
+	font-family: verdana, san-serif;
+	line-height: 150%;
+}
+
+h2 {
+	color: green;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+img#backgroundImage {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+table#layout {
+	z-index: 10;
+}
+
+div.clearer {
+	clear:both;
+}
+div.roundCorners {
+	border-radius: 10px;
+	-moz-border-radius:10px;
+}
+div#header {
+	background-color: #FFF;
+	padding: 10px;
+	margin: 10px 0 10px 0;
+}
+
+div#footer {
+	background-color: #FFF;
+	padding: 10px;
+	margin: 10px 0 10px 0;
+}
+
+div#menu {
+	float:left;
+	width: 150px;
+	height: 200px;
+	background-color: #FFF;
+	padding: 10px;
+	margin: 10px 10px 0 0;
+}
+
+div#content {
+	float:left;
+	width: 780px;
+	background-color: #FFF;
+	padding: 10px;
+	margin: 10px 0 10px 0;
+}
+
+div.seperator {
+	margin-top:10px;
+}
