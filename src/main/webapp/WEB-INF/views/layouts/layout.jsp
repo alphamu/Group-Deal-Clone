@@ -25,20 +25,16 @@
 	<div id="layout">
 		<div id="top" class="clearfix">
 
-			<%
-				boolean loggedIn = !(SecurityContextHolder.getContext().getAuthentication()
-						.getName().equals("anonymousUser"));
-			%>
 			<div class="topMenu">
-				<c:if test="<%= ! loggedIn %>">
+				<sec:authorize access="!isAuthenticated()">
 					<a href="<c:url value="/auth/login"/>" class="topMenuLink">Login</a> | <a
 						href="<c:url value="/user/new"/>" class="topMenuLink">Sign up</a>
-				</c:if>
-				<c:if test="<%= loggedIn %>">
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 					<a href="<c:url value="/auth/logout"/>" class="topMenuLink">Log Out</a> | <a
 						href="<c:url value="/user/chpwd"/>" class="topMenuLink">Change Password</a> | <a
 						href="<c:url value="/shoppingcart/show"/>" class="topMenuLink">Cart</a>
-				</c:if>
+				</sec:authorize>
 			</div>
 			
 		</div>
