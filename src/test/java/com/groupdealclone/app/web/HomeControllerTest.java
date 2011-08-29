@@ -11,7 +11,7 @@ public class HomeControllerTest {
 	@Test
 	public void test() {
         HomeController controller = new HomeController();
-        String viewName = controller.home("karachi", Locale.CANADA_FRENCH, null, null, null);
+        String viewName = controller.home(Locale.CANADA_FRENCH, null, null, null);
         assertEquals("home-tile", viewName);
 	}
 

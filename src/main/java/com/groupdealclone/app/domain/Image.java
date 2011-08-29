@@ -47,5 +47,10 @@ public class Image {
 
 		return (super.equals(other));
 	}
+	
+	@Override
+	public int hashCode() {
+		return (Long.toString(id)+"- image").hashCode();
+	}
 
 }

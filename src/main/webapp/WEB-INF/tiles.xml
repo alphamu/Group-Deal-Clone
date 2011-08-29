@@ -16,6 +16,11 @@
 		<put-attribute name="title" value="Home.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
+	
+	<definition name="show-tile" extends="base.definition">
+		<put-attribute name="title" value="Show.Title" />
+		<put-attribute name="body" value="/WEB-INF/views/show.jsp" />
+	</definition>
 
 	<definition name="campaign/new" extends="base.definition">
 		<put-attribute name="title" value="New.Campaign.Title" />

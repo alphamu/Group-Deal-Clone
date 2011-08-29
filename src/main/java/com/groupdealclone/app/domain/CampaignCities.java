@@ -68,4 +68,5 @@ public class CampaignCities {
 
         return(super.equals(other));
     }
+    
 }
