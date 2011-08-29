@@ -7,7 +7,7 @@
 	<div class="featured-deal">
 		<c:forEach var="f" items="${featured}">
 			<ul class="deal">
-				<li><span class="desc">${f.deal.description}</span></li>
+				<li><span class="desc"><a href="<c:url value="/show/deal/${f.deal.id}" />">${f.deal.description}</a></span></li>
 				<li><span class="discount">${f.deal.discountPercentage}</span></li>
 				<li><span class="price">${f.deal.price}</span></li>
 				<li><span class="minSale">${f.deal.minSaleRequired}</span></li>
@@ -23,7 +23,7 @@
 	<div class="regular-deal">
 		<c:forEach var="r" items="${regular}">
 			<ul class="deal">
-				<li><span class="desc">${r.deal.description}</span></li>
+				<li><span class="desc"><a href="<c:url value="/show/deal/${r.deal.id}" />">${r.deal.description}</a></span></li>
 				<li><span class="discount">${r.deal.discountPercentage}</span></li>
 				<li><span class="price">${r.deal.price}</span></li>
 				<li><span class="minSale">${r.deal.minSaleRequired}</span></li>

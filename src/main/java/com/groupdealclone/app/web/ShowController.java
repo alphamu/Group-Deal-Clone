@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CategoryManager;
@@ -24,9 +23,9 @@ import com.groupdealclone.app.service.DealManager;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController{
+public class ShowController{
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ShowController.class);
 	
 	@Autowired
 	private DealManager dealManager;
@@ -39,28 +38,26 @@ public class HomeController{
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=text/html")
-	public String home(@CookieValue("location") String location, Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/show/company/{companyId}", method = RequestMethod.GET, headers="Accept=text/html")
+	public String showCompany(@CookieValue("location") String location, Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		if(location == null || location.trim().length() == 0)
 			location = "Not Set";
-		model.addAttribute("location", location);
-		model.addAttribute("featured", campaignManager.getFeaturedCampaigns());
-		model.addAttribute("regular", campaignManager.getRegularCampaigns());
-		model.addAttribute("companies", companyManager.getCompany());
-		model.addAttribute("categories", categoryManager.getCategories());
-		
-		
-		
+
 		logger.info("Rendering home in HTML {}", locale.toString());
 		return "home-tile";	
 	}
 	
-	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=application/xml, application/json")
-	public @ResponseBody DealManager homeXmlJson(Locale locale, Model model) {
-	
-		logger.info("Rendering home in XML or JSON {} ", locale.toString());
-		
-		return this.dealManager;
+	@RequestMapping(value = "/show/categoru/{companyId}", method = RequestMethod.GET, headers="Accept=text/html")
+	public String showCategory(@CookieValue("location") String location, Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		if(location == null || location.trim().length() == 0)
+			location = "Not Set";
+		return "home-tile";
 	}
 	
+	@RequestMapping(value = "/show/company/{companyId}", method = RequestMethod.GET, headers="Accept=text/html")
+	public String showDeal(@CookieValue("location") String location, Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		if(location == null || location.trim().length() == 0)
+			location = "Not Set";
+		return "home-tile";
+	}
 }

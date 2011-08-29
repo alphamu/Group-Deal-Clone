@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +91,29 @@ public class CityController {
 
 		return names;
 
+	}
+	
+	@RequestMapping(value = "/location", method = RequestMethod.GET, headers="Accept=text/html")
+	public String setLocation(Locale locale, Model model) {
+		model.addAttribute("cities",cityManager.getCity());
+		return "location";	
+	}
+	
+	@RequestMapping(value = "/location", method = RequestMethod.POST, headers="Accept=text/html")
+	public String setLocation(@RequestParam("city") String cityId, Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		Cookie cookie = null;
+		for(Cookie c: request.getCookies()){
+			if(c.getName().equals("location"))
+				cookie = c;
+		}
+		if(cookie == null) {
+			cookie = new Cookie("location", cityId);
+		} else {
+			cookie.setValue(cityId);
+		}
+		response.addCookie(cookie);
+		
+		return "redirect:parentreload";	
 	}
 
 	public void setCityManager(CityManager cityManager) {

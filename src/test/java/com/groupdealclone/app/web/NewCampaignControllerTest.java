@@ -89,10 +89,11 @@ public class NewCampaignControllerTest {
 	@Test
 	public void testShowForm() {
 		HashMap<String, Object> model = new HashMap<String,Object>();
-		String view = controller.showForm(model);
+		String view = controller.showForm(model, null, null);
 		assertEquals(view, "campaign/new");
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void testProcessForm() {
 		HashMap<String, Object> model = new HashMap<String,Object>();

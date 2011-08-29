@@ -33,6 +33,7 @@
 				<sec:authorize access="isAuthenticated()">
 					<a id="logout" href="<c:url value="/auth/logout"/>" class="topMenuLink">Log Out</a> | 
 					<a id="chpwd" href="<c:url value="/user/chpwd"/>" class="topMenuLink">Change Password</a> | 
+					<a id="location" href="<c:url value="/location"/>" class="topMenuLink">Change Location</a> | 
 					<a id="cart" href="<c:url value="/shoppingcart/show"/>" class="topMenuLink">Cart</a>
 				</sec:authorize>
 			</div>
@@ -53,7 +54,7 @@
 		<div id="content" class="roundCorners">
 			<div id="contentTitle">
 				<h2>
-					<fmt:message key="${titleKey}" />
+					<fmt:message key="${titleKey}" /> - ${location}
 				</h2>
 			</div>
 			<tiles:insertAttribute name="body">
@@ -99,6 +100,12 @@
 		   $('a#signup').bind('click', function(){
 			   $(div).dialog("open");
 			   $("#loginFrame").attr("src","<c:url value="/user/new"/>");
+			   return false;
+		   });
+		   
+		   $('a#location').bind('click', function(){
+			   $(div).dialog("open");
+			   $("#loginFrame").attr("src","<c:url value="/location"/>");
 			   return false;
 		   });
 		});

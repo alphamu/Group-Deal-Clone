@@ -32,8 +32,8 @@ public class JdbcCityDao implements CityDao {
 	public List<City> getCities() {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<City> criteria = builder.createQuery(City.class);
-		@SuppressWarnings("unused")
 		Root<City> city = criteria.from(City.class);
+		criteria.orderBy(builder.asc(city.get("name")));
 		TypedQuery<City> query = em.createQuery(criteria);
 		List<City> result = query.getResultList();
 

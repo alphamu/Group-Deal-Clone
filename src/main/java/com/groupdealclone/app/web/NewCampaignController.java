@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -50,7 +53,9 @@ public class NewCampaignController {
 	CustomDateEditor			dateEditor;
 
 	@RequestMapping(value = "campaign/new", method = RequestMethod.GET)
-	public String showForm(Map<String, Object> model) {
+	public String showForm(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+		@SuppressWarnings("unused")
+		Cookie[] cookies = request.getCookies();
 		Campaign campaignForm = new Campaign();
 		CampaignCities cities = new CampaignCities();
 		cities.setCities(new HashSet<City>(cityManager.getCity()));
