@@ -27,13 +27,13 @@
 
 			<div class="topMenu">
 				<sec:authorize access="!isAuthenticated()">
-					<a href="<c:url value="/auth/login"/>" class="topMenuLink">Login</a> | <a
-						href="<c:url value="/user/new"/>" class="topMenuLink">Sign up</a>
+					<a id="login" href="<c:url value="/auth/login"/>" class="topMenuLink">Login</a> | 
+					<a id="signup" href="<c:url value="/user/new"/>" class="topMenuLink">Sign up</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<a href="<c:url value="/auth/logout"/>" class="topMenuLink">Log Out</a> | <a
-						href="<c:url value="/user/chpwd"/>" class="topMenuLink">Change Password</a> | <a
-						href="<c:url value="/shoppingcart/show"/>" class="topMenuLink">Cart</a>
+					<a id="logout" href="<c:url value="/auth/logout"/>" class="topMenuLink">Log Out</a> | 
+					<a id="chpwd" href="<c:url value="/user/chpwd"/>" class="topMenuLink">Change Password</a> | 
+					<a id="cart" href="<c:url value="/shoppingcart/show"/>" class="topMenuLink">Cart</a>
 				</sec:authorize>
 			</div>
 			
@@ -71,7 +71,38 @@
 	<script src="<c:url value="/resources/js/jquery-1.6.2.js"/>"></script>
 	<script
 		src="<c:url value="/resources/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
+	
 	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		var div = $("<div id='loginDiv'><iframe id='loginFrame' frameBorder='0'></iframe></div>");
+		   $(div).dialog({
+		           autoOpen: false,
+		           modal: true,
+		           height: 400,
+		           width: 500
+		       });
+		   
+		   $('a#login').bind('click', function(){
+			   $(div).dialog("open");
+			   $("#loginFrame").attr("src","<c:url value="/auth/login"/>");
+			   return false;
+		   });
+		   
+		   
+		   $('a#chpwd').bind('click', function(){
+			   $(div).dialog("open");
+			   $("#loginFrame").attr("src","<c:url value="/user/chpwd"/>");
+			   return false;
+		   });
+		   
+		   $('a#signup').bind('click', function(){
+			   $(div).dialog("open");
+			   $("#loginFrame").attr("src","<c:url value="/user/new"/>");
+			   return false;
+		   });
+		});
+	
 		$(function() {
 
 			$("#company\\.name").autocomplete({

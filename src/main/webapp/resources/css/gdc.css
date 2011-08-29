@@ -93,3 +93,8 @@ div#content {
 div.seperator {
 	margin-top:10px;
 }
+
+iframe#loginFrame {
+	width:100%;
+	height: 100%;
+}

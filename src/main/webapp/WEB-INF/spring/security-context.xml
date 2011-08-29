@@ -30,7 +30,7 @@
 
 		<security:form-login login-page="/auth/login"
 			authentication-failure-url="/auth/login?error=true"
-			default-target-url="/home" always-use-default-target="false" />
+			default-target-url="/parentreload" always-use-default-target="false" />
 
 		<security:logout invalidate-session="true"
 			logout-success-url="/home" logout-url="/auth/logout" />

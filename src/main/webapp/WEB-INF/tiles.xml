@@ -95,5 +95,6 @@
 	<definition name="shoppingcart" template="/WEB-INF/views/shoppingcart/show.jsp" />
 	
 	<definition name="page-not-found" template="/WEB-INF/views/page-not-found.jsp" />
+	<definition name="parentreload" template="/WEB-INF/views/parentreload.jsp" />
 
 </tiles-definitions>
