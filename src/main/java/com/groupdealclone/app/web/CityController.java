@@ -100,16 +100,16 @@ public class CityController {
 	}
 	
 	@RequestMapping(value = "/location", method = RequestMethod.POST, headers="Accept=text/html")
-	public String setLocation(@RequestParam("city") String cityId, Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String setLocation(@RequestParam("city") String cityName, Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		Cookie cookie = null;
 		for(Cookie c: request.getCookies()){
 			if(c.getName().equals("location"))
 				cookie = c;
 		}
 		if(cookie == null) {
-			cookie = new Cookie("location", cityId);
+			cookie = new Cookie("location", cityName);
 		} else {
-			cookie.setValue(cityId);
+			cookie.setValue(cityName);
 		}
 		response.addCookie(cookie);
 		

@@ -151,5 +151,9 @@ public class Campaign implements Serializable {
         return(super.equals(other));
     }
 	
+	@Override
+	public int hashCode() {
+		return (Long.toString(id)+name).hashCode();
+	}
 }
 

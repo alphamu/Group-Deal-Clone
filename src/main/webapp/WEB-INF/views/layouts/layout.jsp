@@ -28,6 +28,7 @@
 			<div class="topMenu">
 				<sec:authorize access="!isAuthenticated()">
 					<a id="login" href="<c:url value="/auth/login"/>" class="topMenuLink">Login</a> | 
+					<a id="location" href="<c:url value="/location"/>" class="topMenuLink">Change Location</a> | 
 					<a id="signup" href="<c:url value="/user/new"/>" class="topMenuLink">Sign up</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
