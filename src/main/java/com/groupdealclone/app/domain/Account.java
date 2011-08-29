@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -32,6 +33,7 @@ public class Account implements UserDetails {
 	private String confirmPassword;
 
 	@NotEmpty
+	@Email
 	@Size(min = 1, max = 100)
 	private String username;
 	

@@ -12,9 +12,9 @@
 <div class="menu_seperator seperator"><!--  --></div>
 
 <h2>Companies</h2>
-<c:if test="${not empty company}">
+<c:if test="${not empty companies}">
 	<ul class="company">
-		<c:forEach var="co" items="${company}">
+		<c:forEach var="co" items="${companies}">
 			<li><span class="name">${co.name}</span></li>
 		</c:forEach>
 	</ul>

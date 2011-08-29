@@ -48,3 +48,31 @@ blockquote, q {
 abbr,acronym {
 	border:0;
 }
+
+
+/*CLEAR FIX
+------------------------*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
+
+.clearer{
+	clear:both; height: 0px; margin:0; padding:0;
+}

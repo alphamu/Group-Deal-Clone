@@ -68,7 +68,7 @@
 	</definition>
 
 	<definition name="company/added" extends="base.definition">
-		<put-attribute name="title" value="updatedcompany.title" />
+		<put-attribute name="title" value="Update.Company.Title" />
 		<put-attribute name="body" value="/WEB-INF/views/company/added.jsp" />
 	</definition>
 

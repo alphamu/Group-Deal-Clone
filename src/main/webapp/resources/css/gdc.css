@@ -1,8 +1,9 @@
 @import url("reset.css");
+
 body {
 	width: 980px;
-	margin:auto;
-	font-size: 100%;
+	margin:0 auto 0 auto;
+	font-size: 80%;
 	font-family: verdana, san-serif;
 	line-height: 150%;
 }
@@ -13,21 +14,49 @@ h2 {
 	font-weight: bold;
 }
 
-img#backgroundImage {
+a, a:visited {
+	color: #3300CC;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+img#full-screen-background-image {
+  z-index: -999;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+div#top {
 	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
+}
+div.topMenu {
+	float:right;
+	background-color: #000;
+	border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-left-radius: 10px; 	
+	-moz-border-radius-bottomleft: 10px;	
+	color: #CCC;
+	padding: 10px;
+}
+a.topMenuLink, a.topMenuLink:visited {
+	color:white;
+	text-decoration: none;
+}
+a.topMenuLink:hover {
+	text-decoration: underline;
 }
 
 table#layout {
 	z-index: 10;
 }
 
-div.clearer {
-	clear:both;
-}
 div.roundCorners {
 	border-radius: 10px;
 	-moz-border-radius:10px;

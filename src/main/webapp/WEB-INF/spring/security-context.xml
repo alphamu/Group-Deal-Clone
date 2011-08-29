@@ -33,7 +33,7 @@
 			default-target-url="/home" always-use-default-target="false" />
 
 		<security:logout invalidate-session="true"
-			logout-success-url="/auth/login" logout-url="/auth/logout" />
+			logout-success-url="/home" logout-url="/auth/logout" />
 
 	</security:http>
 

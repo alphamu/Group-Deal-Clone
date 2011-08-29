@@ -40,7 +40,7 @@ public class HomeController{
 		
 		model.addAttribute("featured", campaignManager.getFeaturedCampaigns());
 		model.addAttribute("regular", campaignManager.getRegularCampaigns());
-		model.addAttribute("company", companyManager.getCompany());
+		model.addAttribute("companies", companyManager.getCompany());
 		model.addAttribute("categories", categoryManager.getCategories());
 		
 		logger.info("Rendering home in HTML {}", locale.toString());

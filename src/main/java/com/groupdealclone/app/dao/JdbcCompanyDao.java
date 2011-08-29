@@ -38,7 +38,7 @@ public class JdbcCompanyDao implements CompanyDao {
 
 	@Override
 	public List<Company> getCompanies() {
-		String query = "SELECT company.* FROM Company company INNER JOIN Campaign camp ON company.id=camp.company_id WHERE ?1 BETWEEN camp.startDate AND camp.endDate ORDER BY company.name";
+		String query = "SELECT DISTINCT company.* FROM Company company INNER JOIN Campaign camp ON company.id=camp.company_id WHERE ?1 BETWEEN camp.startDate AND camp.endDate ORDER BY company.name";
 		Query q = em.createNativeQuery(query, Company.class);
 		q.setParameter(1, new java.util.Date(), TemporalType.DATE);
 		@SuppressWarnings("unchecked")
