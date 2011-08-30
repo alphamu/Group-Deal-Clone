@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +16,8 @@ import com.groupdealclone.app.service.DealManager;
 public class NewDealController {
 	//private static final Logger logger = LoggerFactory.getLogger(NewDealController.class);
 	
-	@Autowired
-	private DealManager dealManager;
+//	@Autowired
+//	private DealManager dealManager;
 
 	@RequestMapping(value = "new-deal-input", method = RequestMethod.GET)
 	public String showForm(Map<String, Object> model) {
@@ -33,12 +32,12 @@ public class NewDealController {
 			return "new-deal-input";
 		}
 		model.put("deal", dealForm);
-		this.dealManager.getDeals().add(dealForm);
+		//this.dealManager.getDeals().add(dealForm);
 		return "new-deal-success";
 	}
 	
 	public void setDealManager(DealManager dealManager){
-		this.dealManager = dealManager;
+//		this.dealManager = dealManager;
 	}
 
 }

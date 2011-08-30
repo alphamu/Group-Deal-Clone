@@ -85,11 +85,54 @@
 		</tr>
 
 		<tr>
+			<td>Thumbnail Small</td>
+			<td><FONT color="red"><form:errors path="imageStore.thumbnailSmall" />
+			</FONT><br /> <input type="file" name="imageStore.thumbnailSmall" /></td>
+		</tr>
+		<tr>
+			<td>Thumbnail Medium</td>
+			<td><FONT color="red"><form:errors path="imageStore.thumbnailMedium" />
+			</FONT><br /> <input type="file" name="imageStore.thumbnailMedium" /></td>
+		</tr>
+		<tr>
+			<td>Thumbnail Large</td>
+			<td><FONT color="red"><form:errors path="imageStore.thumbnailLarge" />
+			</FONT><br /> <input type="file" name="imageStore.thumbnailLarge" /></td>
+		</tr>
+		<tr>
+			<td>Thumbnail X-Large</td>
+			<td><FONT color="red"><form:errors path="imageStore.thumbnailXLarge" />
+			</FONT><br /> <input type="file" name="imageStore.thumbnailXLarge" /></td>
+		</tr>
+
+		<tr>
+			<td>Banner Small</td>
+			<td><FONT color="red"><form:errors path="imageStore.bannerSmall" />
+			</FONT><br /> <input type="file" name="imageStore.bannerSmall" /></td>
+		</tr>
+		<tr>
+			<td>Banner Medium</td>
+			<td><FONT color="red"><form:errors path="imageStore.bannerMedium" />
+			</FONT><br /> <input type="file" name="imageStore.bannerMedium" /></td>
+		</tr>
+		<tr>
+			<td>Banner Large</td>
+			<td><FONT color="red"><form:errors path="imageStore.bannerLarge" />
+			</FONT><br /> <input type="file" name="imageStore.bannerLarge" /></td>
+		</tr>
+		<tr>
+			<td>Banner X-Large</td>
+			<td><FONT color="red"><form:errors path="imageStore.bannerXLarge" />
+			</FONT><br /> <input type="file" name="imageStore.bannerXLarge" /></td>
+		</tr>
+		
+<%-- 		<tr>
 			<td>Campaign Image</td>
 			<td><FONT color="red"><form:errors path="imageStore" />
 			</FONT><br /> <input type="file" name="imageStore" /><br /> <input
+			</FONT><br /> <input type="file" name="imageStore" /><br /> <input
 				type="file" name="imageStore" /><br /></td>
-		</tr>
+		</tr> --%>
 	</table>
 
 

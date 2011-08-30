@@ -41,7 +41,7 @@ public class NewDealControllerTest {
 	public void testProcessForm() {
         NewDealController controller = new  NewDealController();
         DealManager dealManager = new SimpleDealManager();
-        dealManager.setDeals(new LinkedHashSet<Deal>());
+//        dealManager.setDeals(new LinkedHashSet<Deal>());
         controller.setDealManager(dealManager);
         Map<String,Object> model;
         Deal newDeal;

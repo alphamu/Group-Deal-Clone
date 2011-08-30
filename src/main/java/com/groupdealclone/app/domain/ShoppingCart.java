@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -36,7 +38,7 @@ public class ShoppingCart {
 		this.account = account;
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	public List<Deal> getDeals() {
 		return deals;
 	}

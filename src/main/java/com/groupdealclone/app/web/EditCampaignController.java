@@ -23,13 +23,13 @@ import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCategories;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
-import com.groupdealclone.app.domain.ImageStore;
+import com.groupdealclone.app.domain.Image;
 import com.groupdealclone.app.exception.CompanyNotFoundException;
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CategoryManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
-import com.groupdealclone.app.validation.CustomByteArrayToImageStoreEditor;
+import com.groupdealclone.app.validation.CustomByteArrayToImageEditor;
 import com.groupdealclone.app.validation.CustomCategoryPropertyEditor;
 import com.groupdealclone.app.validation.CustomCityPropertyEditor;
 
@@ -63,15 +63,6 @@ public class EditCampaignController {
 	@RequestMapping(value = "campaign/{campaignId}/edit", method = RequestMethod.POST)
 	public String processForm(@PathVariable("campaignId") long campaignId, @Valid Campaign campaignForm, BindingResult result, Map<String, Object> model) {
 		new CampaignValidator().validate(campaignForm, result);
-
-		// we want to make sure at least one picture is already attached or being uploaded.
-		if (campaignForm.getImageStore() == null) {
-			// no files uploaded, make sure there are some already there at least.
-			Campaign camp = campaignManager.getCampaign(campaignId);
-			if (camp.getImageStore() == null || camp.getImageStore().getImage() == null || camp.getImageStore().getImage().size() == 0) {
-				result.rejectValue("imageStore", "validation.required");
-			}
-		}
 
 		if (result.hasErrors()) {
 			return "campaign/edit";
@@ -109,7 +100,9 @@ public class EditCampaignController {
 
 		binder.registerCustomEditor(CampaignCategories.class, "campaignCategories", new CustomCategoryPropertyEditor(categoryManager));
 
-		binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
+		binder.registerCustomEditor(Image.class, new CustomByteArrayToImageEditor());
+
+		// binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
 
 	}
 

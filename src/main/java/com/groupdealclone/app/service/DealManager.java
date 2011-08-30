@@ -1,7 +1,5 @@
 package com.groupdealclone.app.service;
 
-import java.util.Set;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Service;
@@ -12,10 +10,10 @@ import com.groupdealclone.app.domain.Deal;
 @XmlRootElement
 public interface DealManager {
 	
-	public Set<Deal> getDeals();
+//	public Set<Deal> getDeals();
 	
 	public Deal getDeal(Long id);
 
-	public void setDeals(Set<Deal> deals);
+//	public void setDeals(Set<Deal> deals);
 
 }

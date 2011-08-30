@@ -71,98 +71,14 @@
 	</div>
 
 	<script src="<c:url value="/resources/js/jquery-1.6.2.js"/>"></script>
-	<script
-		src="<c:url value="/resources/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
-	
+	<script src="<c:url value="/resources/js/jquery-ui-1.8.16.custom.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/global.js"/>"></script>
+	<!-- Variables needed for the campaign binders -->
 	<script type="text/javascript">
-	
-	$(document).ready(function() {
-		var div = $("<div id='loginDiv'><iframe id='loginFrame' frameBorder='0'></iframe></div>");
-		   $(div).dialog({
-		           autoOpen: false,
-		           modal: true,
-		           height: 400,
-		           width: 500
-		       });
-		   
-		   $('a#login').bind('click', function(){
-			   $(div).dialog("open");
-			   $("#loginFrame").attr("src","<c:url value="/auth/login"/>");
-			   return false;
-		   });
-		   
-		   
-		   $('a#chpwd').bind('click', function(){
-			   $(div).dialog("open");
-			   $("#loginFrame").attr("src","<c:url value="/user/chpwd"/>");
-			   return false;
-		   });
-		   
-		   $('a#signup').bind('click', function(){
-			   $(div).dialog("open");
-			   $("#loginFrame").attr("src","<c:url value="/user/new"/>");
-			   return false;
-		   });
-		   
-		   $('a#location').bind('click', function(){
-			   $(div).dialog("open");
-			   $("#loginFrame").attr("src","<c:url value="/location"/>");
-			   return false;
-		   });
-		});
-	
-		$(function() {
-
-			$("#company\\.name").autocomplete({
-				source : "<c:url value="/company/list"/>",
-				minLength : 2,
-				select : function(event, ui) {
-					if (ui.item) {
-						$("#company\\.id").val(ui.item.id);
-					}
-				}
-			});
-
-			$("#campaignCategories").autocomplete({
-				source : "<c:url value="/category/list"/>",
-				minLength : 2,
-				select : function(event, ui) {
-					if (ui.item) {
-						var val = $(this).val();
-						if (val.lastIndexOf(',') == -1) {
-							$(this).val(ui.item.label);
-						} else {
-							val = val.substring(0, val.lastIndexOf(',') + 1);
-							val += ui.item.label;
-							$(this).val(val);
-						}
-						return false;
-					}
-				}
-			});
-
-			$("#campaignCities").autocomplete({
-				source : "<c:url value="/city/list"/>",
-				minLength : 2,
-				select : function(event, ui) {
-					if (ui.item) {
-						var val = $(this).val();
-						if (val.lastIndexOf(',') == -1) {
-							$(this).val(ui.item.label);
-						} else {
-							val = val.substring(0, val.lastIndexOf(',') + 1);
-							val += ui.item.label;
-							$(this).val(val);
-						}
-						return false;
-					}
-				}
-			});
-		});
-
-		$("#startDate, #endDate").datepicker({
-			dateFormat : "dd M yy"
-		});
+	var companyList = "<c:url value="/company/list"/>";
+	var categoryList = "<c:url value="/category/list"/>";
+	var cityList = "<c:url value="/city/list"/>";
 	</script>
+	<script src="<c:url value="/resources/js/campaign/create-new.js"/>"></script>
 </body>
 </html>

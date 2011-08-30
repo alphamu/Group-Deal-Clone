@@ -12,6 +12,7 @@
 				<li><span class="discount">${f.deal.discountPercentage}</span></li>
 				<li><span class="price">${f.deal.price}</span></li>
 				<li><span class="minSale">${f.deal.minSaleRequired}</span></li>
+				<li><span class="buy"><a class="addToCart" href="<c:url value="/shoppingcart/add/${f.deal.id}" />">Buy</a></span></li>
 			</ul>
 		</c:forEach>
 	</div>
@@ -28,6 +29,7 @@
 				<li><span class="discount">${r.deal.discountPercentage}</span></li>
 				<li><span class="price">${r.deal.price}</span></li>
 				<li><span class="minSale">${r.deal.minSaleRequired}</span></li>
+				<li><span class="buy"><a class="addToCart" href="<c:url value="/shoppingcart/add/${f.deal.id}" />">Buy</a></span></li>
 			</ul>
 		</c:forEach>
 	</div>

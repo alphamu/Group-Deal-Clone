@@ -25,7 +25,7 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/user/chpwd"
 			access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/shoppingcart"
+		<security:intercept-url pattern="/shoppingcart/**"
 			access="hasRole('ROLE_USER')" />
 
 		<security:form-login login-page="/auth/login"

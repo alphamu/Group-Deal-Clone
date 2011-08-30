@@ -23,7 +23,7 @@ public class JdbcShoppingCartDao implements ShoppingCartDao {
 	public ShoppingCart getShoppingCart(String username) {
 		try {
 			ShoppingCart cart = em
-					.createQuery("from ShoppingCart where username = ?1", ShoppingCart.class)
+					.createQuery("from ShoppingCart where account.username = ?1", ShoppingCart.class)
 					.setParameter(1, username).getSingleResult();
 			return cart;
 		} catch (NoResultException noResult) {

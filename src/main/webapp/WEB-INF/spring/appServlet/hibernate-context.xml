@@ -93,6 +93,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 
 	<bean id="shoppingCartManager" class="com.groupdealclone.app.service.SimpleShoppingCartManager" />
 	<bean id="shoppingCartDao" class="com.groupdealclone.app.dao.JdbcShoppingCartDao" />
+	
+	<bean id="dealManager" class="com.groupdealclone.app.service.SimpleDealManager" />
+	<bean id="dealDao" class="com.groupdealclone.app.dao.JdbcDealDao" />
 
 
 </beans>

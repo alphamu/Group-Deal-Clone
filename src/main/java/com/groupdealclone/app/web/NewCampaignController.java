@@ -25,13 +25,13 @@ import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCategories;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
-import com.groupdealclone.app.domain.ImageStore;
+import com.groupdealclone.app.domain.Image;
 import com.groupdealclone.app.exception.CompanyNotFoundException;
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CategoryManager;
 import com.groupdealclone.app.service.CityManager;
 import com.groupdealclone.app.validation.CampaignValidator;
-import com.groupdealclone.app.validation.CustomByteArrayToImageStoreEditor;
+import com.groupdealclone.app.validation.CustomByteArrayToImageEditor;
 import com.groupdealclone.app.validation.CustomCategoryPropertyEditor;
 import com.groupdealclone.app.validation.CustomCityPropertyEditor;
 
@@ -67,9 +67,7 @@ public class NewCampaignController {
 	@RequestMapping(value = "campaign/new", method = RequestMethod.POST)
 	public String processForm(@Valid Campaign campaignForm, BindingResult result, Map<String, Object> model) {
 		new CampaignValidator().validate(campaignForm, result);
-		if (campaignForm.getImageStore() == null || campaignForm.getImageStore().getImage() == null || campaignForm.getImageStore().getImage().size() == 0) {
-			result.rejectValue("imageStore", "validation.required");
-		}
+		
 		if (result.hasErrors()) {
 			return "campaign/new";
 		}
@@ -98,7 +96,9 @@ public class NewCampaignController {
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, dateEditor);
 
-		binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
+		binder.registerCustomEditor(Image.class, new CustomByteArrayToImageEditor());
+		
+		//binder.registerCustomEditor(ImageStore.class, "imageStore", new CustomByteArrayToImageStoreEditor());
 
 		binder.registerCustomEditor(CampaignCities.class, "campaignCities", new CustomCityPropertyEditor(cityManager));
 

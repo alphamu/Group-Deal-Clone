@@ -13,12 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.groupdealclone.app.service.CampaignManager;
 import com.groupdealclone.app.service.CategoryManager;
 import com.groupdealclone.app.service.CompanyManager;
-import com.groupdealclone.app.service.DealManager;
 
 /**
  * Handles requests for the application home page.
@@ -28,8 +26,8 @@ public class HomeController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@Autowired
-	private DealManager dealManager;
+//	@Autowired
+//	private DealManager dealManager;
 	@Autowired
 	private CampaignManager campaignManager;
 	@Autowired
@@ -66,12 +64,12 @@ public class HomeController{
 		return "home-tile";	
 	}
 	
-	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=application/xml, application/json")
-	public @ResponseBody DealManager homeXmlJson(Locale locale, Model model) {
-	
-		logger.info("Rendering home in XML or JSON {} ", locale.toString());
-		
-		return this.dealManager;
-	}
+//	@RequestMapping(value = "/home", method = RequestMethod.GET, headers="Accept=application/xml, application/json")
+//	public @ResponseBody DealManager homeXmlJson(Locale locale, Model model) {
+//	
+//		logger.info("Rendering home in XML or JSON {} ", locale.toString());
+//		
+//		return this.dealManager;
+//	}
 	
 }

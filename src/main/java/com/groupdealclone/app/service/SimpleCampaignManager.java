@@ -1,6 +1,5 @@
 package com.groupdealclone.app.service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,8 +14,6 @@ import com.groupdealclone.app.domain.Campaign;
 import com.groupdealclone.app.domain.CampaignCities;
 import com.groupdealclone.app.domain.City;
 import com.groupdealclone.app.domain.Company;
-import com.groupdealclone.app.domain.Image;
-import com.groupdealclone.app.domain.ImageStore;
 import com.groupdealclone.app.exception.CompanyNotFoundException;
 
 @Service
@@ -84,20 +81,20 @@ public class SimpleCampaignManager implements CampaignManager {
 		}
 		
 		//update the images by adding the list of new images to the old ones.
-		ImageStore imgStore = oldCamp.getImageStore();
-		if(imgStore != null) {
-			Set<Image> oldImgList=imgStore.getImage();
-			//oldImgList.clear();
-			if(oldImgList == null)
-				oldImgList = new HashSet<Image>();
-			ImageStore newImageStore = camp.getImageStore();
-			if(newImageStore != null){
-				Set<Image> newImgList = newImageStore.getImage();
-				if(newImgList != null)
-					oldImgList.addAll(newImgList);
-			}
-			camp.setImageStore(imgStore);
-		}
+//		ImageStore imgStore = oldCamp.getImageStore();
+//		if(imgStore != null) {
+//			Set<Image> oldImgList=imgStore.getImage();
+//			//oldImgList.clear();
+//			if(oldImgList == null)
+//				oldImgList = new HashSet<Image>();
+//			ImageStore newImageStore = camp.getImageStore();
+//			if(newImageStore != null){
+//				Set<Image> newImgList = newImageStore.getImage();
+//				if(newImgList != null)
+//					oldImgList.addAll(newImgList);
+//			}
+//			camp.setImageStore(imgStore);
+//		}
 		
 		//check if company exists. replace input company object with one from the DB
 		//this should prevent people from changing the company name when editing a campaign.

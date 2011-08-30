@@ -1,7 +1,6 @@
 package com.groupdealclone.app.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -67,7 +66,8 @@ public class JdbcCampaignDao implements CampaignDao {
 			em.merge(campaign);
 			em.getTransaction().commit();
 		} finally {
-			em.close();
+			if (em != null)
+				em.close();
 		}
 	}
 
@@ -90,29 +90,62 @@ public class JdbcCampaignDao implements CampaignDao {
 			em.merge(camp);
 			em.getTransaction().commit();
 		} finally {
-			em.close();
+			if (em != null)
+				em.close();
 		}
 	}
 
 	@Override
 	public void removeImage(Long campaignId, Long imageId) {
 		EntityManager em = getEntityManager();
-		Campaign camp = em.find(Campaign.class, campaignId);
-		if (camp != null) {
-			ImageStore imgstore = camp.getImageStore();
-			Set<Image> imgs = imgstore.getImage();
-			Image image = null;
-			for (Image i : imgs) {
-				if (i.getId().equals(imageId)) {
-					image = i;
-					imgs.remove(i);
-					break;
-				}
+		try {
+			Campaign camp = em.find(Campaign.class, campaignId);
+			if (camp != null) {
+				ImageStore imgstore = camp.getImageStore();
+				Image image = null;
+
+				if (imgstore.getThumbnailSmall().getId().equals(imageId)) {
+					image = imgstore.getThumbnailSmall();
+					imgstore.setThumbnailSmall(null);
+
+				} else if (imgstore.getThumbnailMedium().getId().equals(imageId)) {
+					image = imgstore.getThumbnailMedium();
+					imgstore.setThumbnailMedium(null);
+
+				} else if (imgstore.getThumbnailLarge().getId().equals(imageId)) {
+					image = imgstore.getThumbnailLarge();
+					imgstore.setThumbnailLarge(null);
+
+				} else if (imgstore.getThumbnailXLarge().getId().equals(imageId)) {
+					image = imgstore.getThumbnailXLarge();
+					imgstore.setThumbnailXLarge(null);
+
+				} else if (imgstore.getBannerSmall().getId().equals(imageId)) {
+					image = imgstore.getBannerSmall();
+					imgstore.setBannerSmall(null);
+				} else if (imgstore.getBannerMedium().getId().equals(imageId)) {
+					image = imgstore.getBannerMedium();
+					imgstore.setBannerMedium(null);
+
+				} else if (imgstore.getBannerLarge().getId().equals(imageId)) {
+					image = imgstore.getBannerLarge();
+					imgstore.setBannerLarge(null);
+
+				} else if (imgstore.getBannerXLarge().getId().equals(imageId)) {
+					image = imgstore.getBannerXLarge();
+					imgstore.setBannerXLarge(null);
+
+				} else
+					return;
+
+				em.getTransaction().begin();
+				em.merge(camp);
+				em.remove(image);
+				em.getTransaction().commit();
 			}
-			em.getTransaction().begin();
-			em.merge(camp);
-			em.remove(image);
-			em.getTransaction().commit();
+		} finally {
+			if (em != null)
+				em.close();
 		}
 	}
 
