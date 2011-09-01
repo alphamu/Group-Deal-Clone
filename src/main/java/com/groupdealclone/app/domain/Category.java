@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 @Entity
 public class Category {
 
@@ -14,6 +16,7 @@ public class Category {
 	@Size(min=1, max=100)
 	private String name;
 
+	@JsonProperty("value")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -23,7 +26,8 @@ public class Category {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	@JsonProperty("label")
 	public String getName() {
 		return name;
 	}

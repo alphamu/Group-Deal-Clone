@@ -1,6 +1,5 @@
 package com.groupdealclone.app.web;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -65,22 +64,17 @@ public class CategoryController {
 
 	@RequestMapping(value = "category/list", method = RequestMethod.GET, headers = "Accept=application/xml, application/json")
 	public @ResponseBody
-	List<LabelHolderBean> homeXmlJson(@RequestParam(required = true, value = "term") String q, Locale locale, Model model) {
+	List<Category> homeXmlJson(@RequestParam(required = true, value = "term") String q, Locale locale, Model model) {
 		String query = q;
 		if (q.lastIndexOf(',') > 0)
 			query = query.substring(q.lastIndexOf(',') + 1).trim();
 
-		if(query.length() < 2)
+		if (query.length() < 2)
 			return null;
 
 		List<Category> cat = categoryManager.getCategories(query);
 
-		List<LabelHolderBean> names = new LinkedList<LabelHolderBean>();
-		for (Category c : cat) {
-			names.add(new LabelHolderBean(c.getId(), c.getName()));
-		}
-
-		return names;
+		return cat;
 	}
 
 	public void setCategoryManager(CategoryManager categoryManager) {

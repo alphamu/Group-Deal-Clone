@@ -6,8 +6,10 @@
 				minLength : 2,
 				select : function(event, ui) {
 					if (ui.item) {
-						$("#company\\.id").val(ui.item.id);
+						$("#company\\.id").val(ui.item.value);
+						$(this).val(ui.item.label);
 					}
+					return false;
 				}
 			});
 

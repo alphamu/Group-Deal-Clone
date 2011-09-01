@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -28,6 +29,7 @@ public class Company implements Serializable {
 	
 	private Set<CompanyAddress> address = new LinkedHashSet<CompanyAddress>();
 
+	@JsonProperty("value")
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
@@ -38,6 +40,7 @@ public class Company implements Serializable {
 		this.id = id;
 	}
 
+	@JsonProperty("label")
 	public String getName() {
 		return name;
 	}

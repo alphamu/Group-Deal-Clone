@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.Size;
 
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -20,6 +21,7 @@ public class City implements Serializable {
 	private String				name;
 	private Long				id;
 
+	@JsonProperty("value")
 	@javax.persistence.Id
 	@javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -30,6 +32,7 @@ public class City implements Serializable {
 		this.id = id;
 	}
 
+	@JsonProperty("label")
 	public String getName() {
 		return name;
 	}

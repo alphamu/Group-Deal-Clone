@@ -2,7 +2,6 @@ package com.groupdealclone.app.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -73,14 +72,9 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "company/list", method = RequestMethod.GET, headers="Accept=application/xml, application/json")
-	public @ResponseBody List<LabelHolderBean> homeXmlJson(@RequestParam(required=true, value="term") String q, Locale locale, Model model) {
-		List<Company> co =  companyManager.getCompanies(q);
-		List<LabelHolderBean> names = new LinkedList<LabelHolderBean>();
-		for(Company c: co) {
-			names.add(new LabelHolderBean(c.getId(), c.getName()));
-		}
-		
-		return names;
+	public @ResponseBody List<Company> homeXmlJson(@RequestParam(required=true, value="term") String q, Locale locale, Model model) {
+		List<Company> co =  companyManager.getCompanies(q);		
+		return co;
 		
 	}
 	
