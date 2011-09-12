@@ -1,6 +1,8 @@
+<%@ include file="/WEB-INF/views/include.jsp" %>
 <html>
 <head>
 <script type="text/javascript">
+
 function gup( name )
 {
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -12,12 +14,15 @@ function gup( name )
   else
     return results[1];
 }
-if(gup("reload") == "false")
-	window.parent.location.reload();
-	window.location.href = window.location.href+"?reload=false";
+
+<sec:authorize access="isAuthenticated()">
+	window.top.window.closeDialog();
+</sec:authorize>
+	
 </script>
+
+
 </head>
 <body>
-
 </body>
 </html>

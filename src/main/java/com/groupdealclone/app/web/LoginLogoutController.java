@@ -24,7 +24,7 @@ public class LoginLogoutController {
 	 * @return the name of the JSP page
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
+	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, @RequestParam(value = "reload", required = false) boolean reload, ModelMap model) {
 		logger.debug("Received request to show login page");
 
 		if (error == true) {
