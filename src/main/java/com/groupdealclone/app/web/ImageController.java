@@ -22,7 +22,7 @@ public class ImageController {
 	@Autowired
 	ImagesManager imagesManager;
 	
-	@RequestMapping(value = "images/stored/{imageId}", method = RequestMethod.GET, headers="Accept=image/*")
+	@RequestMapping(value = "images/stored/{imageId}", method = RequestMethod.GET, headers="Accept=plain/text")
 	public @ResponseBody byte[] showImage(@PathVariable("imageId") long imageId, HashMap<String,Object> model){	
 		Image img=imagesManager.getImage(imageId);
 		return img.getImage();	
